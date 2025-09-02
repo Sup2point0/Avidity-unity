@@ -1,11 +1,15 @@
 #pragma warning disable IDE1006
 
+using System;
 using System.Collections.Generic;
+
+using UnityEngine;
 
 using Shard = System.String;
 
 
 /// <summary> A soundtrack with all its associated data. </summary>
+[Serializable]
 public class Track
 {
     /// <summary> Internal identifier of the soundtrack. </summary>
