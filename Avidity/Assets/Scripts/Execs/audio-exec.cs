@@ -1,25 +1,36 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 using UnityEngine;
 
 using Shard = System.String;
 
 
+/// <summary> An audio manager. </summary>
 public class AudioExec : MonoBehaviour
 {
+    /// <summary> Something went wrong loading an audio file. </summary>
     public class AudioLoadException : Exception
+    {}
+
+    /// <summary> A playlist is empty so cannot be played. </summary>
+    public class EmptyPlaylistException : Exception
     {}
 
 
     public AudioSource audioSource;
 
+    /// <summary> Currently active track. `null` if no track is active. </summary>
     public Track currentTrack;
 
+    /// <summary> Is the audio paused? </summary>
     public bool isPaused;
 
+    /// <summary> Playback position in seconds. </summary>
     public float timeElapsed;
 
+    /// <summary> The queue of tracks to play next. </summary>
     public List<Track> trackQueue = new();
 
 
@@ -35,14 +46,6 @@ public class AudioExec : MonoBehaviour
 
     #region INTERNAL
 
-    private AudioSource PlayClip(AudioClip clip, float volume = 1.0f)
-    {
-        audioSource.clip = clip;
-        audioSource.volume = volume;
-        audioSource.Play();
-        return audioSource;
-    }
-
     private AudioClip LoadClip(Shard shard)
     {
         var clip = Resources.Load<AudioClip>($"Tracks/{shard}");
@@ -54,39 +57,105 @@ public class AudioExec : MonoBehaviour
         return clip;
     }
 
+    private AudioSource PlayClip(AudioClip clip, float volume = 1.0f)
+    {
+        audioSource.clip = clip;
+        audioSource.volume = volume;
+        audioSource.Play();
+        return audioSource;
+    }
+
     #endregion
 
 
     #region START PLAYBACK
 
-    public void PlayCurrent()
-    {}
-
-    public void PlayTrack(Track track)
+    private void PlayCurrent()
     {
-        var clip = LoadClip(track.shard);
+        var clip = LoadClip(currentTrack.shard);
         PlayClip(clip);
     }
 
     public void PlayNext()
-    {}
+    {
+        ClearCurrent();
 
-    public void PlayList()
-    {}
+        if (trackQueue.Count > 0) {
+            currentTrack = trackQueue[0];
+            trackQueue.RemoveAt(0);
+            PlayCurrent();
+        }
+        else {
+            currentTrack = null;
+        }
+    }
+
+    public void Play(Track track)
+    {
+        ClearCurrent();
+
+        currentTrack = track;
+        PlayCurrent();
+    }
+
+    public void Play(Playlist playlist)
+    {
+        if (0 >= playlist.tracks.Count) {
+            throw new EmptyPlaylistException();
+        }
+
+        ClearCurrent();
+        ClearQueue();
+
+        /* Create a shallow copy so that modifying queue does not corrupt playlist */
+        trackQueue = playlist.tracks.ToList();
+        PlayNext();
+    }
 
     #endregion
 
     
     #region MOVE PLAYBACK
 
+    public void Pause()
+        => audioSource.Pause();
+
+    public void UnPause()
+        => audioSource.UnPause();
+
+    public void TogglePause()
+    {
+        if (isPaused) {
+            UnPause();
+        } else {
+            Pause();
+        }
+    }
+
     public void Restart()
-    {}
+        => audioSource.time = 0;
 
     public void Seek(float to)
-    {}
+        => audioSource.time = to;
 
     public void Shift(float by)
-    {}
+        => audioSource.time += by;
+
+    #endregion
+
+
+    #region END PLAYBACK
+
+    public void ClearCurrent()
+    {
+        audioSource.Stop();
+        currentTrack = null;
+    }
+
+    public void ClearQueue()
+    {
+        trackQueue.Clear();
+    }
 
     #endregion
 }

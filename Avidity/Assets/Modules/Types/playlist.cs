@@ -14,6 +14,8 @@ public class Playlist
     /// <summary> . </summary>
     public List<Track> tracks;
 
+    public Track first_track => (tracks.Count > 0) ? tracks[0] : null;
+
 
     public Playlist()
     {
