@@ -59,6 +59,7 @@ public class AudioExec : MonoBehaviour
 
     private AudioSource PlayClip(AudioClip clip, float volume = 1.0f)
     {
+        Debug.Log($"clip = {clip}");
         audioSource.clip = clip;
         audioSource.volume = volume;
         audioSource.Play();
@@ -118,10 +119,16 @@ public class AudioExec : MonoBehaviour
     #region MOVE PLAYBACK
 
     public void Pause()
-        => audioSource.Pause();
+    {
+        audioSource.Pause();
+        isPaused = true;
+    }
 
     public void UnPause()
-        => audioSource.UnPause();
+    {
+        audioSource.UnPause();
+        isPaused = false;
+    }
 
     public void TogglePause()
     {

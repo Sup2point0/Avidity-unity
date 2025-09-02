@@ -4,12 +4,14 @@ using UnityEngine.UI;
 
 public class TrackRowScript : MonoBehaviour
 {
+    public Button button;
+
     public Track track;
 
 
     void Start()
     {
-        GetComponent<Button>().onClick.AddListener(OnClick);
+        button.onClick.AddListener(OnClick);
 
         track = new Track() {
             shard = "synthesis"
@@ -17,12 +19,11 @@ public class TrackRowScript : MonoBehaviour
     }
 
     void Update()
-    {
-        
+    { 
     }
 
     void OnClick()
     {
-        Exec.Audio.PlayTrack(track);
+        Exec.Audio.Play(track);
     }
 }
