@@ -91,7 +91,7 @@ public class AudioExec : MonoBehaviour
         }
     }
 
-    public void Play(Track track)
+    public void PlayNow(Track track)
     {
         ClearCurrent();
 
@@ -99,7 +99,7 @@ public class AudioExec : MonoBehaviour
         PlayCurrent();
     }
 
-    public void Play(Playlist playlist)
+    public void PlayNow(Playlist playlist)
     {
         if (0 >= playlist.tracks.Count) {
             throw new EmptyPlaylistException();
@@ -126,7 +126,12 @@ public class AudioExec : MonoBehaviour
 
     public void UnPause()
     {
-        audioSource.UnPause();
+        if (currentTrack is null && trackQueue.Count > 0) {
+            PlayNext();
+        } else {
+            audioSource.UnPause();
+        }
+        
         isPaused = false;
     }
 
@@ -162,6 +167,16 @@ public class AudioExec : MonoBehaviour
     public void ClearQueue()
     {
         trackQueue.Clear();
+    }
+
+    #endregion
+
+
+    #region QUEUE PLAYBACK
+
+    public void AddToQueue(Track track)
+    {
+        trackQueue.Add(track);
     }
 
     #endregion

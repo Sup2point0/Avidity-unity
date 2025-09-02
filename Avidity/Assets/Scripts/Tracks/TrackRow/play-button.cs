@@ -1,17 +1,14 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 
-public class TrackRowScript : MonoBehaviour
+public class PlayTrackButtonScript : ButtonScript
 {
-    public Button button;
-
     public Track track;
 
 
-    void Start()
+    protected override void Start()
     {
-        button.onClick.AddListener(OnClick);
+        base.Start();
 
         track = new Track() {
             shard = "synthesis"
@@ -22,8 +19,8 @@ public class TrackRowScript : MonoBehaviour
     { 
     }
 
-    void OnClick()
+    protected override void OnClick()
     {
-        Exec.Audio.Play(track);
+        Exec.Audio.PlayNow(track);
     }
 }
