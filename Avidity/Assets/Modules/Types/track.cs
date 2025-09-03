@@ -9,23 +9,20 @@ using Shard = System.String;
 public class Track
 {
     /// <summary> Internal identifier of the track. </summary>
-    public Shard shard { get; init; }
+    public Shard shard;
     
     /// <summary> Exact displayed name of the track. </summary>
-    public string name { get; set; }
+    public string name;
     
     /// <summary> Artists assigned to the sountrack. </summary>
-    public List<Artist> artists { get; init; }
+    public List<Artist> artists;
     
     /// <summary> Playlists the track belongs to. </summary>
-    public List<Playlist> playlists { get; set; }
-
-    /// <summary> Filename of the audio file for the track. </summary>
-    public string audio_filename { get; set; }
-
-    /// <summary> Filename of the cover image for the track. </summary>
-    public string cover_filename { get; set; }
+    public List<Playlist> playlists;
     
     /// <summary> Total number of times this track has been played. </summary>
-    public int total_plays { get; set; }
+    public int total_plays;
+
+
+    public Track() {}
 }

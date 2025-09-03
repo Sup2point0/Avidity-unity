@@ -15,12 +15,22 @@ public class SceneExec : MonoBehaviour
     
     public Tab currentTab = Tab.Tracks;
 
+    [SerializeField]
+    public Track selectedTrack;
 
-    void Start()
+
+    #region UNITY
+
+    void Awake()
     {
+        Exec.Scene = this;
     }
 
-    void Update()
+    #endregion
+
+
+    public void SelectTrack(Track track)
     {
+        this.selectedTrack = track;
     }
 }

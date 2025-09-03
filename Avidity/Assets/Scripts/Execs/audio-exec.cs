@@ -25,8 +25,8 @@ public class AudioExec : MonoBehaviour
 
     public AudioSource audioSource;
 
-    /// <summary> Currently active track. `null` if no track is active. </summary>
-    public Track currentTrack;
+    /// <summary> Currently playing track (different to selected). `null` if no track is active. </summary>
+    public Track activeTrack;
 
     /// <summary> Is the audio paused? </summary>
     public bool isPaused;
@@ -63,10 +63,10 @@ public class AudioExec : MonoBehaviour
 
     private AudioSource PlayClip(AudioClip clip, float volume = 1.0f)
     {
-        audioSource.clip = clip;
-        audioSource.volume = volume;
-        audioSource.Play();
-        return audioSource;
+        this.audioSource.clip = clip;
+        this.audioSource.volume = volume;
+        this.audioSource.Play();
+        return this.audioSource;
     }
 
     #endregion
@@ -76,7 +76,7 @@ public class AudioExec : MonoBehaviour
 
     private void PlayCurrent()
     {
-        var clip = LoadClip(currentTrack.shard);
+        var clip = LoadClip(this.activeTrack.shard);
         PlayClip(clip);
     }
 
@@ -84,13 +84,13 @@ public class AudioExec : MonoBehaviour
     {
         ClearCurrent();
 
-        if (trackQueue.Count > 0) {
-            currentTrack = trackQueue[0];
-            trackQueue.RemoveAt(0);
+        if (this.trackQueue.Count > 0) {
+            this.activeTrack = this.trackQueue[0];
+            this.trackQueue.RemoveAt(0);
             PlayCurrent();
         }
         else {
-            currentTrack = null;
+            this.activeTrack = null;
         }
     }
 
@@ -98,7 +98,7 @@ public class AudioExec : MonoBehaviour
     {
         ClearCurrent();
 
-        currentTrack = track;
+        this.activeTrack = track;
         PlayCurrent();
     }
 
@@ -112,7 +112,7 @@ public class AudioExec : MonoBehaviour
         ClearQueue();
 
         /* Create a shallow copy so that modifying queue does not corrupt playlist */
-        trackQueue = playlist.tracks.ToList();
+        this.trackQueue = playlist.tracks.ToList();
         PlayNext();
     }
 
@@ -123,24 +123,24 @@ public class AudioExec : MonoBehaviour
 
     public void Pause()
     {
-        audioSource.Pause();
-        isPaused = true;
+        this.audioSource.Pause();
+        this.isPaused = true;
     }
 
     public void UnPause()
     {
-        if (currentTrack is null && trackQueue.Count > 0) {
+        if (this.activeTrack is null && this.trackQueue.Count > 0) {
             PlayNext();
         } else {
-            audioSource.UnPause();
+            this.audioSource.UnPause();
         }
         
-        isPaused = false;
+        this.isPaused = false;
     }
 
     public void TogglePause()
     {
-        if (isPaused) {
+        if (this.isPaused) {
             UnPause();
         } else {
             Pause();
@@ -148,13 +148,13 @@ public class AudioExec : MonoBehaviour
     }
 
     public void Restart()
-        => audioSource.time = 0;
+        => this.audioSource.time = 0;
 
     public void Seek(float to)
-        => audioSource.time = to;
+        => this.audioSource.time = to;
 
     public void Shift(float by)
-        => audioSource.time += by;
+        => this.audioSource.time += by;
 
     #endregion
 
@@ -163,13 +163,13 @@ public class AudioExec : MonoBehaviour
 
     public void ClearCurrent()
     {
-        audioSource.Stop();
-        currentTrack = null;
+        this.audioSource.Stop();
+        this.activeTrack = null;
     }
 
     public void ClearQueue()
     {
-        trackQueue.Clear();
+        this.trackQueue.Clear();
     }
 
     #endregion
@@ -179,7 +179,7 @@ public class AudioExec : MonoBehaviour
 
     public void AddToQueue(Track track)
     {
-        trackQueue.Add(track);
+        this.trackQueue.Add(track);
     }
 
     #endregion
