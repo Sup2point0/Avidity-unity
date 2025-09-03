@@ -19,6 +19,7 @@ public static class Exec
     }
 
 
+    /// <summary> The scene executive for managing navigation. </summary>
     public static SceneExec Scene {
         get => scene_exec;
         set {

@@ -63,7 +63,6 @@ public class AudioExec : MonoBehaviour
 
     private AudioSource PlayClip(AudioClip clip, float volume = 1.0f)
     {
-        Debug.Log($"clip = {clip}");
         audioSource.clip = clip;
         audioSource.volume = volume;
         audioSource.Play();

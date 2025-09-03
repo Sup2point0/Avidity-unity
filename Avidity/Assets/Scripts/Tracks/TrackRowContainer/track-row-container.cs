@@ -15,9 +15,6 @@ public class TrackRowContainerScript : MonoBehaviour
     void Awake()
     {
         displayedTracks = Data.Tracks.ToList();
-        foreach (var track in displayedTracks) {
-            Debug.Log($"track = {track}");
-        }
     }
 
     void Start()

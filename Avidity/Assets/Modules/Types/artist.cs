@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 using Shard = System.String;
 
 
@@ -15,4 +17,14 @@ public class Artist
 
     /// <summary> Total number of times tracks by this artist have been played. </summary>
     public int plays { get; set; }
+
+
+    public override string ToString()
+        => this.name;
+
+
+    public static string DisplayNames(IEnumerable<Artist> artists)
+    {
+        return string.Join(" / ", artists);
+    }
 }
