@@ -10,9 +10,7 @@ public class QueueTrackButtonScript : ButtonScript
     {
         base.Start();
 
-        track = new Track() {
-            shard = "colour-mourning"
-        };
+        this.track = GetComponentInParent<TrackRowScript>().track;
     }
 
     void Update()

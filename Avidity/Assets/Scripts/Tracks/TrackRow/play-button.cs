@@ -10,9 +10,7 @@ public class PlayTrackButtonScript : ButtonScript
     {
         base.Start();
 
-        track = new Track() {
-            shard = "synthesis"
-        };
+        this.track = GetComponentInParent<TrackRowScript>().track;
     }
 
     void Update()
