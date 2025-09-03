@@ -19,6 +19,18 @@ public static class Exec
     }
 
 
+    public static SceneExec Scene {
+        get => scene_exec;
+        set {
+            if (scene_exec is null) {
+                scene_exec = value;
+            } else {
+                GameObject.Destroy(value);
+                throw new SingletonOverwriteException("Scene executive already exists!");
+            }
+        }
+    }
+
     /// <summary> The audio executive for managing audio playback. </summary>
     public static AudioExec Audio {
         get => audio_exec;
@@ -32,5 +44,6 @@ public static class Exec
         }
     }
 
+    private static SceneExec scene_exec;
     private static AudioExec audio_exec;
 }

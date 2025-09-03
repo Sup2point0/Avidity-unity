@@ -7,9 +7,11 @@ using UnityEngine;
 using Shard = System.String;
 
 
-/// <summary> An audio manager. </summary>
+/// <summary> The audio manager. </summary>
 public class AudioExec : MonoBehaviour
 {
+    #region EXCEPTIONS
+
     /// <summary> Something went wrong loading an audio file. </summary>
     public class AudioLoadException : Exception
     {}
@@ -17,6 +19,8 @@ public class AudioExec : MonoBehaviour
     /// <summary> A playlist is empty so cannot be played. </summary>
     public class EmptyPlaylistException : Exception
     {}
+
+    #endregion
 
 
     public AudioSource audioSource;
