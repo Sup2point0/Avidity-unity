@@ -1,15 +1,21 @@
+using System;
+
 using UnityEngine;
 
 
 namespace Avidity
 {
-    public static class Colours
+    [CreateAssetMenu(fileName = "colours", menuName = "Scriptable Objects/Colour Palette")]
+    public class ColourPalette : ScriptableObject
     {
-        public static class Back
+        public BackgroundColours Back;
+
+        [Serializable]
+        public class BackgroundColours
         {
-            public static readonly Color PROT = new(0, 0, 0, 0.75f);
-            public static readonly Color DEUT = new(0, 0, 0, 0.25f);
-            public static readonly Color TRIT = new(0, 0, 0, 0.1f);
+            public UnityEngine.Color Protive;
+            public UnityEngine.Color Deutive;
+            public UnityEngine.Color Tritive;
         }
     }
 }

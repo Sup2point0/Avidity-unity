@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-public class PlaybackControlsScript : Avidity.UIElementScript
+public class NavigationBarScript : Avidity.UIElementScript
 {
     void Awake()
     {
