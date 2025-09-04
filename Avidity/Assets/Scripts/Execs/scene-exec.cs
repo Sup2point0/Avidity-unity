@@ -6,7 +6,7 @@ using Avidity;
 
 
 /// <summary> The scene manager. </summary>
-public class SceneExec : MonoBehaviour
+public class SceneExecutive : MonoBehaviour
 {
     #region ENUMS
 
@@ -19,6 +19,10 @@ public class SceneExec : MonoBehaviour
 
     #region DELEGATES
 
+    /// <summary> Fired when the window tab is changed. </summary>
+    public Action onTabNavigate;
+
+    /// <summary> Fired when a track is selected. </summary>
     public Action onTrackSelect;
 
     #endregion
@@ -39,6 +43,12 @@ public class SceneExec : MonoBehaviour
 
     #endregion
 
+
+    public void NavigateToTab(Tab tab)
+    {
+        this.currentTab = tab;
+        onTabNavigate?.Invoke();
+    }
 
     public void SelectTrack(Track track)
     {
