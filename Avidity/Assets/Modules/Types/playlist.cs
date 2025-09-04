@@ -36,6 +36,9 @@ public class Playlist
     public Track firstTrack => (tracks.Count > 0) ? tracks[0] : null;
 
 
+    public static implicit operator string(Playlist playlist)
+        => playlist.ToString();
+
     public override string ToString()
         => this.name;
 

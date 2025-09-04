@@ -16,6 +16,10 @@ public class Track
     
     /// <summary> Artists assigned to the sountrack. </summary>
     public List<Artist> artists;
+
+    /// <summary> Album the track belongs to. </summary>
+    [NonSerialized]
+    public Playlist album;
     
     /// <summary> Playlists the track belongs to. </summary>
     [NonSerialized]
@@ -25,9 +29,9 @@ public class Track
     public int totalPlays;
 
 
+    public static implicit operator string(Track track)
+        => track.ToString();
+
     public override string ToString()
         => this.name;
-
-
-    // public Track() {}
 }

@@ -26,15 +26,9 @@ public static class Data
                         name = "Sup#2.0",
                     },
                 },
-            },
-            new Track() {
-                shard = "synthesis",
-                name = "Synthesis.",
-                artists = new() {
-                    new Artist() {
-                        shard = "tn-shi",
-                        name = "tn-shi",
-                    },
+                album = new() {
+                    shard = "cortex",
+                    name = "Cortex",
                 },
             },
             new Track() {
@@ -78,43 +72,113 @@ public static class Data
                 },
             },
             new Track() {
-                shard = "synthesis",
-                name = "Synthesis.",
-                artists = new() {
-                    new Artist() {
-                        shard = "tn-shi",
-                        name = "tn-shi",
-                    },
-                },
-            },
-            new Track() {
-                shard = "synthesis",
-                name = "Synthesis.",
-                artists = new() {
-                    new Artist() {
-                        shard = "tn-shi",
-                        name = "tn-shi",
-                    },
-                },
-            },
-            new Track() {
-                shard = "synthesis",
-                name = "Synthesis.",
-                artists = new() {
-                    new Artist() {
-                        shard = "tn-shi",
-                        name = "tn-shi",
-                    },
-                },
-            },
-            new Track() {
-                shard = "synthesis",
+                shard = "terabyte",
                 name = "TERABYTE CONNECTION",
                 artists = new() {
                     new Artist() {
+                        shard = "camellia",
+                        name = "Camellia",
+                    },
+                },
+                album = new() {
+                    shard = "tera-io",
+                    name = "Tera I/O",
+                },
+            },
+            new Track() {
+                shard = "synthesis",
+                name = "Synthesis.",
+                artists = new() {
+                    new Artist() {
                         shard = "tn-shi",
                         name = "tn-shi",
                     },
+                },
+            },
+            new Track() {
+                shard = "terabyte",
+                name = "TERABYTE CONNECTION",
+                artists = new() {
+                    new Artist() {
+                        shard = "camellia",
+                        name = "Camellia",
+                    },
+                },
+                album = new() {
+                    shard = "tera-io",
+                    name = "Tera I/O",
+                },
+            },
+            new Track() {
+                shard = "synthesis",
+                name = "Synthesis.",
+                artists = new() {
+                    new Artist() {
+                        shard = "tn-shi",
+                        name = "tn-shi",
+                    },
+                },
+            },
+            new Track() {
+                shard = "terabyte",
+                name = "TERABYTE CONNECTION",
+                artists = new() {
+                    new Artist() {
+                        shard = "camellia",
+                        name = "Camellia",
+                    },
+                },
+                album = new() {
+                    shard = "tera-io",
+                    name = "Tera I/O",
+                },
+            },
+            new Track() {
+                shard = "synthesis",
+                name = "Synthesis.",
+                artists = new() {
+                    new Artist() {
+                        shard = "tn-shi",
+                        name = "tn-shi",
+                    },
+                },
+            },
+            new Track() {
+                shard = "terabyte",
+                name = "TERABYTE CONNECTION",
+                artists = new() {
+                    new Artist() {
+                        shard = "camellia",
+                        name = "Camellia",
+                    },
+                },
+                album = new() {
+                    shard = "tera-io",
+                    name = "Tera I/O",
+                },
+            },
+            new Track() {
+                shard = "synthesis",
+                name = "Synthesis.",
+                artists = new() {
+                    new Artist() {
+                        shard = "tn-shi",
+                        name = "tn-shi",
+                    },
+                },
+            },
+            new Track() {
+                shard = "terabyte",
+                name = "TERABYTE CONNECTION",
+                artists = new() {
+                    new Artist() {
+                        shard = "camellia",
+                        name = "Camellia",
+                    },
+                },
+                album = new() {
+                    shard = "tera-io",
+                    name = "Tera I/O",
                 },
             },
         };

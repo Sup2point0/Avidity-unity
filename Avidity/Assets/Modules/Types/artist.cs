@@ -18,6 +18,9 @@ public class Artist
     public int totalPlays;
 
 
+    public static implicit operator string(Artist artist)
+        => artist.ToString();
+
     public override string ToString()
         => this.name;
 

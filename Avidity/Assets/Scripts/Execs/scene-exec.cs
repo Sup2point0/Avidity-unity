@@ -1,3 +1,5 @@
+using System;
+
 using UnityEngine;
 
 
@@ -9,6 +11,13 @@ public class SceneExec : MonoBehaviour
     public enum Tab {
         Tracks, Playlists, Artists
     }
+
+    #endregion
+
+
+    #region DELEGATES
+
+    public Action onTrackSelect;
 
     #endregion
 
@@ -32,5 +41,6 @@ public class SceneExec : MonoBehaviour
     public void SelectTrack(Track track)
     {
         this.selectedTrack = track;
+        onTrackSelect?.Invoke();
     }
 }
