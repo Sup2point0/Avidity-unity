@@ -3,9 +3,12 @@ using UnityEngine;
 
 namespace Avidity
 {
-    public class UIElementScript : MonoBehaviour
+    public static partial class Bases
     {
-        [SerializeField]
-        protected Avidity.ColourPalette colours;
+        public class UIElementScript : MonoBehaviour
+        {
+            [SerializeField]
+            protected Avidity.ColourPalette colours;
+        }
     }
 }

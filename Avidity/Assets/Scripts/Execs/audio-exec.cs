@@ -10,16 +10,16 @@ using Shard = System.String;
 
 
 /// <summary> The audio manager. </summary>
-public class AudioExec : MonoBehaviour
+public class AudioExecutive : MonoBehaviour
 {
     #region EXCEPTIONS
 
     /// <summary> Something went wrong loading an audio file. </summary>
-    public class AudioLoadException : Exception
+    public class AudioLoadException : Avidity.Bases.DisplayedException
     {}
 
     /// <summary> A playlist is empty so cannot be played. </summary>
-    public class EmptyPlaylistException : Exception
+    public class EmptyPlaylistException : Avidity.Bases.DisplayedException
     {}
 
     #endregion
@@ -27,6 +27,13 @@ public class AudioExec : MonoBehaviour
 
     #region DELEGATES
 
+    /// <summary> Fired when a new track is played. </summary>
+    public Action onTrackPlayed;
+
+    /// <summary> Fired when the current track is cleared. </summary>
+    public Action onTrackCleared;
+
+    /// <summary> Fired when the playback queue is modified. </summary>
     public Action onQueueUpdated;
 
     #endregion
@@ -75,6 +82,10 @@ public class AudioExec : MonoBehaviour
         this.audioSource.clip = clip;
         this.audioSource.volume = volume;
         this.audioSource.Play();
+        this.isPaused = false;
+
+        onTrackPlayed?.Invoke();
+
         return this.audioSource;
     }
 
@@ -174,6 +185,8 @@ public class AudioExec : MonoBehaviour
     {
         this.audioSource.Stop();
         this.activeTrack = null;
+
+        onTrackCleared?.Invoke();
     }
 
     public void ClearQueue()

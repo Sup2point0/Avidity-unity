@@ -3,7 +3,7 @@ using UnityEngine;
 using Avidity;
 
 
-public class QueueTrackButtonScript : ButtonScript
+public class QueueTrackButtonScript : Avidity.Bases.ButtonScript
 {
     public Track track;
 

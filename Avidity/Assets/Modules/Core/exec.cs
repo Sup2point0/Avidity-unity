@@ -22,7 +22,7 @@ namespace Avidity
 
 
         /// <summary> The scene executive for managing navigation. </summary>
-        public static SceneExec Scene {
+        public static SceneExecutive Scene {
             get => scene_exec;
             set {
                 if (scene_exec is null) {
@@ -35,7 +35,7 @@ namespace Avidity
         }
 
         /// <summary> The audio executive for managing audio playback. </summary>
-        public static AudioExec Audio {
+        public static AudioExecutive Audio {
             get => audio_exec;
             set {
                 if (audio_exec is null) {
@@ -47,7 +47,7 @@ namespace Avidity
             }
         }
 
-        private static SceneExec scene_exec;
-        private static AudioExec audio_exec;
+        private static SceneExecutive scene_exec;
+        private static AudioExecutive audio_exec;
     }
 }

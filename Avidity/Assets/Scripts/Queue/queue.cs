@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-public class QueueScript : Avidity.UIElementScript
+public class QueueScript : Avidity.Bases.UIElementScript
 {
     void Awake()
     {

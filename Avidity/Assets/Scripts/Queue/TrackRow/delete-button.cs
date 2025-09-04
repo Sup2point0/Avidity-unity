@@ -3,7 +3,7 @@ using UnityEngine;
 using Avidity;
 
 
-public class DeleteTrackButtonQueueScript : ButtonScript
+public class DeleteTrackButtonQueueScript : Avidity.Bases.ButtonScript
 {
     public Track track;
 

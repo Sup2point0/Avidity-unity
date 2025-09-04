@@ -3,7 +3,7 @@ using UnityEngine;
 using Avidity;
 
 
-public class PlayTrackButtonScript : ButtonScript
+public class PlayTrackButtonScript : Avidity.Bases.ButtonScript
 {
     public Track track;
 
@@ -14,6 +14,7 @@ public class PlayTrackButtonScript : ButtonScript
 
         this.track = GetComponentInParent<TrackRowWindowScript>().track;
     }
+
 
     protected override void OnClick()
     {

@@ -4,17 +4,20 @@ using UnityEngine.UI;
 
 namespace Avidity
 {
-    /// <summary> Base class for a script controlling a button `GameObject`. Automatically registers button event listeners on `Start()`. </summary>
-    public abstract class ButtonScript : MonoBehaviour
+    public static partial class Bases
     {
-        public Button button;
-
-
-        protected virtual void Start()
+        /// <summary> Base class for a script controlling a button `GameObject`. Automatically registers button event listeners on `Start()`. </summary>
+        public abstract class ButtonScript : MonoBehaviour
         {
-            button.onClick.AddListener(OnClick);
-        }
+            public Button button;
 
-        protected abstract void OnClick();
+
+            protected virtual void Start()
+            {
+                button.onClick.AddListener(OnClick);
+            }
+
+            protected abstract void OnClick();
+        }
     }
 }
