@@ -1,5 +1,7 @@
 using UnityEngine;
 
+using Avidity;
+
 
 public class PlayTrackButtonScript : ButtonScript
 {
@@ -11,10 +13,6 @@ public class PlayTrackButtonScript : ButtonScript
         base.Start();
 
         this.track = GetComponentInParent<TrackRowScript>().track;
-    }
-
-    void Update()
-    { 
     }
 
     protected override void OnClick()

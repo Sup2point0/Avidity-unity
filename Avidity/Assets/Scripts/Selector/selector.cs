@@ -2,6 +2,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+using Avidity;
+
 
 public class SelectorScript : MonoBehaviour
 {
@@ -10,13 +12,15 @@ public class SelectorScript : MonoBehaviour
     public TMP_Text albumNameText;
 
 
+    void Awake()
+    {
+        GetComponent<Image>().color = Colours.Back.DEUT;
+    }
+
     void Start()
     {
         Exec.Scene.onTrackSelect += OnTrackSelect;
     }
-
-    void Update()
-    {}
 
 
     void OnTrackSelect()

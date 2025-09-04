@@ -2,6 +2,8 @@ using System;
 
 using UnityEngine;
 
+using Avidity;
+
 
 /// <summary> The scene manager. </summary>
 public class SceneExec : MonoBehaviour

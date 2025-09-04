@@ -1,6 +1,8 @@
 using UnityEngine;
 using TMPro;
 
+using Avidity;
+
 
 public class TrackRowScript : ButtonScript
 {
@@ -22,9 +24,6 @@ public class TrackRowScript : ButtonScript
         displayedTrackName.GetComponent<TMP_Text>().text = track.name ?? "<UNTITLED TRACK>";
         displayedArtistName.GetComponent<TMP_Text>().text = Artist.DisplayNames(track.artists) ?? "<NO ARTIST>";
     }
-
-    void Update()
-    {}
 
     protected override void OnClick()
     {
