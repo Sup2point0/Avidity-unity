@@ -3,7 +3,7 @@ using UnityEngine;
 using Avidity;
 
 
-public class PlayTrackButtonScript : ButtonScript
+public class PushTrackButtonQueueScript : ButtonScript
 {
     public Track track;
 
@@ -12,11 +12,12 @@ public class PlayTrackButtonScript : ButtonScript
     {
         base.Start();
 
-        this.track = GetComponentInParent<TrackRowWindowScript>().track;
+        this.track = GetComponentInParent<TrackRowQueueScript>().track;
     }
 
     protected override void OnClick()
     {
         Exec.Audio.PlayNow(track);
+        Exec.Audio.DeleteFromQueue(track);
     }
 }

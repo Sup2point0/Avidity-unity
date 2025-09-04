@@ -4,7 +4,7 @@ using TMPro;
 using Avidity;
 
 
-public class TrackRowScript : ButtonScript
+public class TrackRowWindowScript : ButtonScript
 {
     public GameObject displayedTrackName;
     public GameObject displayedArtistName;

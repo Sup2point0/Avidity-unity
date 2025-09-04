@@ -4,12 +4,12 @@ using System.Linq;
 using UnityEngine;
 
 
-public class TrackRowContainerScript : MonoBehaviour
+public class TrackRowContainerWindowScript : MonoBehaviour
 {
-    public List<Track> displayedTracks;
-
     public GameObject contentContainer;
     public GameObject trackRowPrefab;
+    
+    public List<Track> displayedTracks;
 
 
     void Awake()
@@ -23,11 +23,7 @@ public class TrackRowContainerScript : MonoBehaviour
 
         foreach (var track in this.displayedTracks) {
             track_row = Instantiate(trackRowPrefab, contentContainer.transform);
-            track_row.GetComponent<TrackRowScript>().Init(track);
+            track_row.GetComponent<TrackRowWindowScript>().Init(track);
         }
-    }
-
-    void Update()
-    {
     }
 }

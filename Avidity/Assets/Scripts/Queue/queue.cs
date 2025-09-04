@@ -1,13 +1,11 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-using Avidity;
 
-
-public class QueueScript : MonoBehaviour
+public class QueueScript : Avidity.UIElementScript
 {
     void Awake()
     {
-        GetComponent<Image>().color = Colours.Back.DEUT;
+        GetComponent<Image>().color = colours.Back.Deutive;
     }
 }

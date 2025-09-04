@@ -25,6 +25,13 @@ public class AudioExec : MonoBehaviour
     #endregion
 
 
+    #region DELEGATES
+
+    public Action onQueueUpdated;
+
+    #endregion
+
+
     public AudioSource audioSource;
 
     /// <summary> Currently playing track (different to selected). `null` if no track is active. </summary>
@@ -37,7 +44,7 @@ public class AudioExec : MonoBehaviour
     public float timeElapsed;
 
     /// <summary> The queue of tracks to play next. </summary>
-    public List<Track> trackQueue = new();
+    public List<Track> queuedTracks = new();
 
 
     #region UNITY
@@ -86,9 +93,9 @@ public class AudioExec : MonoBehaviour
     {
         ClearCurrent();
 
-        if (this.trackQueue.Count > 0) {
-            this.activeTrack = this.trackQueue[0];
-            this.trackQueue.RemoveAt(0);
+        if (this.queuedTracks.Count > 0) {
+            this.activeTrack = this.queuedTracks[0];
+            this.queuedTracks.RemoveAt(0);
             PlayCurrent();
         }
         else {
@@ -114,7 +121,7 @@ public class AudioExec : MonoBehaviour
         ClearQueue();
 
         /* Create a shallow copy so that modifying queue does not corrupt playlist */
-        this.trackQueue = playlist.tracks.ToList();
+        this.queuedTracks = playlist.tracks.ToList();
         PlayNext();
     }
 
@@ -131,7 +138,7 @@ public class AudioExec : MonoBehaviour
 
     public void UnPause()
     {
-        if (this.activeTrack is null && this.trackQueue.Count > 0) {
+        if (this.activeTrack is null && this.queuedTracks.Count > 0) {
             PlayNext();
         } else {
             this.audioSource.UnPause();
@@ -171,7 +178,7 @@ public class AudioExec : MonoBehaviour
 
     public void ClearQueue()
     {
-        this.trackQueue.Clear();
+        this.queuedTracks.Clear();
     }
 
     #endregion
@@ -181,7 +188,14 @@ public class AudioExec : MonoBehaviour
 
     public void AddToQueue(Track track)
     {
-        this.trackQueue.Add(track);
+        this.queuedTracks.Add(track);
+        onQueueUpdated?.Invoke();
+    }
+
+    public void DeleteFromQueue(Track track)
+    {
+        this.queuedTracks.Remove(track);  // FIXME
+        onQueueUpdated?.Invoke();
     }
 
     #endregion

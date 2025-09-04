@@ -3,7 +3,7 @@ using UnityEngine;
 using Avidity;
 
 
-public class QueueTrackButtonScript : ButtonScript
+public class DeleteTrackButtonQueueScript : ButtonScript
 {
     public Track track;
 
@@ -12,11 +12,11 @@ public class QueueTrackButtonScript : ButtonScript
     {
         base.Start();
 
-        this.track = GetComponentInParent<TrackRowWindowScript>().track;
+        this.track = GetComponentInParent<TrackRowQueueScript>().track;
     }
 
     protected override void OnClick()
     {
-        Exec.Audio.AddToQueue(track);
+        Exec.Audio.DeleteFromQueue(track);
     }
 }

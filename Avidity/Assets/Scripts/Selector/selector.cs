@@ -5,7 +5,7 @@ using TMPro;
 using Avidity;
 
 
-public class SelectorScript : MonoBehaviour
+public class SelectorScript : Avidity.UIElementScript
 {
     public TMP_Text trackNameText;
     public TMP_Text artistNameText;
@@ -14,7 +14,7 @@ public class SelectorScript : MonoBehaviour
 
     void Awake()
     {
-        GetComponent<Image>().color = Colours.Back.DEUT;
+        GetComponent<Image>().color = colours.Back.Deutive;
     }
 
     void Start()
