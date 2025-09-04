@@ -18,11 +18,16 @@ public class Track
     public List<Artist> artists;
     
     /// <summary> Playlists the track belongs to. </summary>
+    [NonSerialized]
     public List<Playlist> playlists;
     
     /// <summary> Total number of times this track has been played. </summary>
-    public int total_plays;
+    public int totalPlays;
 
 
-    public Track() {}
+    public override string ToString()
+        => this.name;
+
+
+    // public Track() {}
 }
