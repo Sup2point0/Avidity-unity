@@ -84,7 +84,7 @@ public class AudioExecutive : MonoBehaviour
         this.audioSource.Play();
         this.isPaused = false;
 
-        onTrackPlayed?.Invoke();
+        this.onTrackPlayed?.Invoke();
 
         return this.audioSource;
     }
@@ -186,7 +186,7 @@ public class AudioExecutive : MonoBehaviour
         this.audioSource.Stop();
         this.activeTrack = null;
 
-        onTrackCleared?.Invoke();
+        this.onTrackCleared?.Invoke();
     }
 
     public void ClearQueue()
@@ -202,13 +202,13 @@ public class AudioExecutive : MonoBehaviour
     public void AddToQueue(Track track)
     {
         this.queuedTracks.Add(track);
-        onQueueUpdated?.Invoke();
+        this.onQueueUpdated?.Invoke();
     }
 
     public void DeleteFromQueue(Track track)
     {
         this.queuedTracks.Remove(track);  // FIXME
-        onQueueUpdated?.Invoke();
+        this.onQueueUpdated?.Invoke();
     }
 
     #endregion

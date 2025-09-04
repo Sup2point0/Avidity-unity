@@ -5,7 +5,7 @@ using TMPro;
 using Avidity;
 
 
-public class SelectorScript : Avidity.UIElementScript
+public class SelectorPaneScript : Avidity.Bases.UIElementScript
 {
     public TMP_Text trackNameText;
     public TMP_Text artistNameText;
