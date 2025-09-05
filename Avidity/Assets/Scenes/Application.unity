@@ -604,6 +604,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1574ee31c08e71a45aaf4a49cf87d94c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainCamera: {fileID: 519420031}
   currentTab: 0
   selectedTrack:
     shard: 

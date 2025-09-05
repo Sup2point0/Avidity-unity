@@ -27,6 +27,8 @@ public class SceneExecutive : MonoBehaviour
 
     #endregion
 
+
+    public Canvas mainCanvas;
     
     public Tab currentTab = Tab.Tracks;
 
@@ -39,6 +41,22 @@ public class SceneExecutive : MonoBehaviour
     void Awake()
     {
         Exec.Scene = this;
+        // QualitySettings.vSyncCount = 1;
+        Application.targetFrameRate = 0;
+    }
+
+    void OnApplicationFocus(bool is_focused)
+    {
+        if (is_focused) {
+            mainCanvas.enabled = true;
+            // QualitySettings.vSyncCount = 1;
+            Application.targetFrameRate = 60;
+        }
+        else {
+            mainCanvas.enabled = false;
+            // QualitySettings.vSyncCount = 0;
+            Application.targetFrameRate = 4;
+        }
     }
 
     #endregion
