@@ -2,7 +2,7 @@
 
 # Config
 .vscode
-# !Avidity/.vscode/
+!Avidity/.vscode/
 
 # Unity
 [Ll]ibrary/
