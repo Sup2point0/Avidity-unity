@@ -1,6 +1,7 @@
 using System;
 
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 using Avidity;
 
@@ -28,12 +29,33 @@ public class SceneExecutive : MonoBehaviour
     #endregion
 
 
+    [Header("Configuration")]
+
+    public int frameRateWhenActive = 0;
+    public int frameRateWhenIdle = 0;
+    public int frameRateWhenUnfocused = 0;
+    public float secondsBeforeIdle;
+
+
+    [Header("Connections")]
+
+    public PlayerInput playerInput;
     public Canvas mainCanvas;
-    
+
+
+    [Header("State")]
+
     public Tab currentTab = Tab.Tracks;
 
     [SerializeField]
     public Track selectedTrack;
+
+
+    #region PRIVATE
+    public bool is_focused;
+    public bool is_idle;
+    public float until_idle;
+    #endregion
 
 
     #region UNITY
@@ -41,27 +63,93 @@ public class SceneExecutive : MonoBehaviour
     void Awake()
     {
         Exec.Scene = this;
-        // QualitySettings.vSyncCount = 1;
-        Application.targetFrameRate = 0;
+
+        this.ToActive();
     }
 
-    void OnApplicationFocus(bool is_focused)
+    void Update()
     {
-        if (is_focused) {
-            mainCanvas.enabled = true;
-            // QualitySettings.vSyncCount = 1;
-            Application.targetFrameRate = 60;
+        Debug.Log($"Application.targetFrameRate = {Application.targetFrameRate}");
+        if (!is_focused) return;
+
+        if (this.until_idle < 0) {
+            this.ToIdle();
+        }
+        else if (!this.is_idle) {
+            this.until_idle -= Time.deltaTime;
+        }
+    }
+
+    void OnApplicationFocus(bool isFocused)
+    {
+        if (isFocused) {
+            this.ToFocused();
         }
         else {
-            mainCanvas.enabled = false;
-            // QualitySettings.vSyncCount = 0;
-            Application.targetFrameRate = 4;
+            this.ToUnfocused();
+        }
+    }
+
+    void OnPoint()
+    {
+        if (!is_focused) return;
+        
+        if (this.is_idle) {
+            this.ToActive();
+        }
+        else {
+            this.until_idle = this.secondsBeforeIdle;
         }
     }
 
     #endregion
 
 
+    #region INTERNAL
+
+    private void ToActive()
+    {
+        this.is_idle = false;
+        this.until_idle = this.secondsBeforeIdle;
+
+        // QualitySettings.vSyncCount = 1;
+        Application.targetFrameRate = this.frameRateWhenActive;
+    }
+
+    private void ToIdle()
+    {
+        this.is_idle = true;
+        this.until_idle = 0;
+
+        // QualitySettings.vSyncCount = 0;
+        Application.targetFrameRate = this.frameRateWhenIdle;
+    }
+
+    private void ToFocused()
+    {
+        this.is_focused = true;
+
+        // QualitySettings.vSyncCount = 1;
+        Application.targetFrameRate = this.frameRateWhenActive;
+        // this.playerInput.enabled = true;
+        this.mainCanvas.enabled = true;
+    }
+
+    private void ToUnfocused()
+    {
+        this.is_focused = false;
+
+        // QualitySettings.vSyncCount = 0;
+        Application.targetFrameRate = this.frameRateWhenUnfocused;
+        this.playerInput.enabled = false;
+        this.mainCanvas.enabled = false;
+    }
+    
+    #endregion
+
+
+    #region INTERFACE
+    
     public void NavigateToTab(Tab tab)
     {
         this.currentTab = tab;
@@ -73,4 +161,6 @@ public class SceneExecutive : MonoBehaviour
         this.selectedTrack = track;
         onTrackSelect?.Invoke();
     }
+    
+    #endregion
 }
