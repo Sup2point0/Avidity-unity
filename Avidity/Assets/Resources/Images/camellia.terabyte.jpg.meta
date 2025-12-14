@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      camellia.terabyte_0: 8616776872641824041
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
