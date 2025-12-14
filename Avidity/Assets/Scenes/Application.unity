@@ -682,7 +682,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &273125878
 RectTransform:
   m_ObjectHideFlags: 0
@@ -751,6 +751,7 @@ GameObject:
   - component: {fileID: 273337164}
   - component: {fileID: 273337163}
   - component: {fileID: 273337165}
+  - component: {fileID: 273337166}
   m_Layer: 5
   m_Name: UI
   m_TagString: Untagged
@@ -792,7 +793,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -808,6 +809,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e97e78cbf59c8704cb6f598a70741e3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlaybackControls_Script
+--- !u!114 &273337166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 273337162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12b9557987988764b97e3faf51906f32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlaybackInfoScript
 --- !u!1 &359876378
 GameObject:
   m_ObjectHideFlags: 0
@@ -891,7 +904,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 606743623}
   m_Direction: 0
   m_Value: 0
-  m_Size: 1
+  m_Size: 0.99999994
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1027,7 +1040,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &478428873
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4050,8 +4063,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1758028272}
   m_HandleRect: {fileID: 1758028271}
   m_Direction: 0
-  m_Value: 1
-  m_Size: 1
+  m_Value: 0
+  m_Size: 0.99999994
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -5464,5 +5477,5 @@ SceneRoots:
   m_Roots:
   - {fileID: 519420032}
   - {fileID: 886424312}
-  - {fileID: 273337164}
   - {fileID: 187941624}
+  - {fileID: 273337164}

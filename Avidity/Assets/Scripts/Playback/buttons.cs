@@ -4,39 +4,32 @@ using UnityEngine.UIElements;
 using Avidity;
 
 
-public class PlaybackButtonsScript : MonoBehaviour
+public class PlaybackButtonsScript : Bases.InterfaceController
 {
-    public VisualElement ui;
+    public PauseClicky pauseClicky;
+    public PrevClicky prevClicky;
+    public NextClicky nextClicky;
 
-    public PauseButton pauseButton;
-    public PrevButton prevButton;
-    public NextButton nextButton;
-
-
-    void Awake()
-    {
-        this.ui = GetComponent<UIDocument>().rootVisualElement;
-    }
 
     void OnEnable()
     {
-        this.pauseButton = new PauseButton(this.ui);
-        this.prevButton = new PrevButton(this.ui);
-        this.nextButton = new NextButton(this.ui);
+        this.pauseClicky = new PauseClicky(this.ui);
+        this.prevClicky = new PrevClicky(this.ui);
+        this.nextClicky = new NextClicky(this.ui);
     }
 
     void Start()
     {
-        this.pauseButton.BindListeners();
-        this.prevButton.BindListeners();
-        this.nextButton.BindListeners();
+        this.pauseClicky.BindListeners();
+        this.prevClicky.BindListeners();
+        this.nextClicky.BindListeners();
     }
 }
 
 
-public class PauseButton : Bases.Clicky
+public class PauseClicky : Bases.Clicky
 {
-    public PauseButton(VisualElement ui) : base(ui, "pause")
+    public PauseClicky(VisualElement ui) : base(ui, "pause")
     {
         Disable();
     }
@@ -50,9 +43,9 @@ public class PauseButton : Bases.Clicky
 }
 
 
-public class PrevButton : Bases.Clicky
+public class PrevClicky : Bases.Clicky
 {
-    public PrevButton(VisualElement ui) : base(ui, "prev")
+    public PrevClicky(VisualElement ui) : base(ui, "prev")
     {
         Disable();
     }
@@ -66,9 +59,9 @@ public class PrevButton : Bases.Clicky
 }
 
 
-public class NextButton : Bases.Clicky
+public class NextClicky : Bases.Clicky
 {
-    public NextButton(VisualElement ui) : base(ui, "next")
+    public NextClicky(VisualElement ui) : base(ui, "next")
     {
         Disable();
     }
@@ -76,8 +69,12 @@ public class NextButton : Bases.Clicky
     public override void BindListeners()
     {
         this.button.clicked += () => Exec.Audio.PlayNext();
-        
-        Exec.Audio.onQueueUpdated += () =>
-            this.button.SetEnabled(Exec.Audio.queuedTracks.Count > 0);
+
+        Exec.Audio.onQueueUpdated += UpdateEnabled;
+    }
+
+    void UpdateEnabled()
+    {
+        this.button.SetEnabled(Exec.Audio.queuedTracks.Count > 0);
     }
 }

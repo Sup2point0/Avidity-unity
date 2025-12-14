@@ -4,9 +4,9 @@
     <ui:VisualElement name="layout" style="flex-grow: 1;">
         <ui:VisualElement name="playback" style="flex-grow: 0; flex-basis: auto; background-color: rgba(0, 0, 0, 0.5); flex-direction: row; padding-top: 10px; padding-bottom: 10px;">
             <ui:VisualElement name="buttons" style="flex-grow: 1; flex-direction: row; align-items: center; justify-content: center;">
-                <ui:Button text="prev" name="prev" enabled="true" />
-                <ui:Button text="pause" name="pause" enabled="true" />
-                <ui:Button text="skip" name="skip" />
+                <ui:Button text="&lt;" name="prev" enabled="true" />
+                <ui:Button text="=" name="pause" enabled="true" />
+                <ui:Button text="&gt;" name="next" />
             </ui:VisualElement>
             <ui:VisualElement name="bar" style="flex-grow: 5;" />
             <ui:VisualElement name="info" style="flex-grow: 2; align-items: flex-end; justify-content: center;">
