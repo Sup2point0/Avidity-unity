@@ -34,59 +34,49 @@ public class PlaybackButtonsScript : MonoBehaviour
 }
 
 
-public class PauseButton
+public class PauseButton : Bases.Clicky
 {
-    public Button button;
-
-    public PauseButton(VisualElement ui)
+    public PauseButton(VisualElement ui) : base(ui, "pause")
     {
-        this.button = ui.Q<Button>("pause");
-        this.button.SetEnabled(false);
+        Disable();
     }
 
-    public void BindListeners()
+    public override void BindListeners()
     {
-        Debug.Log($"Exec.Audio = {Exec.Audio}");
         this.button.clicked += () => Exec.Audio.TogglePause();
-
-        Exec.Audio.onTrackPlayed  += () => this.button.SetEnabled(true);
-        Exec.Audio.onTrackCleared += () => this.button.SetEnabled(false);
+        Exec.Audio.onTrackPlayed += Enable;
+        Exec.Audio.onTrackCleared += Disable;
     }
 }
 
 
-public class PrevButton
+public class PrevButton : Bases.Clicky
 {
-    public Button button;
-
-    public PrevButton(VisualElement ui)
+    public PrevButton(VisualElement ui) : base(ui, "prev")
     {
-        this.button = ui.Q<Button>("prev");
-        this.button.SetEnabled(false);
+        Disable();
+    }
+
+    public override void BindListeners()
+    {
         this.button.clicked += () => Exec.Audio.Restart();
-    }
-
-    public void BindListeners()
-    {
-        Exec.Audio.onTrackPlayed  += () => this.button.SetEnabled(true);
-        Exec.Audio.onTrackCleared += () => this.button.SetEnabled(false);
+        Exec.Audio.onTrackPlayed += Enable;
+        Exec.Audio.onTrackCleared += Disable;
     }
 }
 
 
-public class NextButton
+public class NextButton : Bases.Clicky
 {
-    public Button button;
-
-    public NextButton(VisualElement ui)
+    public NextButton(VisualElement ui) : base(ui, "next")
     {
-        this.button = ui.Q<Button>("skip");
-        this.button.SetEnabled(false);
-        this.button.clicked += () => Exec.Audio.PlayNext();
+        Disable();
     }
 
-    public void BindListeners()
+    public override void BindListeners()
     {
+        this.button.clicked += () => Exec.Audio.PlayNext();
+        
         Exec.Audio.onQueueUpdated += () =>
             this.button.SetEnabled(Exec.Audio.queuedTracks.Count > 0);
     }
