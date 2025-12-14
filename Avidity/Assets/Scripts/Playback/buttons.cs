@@ -4,7 +4,7 @@ using UnityEngine.UIElements;
 using Avidity;
 
 
-public class PlaybackControls_Script : MonoBehaviour
+public class PlaybackButtonsScript : MonoBehaviour
 {
     public VisualElement ui;
 
@@ -24,6 +24,13 @@ public class PlaybackControls_Script : MonoBehaviour
         this.prevButton = new PrevButton(this.ui);
         this.skipButton = new SkipButton(this.ui);
     }
+
+    void Start()
+    {
+        this.pauseButton.BindListeners();
+        this.prevButton.BindListeners();
+        this.skipButton.BindListeners();
+    }
 }
 
 
@@ -35,20 +42,18 @@ public class PauseButton
     {
         this.button = ui.Q<Button>("pause");
         this.button.SetEnabled(false);
-        this.button.clicked += Exec.Audio.TogglePause;
-
-        Exec.Audio.onTrackPlayed += this.OnTrackPlayed;
-        Exec.Audio.onTrackCleared += this.OnTrackCleared;
+        
+        Debug.Log("SETTING");
+        this.button.clicked += () => {
+            Debug.Log("CLICKED");
+            Exec.Audio.TogglePause();
+        };
     }
 
-    void OnTrackPlayed()
+    public void BindListeners()
     {
-        this.button.SetEnabled(true);
-    }
-
-    void OnTrackCleared()
-    {
-        this.button.SetEnabled(false);
+        Exec.Audio.onTrackPlayed  += () => this.button.SetEnabled(true);
+        Exec.Audio.onTrackCleared += () => this.button.SetEnabled(false);
     }
 }
 
@@ -61,22 +66,13 @@ public class PrevButton
     {
         this.button = ui.Q<Button>("prev");
         this.button.SetEnabled(false);
-        this.button.clicked += Exec.Audio.Restart;
-
-        Exec.Audio.onTrackPlayed += this.OnTrackPlayed;
-        Exec.Audio.onTrackCleared += () => {
-            this.button.SetEnabled(false);
-        };
+        this.button.clicked += () => Exec.Audio.Restart();
     }
 
-    void OnTrackPlayed()
+    public void BindListeners()
     {
-        this.button.SetEnabled(true);
-    }
-
-    void OnTrackCleared()
-    {
-        this.button.SetEnabled(false);
+        Exec.Audio.onTrackPlayed  += () => this.button.SetEnabled(true);
+        Exec.Audio.onTrackCleared += () => this.button.SetEnabled(false);
     }
 }
 
@@ -89,10 +85,12 @@ public class SkipButton
     {
         this.button = ui.Q<Button>("skip");
         this.button.SetEnabled(false);
-        this.button.clicked += Exec.Audio.PlayNext;
+        this.button.clicked += () => Exec.Audio.PlayNext();
+    }
 
-        Exec.Audio.onQueueUpdated += () => {
+    public void BindListeners()
+    {
+        Exec.Audio.onQueueUpdated += () =>
             this.button.SetEnabled(Exec.Audio.queuedTracks.Count > 0);
-        };
-    }  
+    }
 }

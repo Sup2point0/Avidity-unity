@@ -25,7 +25,7 @@ namespace Avidity
         public static SceneExecutive Scene {
             get => scene_exec;
             set {
-                if (scene_exec is null) {
+                if (scene_exec == null) {
                     scene_exec = value;
                 } else {
                     GameObject.Destroy(value);
@@ -38,7 +38,7 @@ namespace Avidity
         public static AudioExecutive Audio {
             get => audio_exec;
             set {
-                if (audio_exec is null) {
+                if (audio_exec == null) {
                     audio_exec = value;
                 } else {
                     GameObject.Destroy(value);

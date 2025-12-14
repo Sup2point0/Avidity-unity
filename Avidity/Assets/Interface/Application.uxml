@@ -2,16 +2,16 @@
     <Style src="project://database/Assets/Interface/playback/buttons.uss?fileID=7433441132597879392&amp;guid=3ec11caf9e3cb05429c5b52570f35762&amp;type=3#buttons" />
     <Style src="project://database/Assets/Interface/essence.uss?fileID=7433441132597879392&amp;guid=57add471641c76f49b9f2be788e117d7&amp;type=3#essence" />
     <ui:VisualElement name="layout" style="flex-grow: 1;">
-        <ui:VisualElement name="playback" style="flex-grow: 0; flex-basis: auto; background-color: rgba(0, 0, 0, 0.2); flex-direction: row; padding-top: 10px; padding-bottom: 10px;">
+        <ui:VisualElement name="playback" style="flex-grow: 0; flex-basis: auto; background-color: rgba(0, 0, 0, 0.5); flex-direction: row; padding-top: 10px; padding-bottom: 10px;">
             <ui:VisualElement name="buttons" style="flex-grow: 1; flex-direction: row; align-items: center; justify-content: center;">
                 <ui:Button text="prev" name="prev" enabled="true" />
-                <ui:Button text="pause" name="pause" />
-                <ui:Button text="next" name="next" />
+                <ui:Button text="pause" name="pause" enabled="true" />
+                <ui:Button text="skip" name="skip" />
             </ui:VisualElement>
             <ui:VisualElement name="bar" style="flex-grow: 5;" />
             <ui:VisualElement name="info" style="flex-grow: 2; align-items: flex-end; justify-content: center;">
-                <ui:Label text="Label" name="track-name" class="track-name" />
-                <ui:Label text="Label" name="artist-name" class="artist-name" />
+                <ui:Label text="Label" name="track-name" />
+                <ui:Label text="Label" name="artist-name" />
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="window" style="flex-grow: 7;" />

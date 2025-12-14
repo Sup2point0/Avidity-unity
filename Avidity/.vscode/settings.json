@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "Avidity.sln"
+    "dotnet.defaultSolution": "Avidity.slnx"
 }

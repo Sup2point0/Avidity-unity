@@ -9,12 +9,12 @@ Button {
   border-width: 0;
 }
 
-.track-name {
+#track-name {
   color: white;
   font-size: 30px;
 }
 
-.artist-name {
+#artist-name {
   color: rgb(192, 192, 192);
   font-size: 25px;
 }

@@ -69,7 +69,7 @@ public class SceneExecutive : MonoBehaviour
 
     void Update()
     {
-        Debug.Log($"Application.targetFrameRate = {Application.targetFrameRate}");
+        // Debug.Log($"Application.targetFrameRate = {Application.targetFrameRate}");
         if (!is_focused) return;
 
         if (this.until_idle < 0) {
