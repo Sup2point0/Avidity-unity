@@ -27,7 +27,6 @@ public class AudioExecutive : MonoBehaviour
 
     #region DELEGATES
 
-    public Action onTrackSelected;
     public Action onTrackPlayed;
     public Action onPlaybackUpdated;
     public Action onPlaybackUnpaused;

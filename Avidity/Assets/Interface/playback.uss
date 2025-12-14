@@ -1,12 +1,6 @@
-:root {
-}
-
-Button {
+#playback Button {
   min-width: 100px;
   min-height: 100px;
-  padding: 0;
-  margin: 0 20px;
-  border-width: 0;
 }
 
 #track-name {

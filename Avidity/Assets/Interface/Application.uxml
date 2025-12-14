@@ -1,6 +1,8 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/Interface/playback/buttons.uss?fileID=7433441132597879392&amp;guid=3ec11caf9e3cb05429c5b52570f35762&amp;type=3#buttons" />
     <Style src="project://database/Assets/Interface/essence.uss?fileID=7433441132597879392&amp;guid=57add471641c76f49b9f2be788e117d7&amp;type=3#essence" />
+    <Style src="project://database/Assets/Interface/buttons.uss?fileID=7433441132597879392&amp;guid=3ec11caf9e3cb05429c5b52570f35762&amp;type=3#buttons" />
+    <Style src="project://database/Assets/Interface/playback.uss?fileID=7433441132597879392&amp;guid=122cbeb5f9eb5504fae39bfae91ce990&amp;type=3#playback" />
+    <Style src="project://database/Assets/Interface/navigation.uss?fileID=7433441132597879392&amp;guid=31600e0154b29c3458a8818ed49200b9&amp;type=3#navigation" />
     <ui:VisualElement name="layout" style="flex-grow: 1;">
         <ui:VisualElement name="playback" style="flex-grow: 0; flex-basis: auto; background-color: rgba(0, 0, 0, 0.5); flex-direction: row; padding-top: 10px; padding-bottom: 10px;">
             <ui:VisualElement name="buttons" style="flex-grow: 1; flex-direction: row; align-items: center; justify-content: center;">
@@ -9,14 +11,16 @@
                 <ui:Button text="&gt;" name="next" />
             </ui:VisualElement>
             <ui:VisualElement name="bar" style="flex-grow: 5;" />
-            <ui:VisualElement name="info" style="flex-grow: 2; align-items: flex-end; justify-content: center;">
+            <ui:VisualElement name="info" style="flex-grow: 2; align-items: flex-end; justify-content: center; padding-right: 50px;">
                 <ui:Label text="&lt;TRACK-NAME&gt;" name="track-name" />
-                <ui:Label text="&lt;ARTIST-NAME." name="artist-name" />
+                <ui:Label text="&lt;ARTIST-NAME&gt;" name="artist-name" />
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="window" style="flex-grow: 7;" />
-        <ui:VisualElement name="navigation" style="flex-grow: 0; flex-basis: auto;">
-            <ui:Button text="&lt;" name="prev" enabled="true" />
+        <ui:VisualElement name="navigation" style="flex-grow: 0; flex-basis: auto; flex-direction: row; align-items: center; justify-content: center; background-color: rgba(0, 0, 0, 0.5); padding-top: 10px; padding-bottom: 10px;">
+            <ui:Button text="PLAYLISTS" name="playlists" enabled="true" />
+            <ui:Button text="TRACKS" name="tracks" enabled="true" />
+            <ui:Button text="ARTISTS" name="artists" enabled="true" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

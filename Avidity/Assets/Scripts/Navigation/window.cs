@@ -11,11 +11,11 @@ public class WindowScript : MonoBehaviour
 
     void Start()
     {
-        Exec.Scene.onTabNavigate = OnTabNavigate;
+        Exec.Scene.onTabChanged = OnTabChanged;
     }
 
     
-    void OnTabNavigate()
+    void OnTabChanged()
     {
         gameObject.SetActive(Exec.Scene.currentTab == tab);
     }

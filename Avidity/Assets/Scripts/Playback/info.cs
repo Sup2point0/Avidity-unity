@@ -12,7 +12,7 @@ public class PlaybackInfoScript : Bases.InterfaceController
 
     void OnEnable()
     {
-        var root = this.ui.Q<Label>("playback");
+        var root = this.ui.Q<VisualElement>("playback");
         this.trackName = root.Q<Label>("track-name");
         this.artistName = root.Q<Label>("artist-name");
     }

@@ -11,8 +11,11 @@ public class SceneExecutive : MonoBehaviour
 {
     #region ENUMS
 
+    /// <summary> A window tab that can be navigated to in the application. </summary>
     public enum Tab {
-        Tracks, Playlists, Artists
+        Playlists,
+        Tracks,
+        Artists,
     }
 
     #endregion
@@ -21,7 +24,7 @@ public class SceneExecutive : MonoBehaviour
     #region DELEGATES
 
     /// <summary> Fired when the window tab is changed. </summary>
-    public Action onTabNavigate;
+    public Action onTabChanged;
 
     /// <summary> Fired when a track is selected. </summary>
     public Action onTrackSelect;
@@ -47,14 +50,15 @@ public class SceneExecutive : MonoBehaviour
 
     public Tab currentTab = Tab.Tracks;
 
-    [SerializeField]
-    public Track selectedTrack;
+    [SerializeField] public Track selectedTrack;
 
 
     #region PRIVATE
+
     public bool is_focused;
     public bool is_idle;
     public float until_idle;
+
     #endregion
 
 
@@ -153,7 +157,7 @@ public class SceneExecutive : MonoBehaviour
     public void NavigateToTab(Tab tab)
     {
         this.currentTab = tab;
-        onTabNavigate?.Invoke();
+        onTabChanged?.Invoke();
     }
 
     public void SelectTrack(Track track)
