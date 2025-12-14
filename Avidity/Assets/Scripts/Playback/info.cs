@@ -12,8 +12,9 @@ public class PlaybackInfoScript : Bases.InterfaceController
 
     void OnEnable()
     {
-        this.trackName = this.ui.Q<Label>("track-name");
-        this.artistName = this.ui.Q<Label>("artist-name");
+        var root = this.ui.Q<Label>("playback");
+        this.trackName = root.Q<Label>("track-name");
+        this.artistName = root.Q<Label>("artist-name");
     }
 
     void Start()

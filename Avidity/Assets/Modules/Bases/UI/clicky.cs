@@ -13,9 +13,9 @@ namespace Avidity
             public Button button;
 
             
-            public Clicky(VisualElement ui, string name)
+            public Clicky(VisualElement root, string name)
             {
-                this.button = ui.Q<Button>(name);
+                this.button = root.Q<Button>(name);
             }
 
             public abstract void BindListeners();
