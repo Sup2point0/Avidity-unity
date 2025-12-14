@@ -1,0 +1,4 @@
+* {
+    -unity-font: resource('Fonts/Abel.ttf');
+    -unity-font-definition: resource('Fonts/Abel');
+}
