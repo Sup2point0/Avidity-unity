@@ -27,13 +27,12 @@ public class AudioExecutive : MonoBehaviour
 
     #region DELEGATES
 
-    /// <summary> Fired when a new track is played. </summary>
+    public Action onTrackSelected;
     public Action onTrackPlayed;
-
-    /// <summary> Fired when the current track is cleared. </summary>
+    public Action onPlaybackUpdated;
+    public Action onPlaybackUnpaused;
+    public Action onPlaybackPaused;
     public Action onTrackCleared;
-
-    /// <summary> Fired when the playback queue is modified. </summary>
     public Action onQueueUpdated;
 
     #endregion
@@ -68,13 +67,7 @@ public class AudioExecutive : MonoBehaviour
 
     private AudioClip LoadClip(Shard shard)
     {
-        var clip = Resources.Load<AudioClip>($"Tracks/{shard}");
-
-        if (clip is null) {
-            throw new AudioLoadException();
-        }
-
-        return clip;
+        return Resources.Load<AudioClip>($"Tracks/{shard}") ?? throw new AudioLoadException();
     }
 
     private AudioSource PlayClip(AudioClip clip, float volume = 1.0f)
@@ -145,6 +138,9 @@ public class AudioExecutive : MonoBehaviour
     {
         this.audioSource.Pause();
         this.isPaused = true;
+
+        this.onPlaybackUpdated?.Invoke();
+        this.onPlaybackPaused?.Invoke();
     }
 
     public void UnPause()
@@ -156,6 +152,9 @@ public class AudioExecutive : MonoBehaviour
         }
         
         this.isPaused = false;
+
+        this.onPlaybackUpdated?.Invoke();
+        this.onPlaybackUnpaused?.Invoke();
     }
 
     public void TogglePause()
@@ -192,6 +191,8 @@ public class AudioExecutive : MonoBehaviour
     public void ClearQueue()
     {
         this.queuedTracks.Clear();
+
+        this.onQueueUpdated?.Invoke();
     }
 
     #endregion
