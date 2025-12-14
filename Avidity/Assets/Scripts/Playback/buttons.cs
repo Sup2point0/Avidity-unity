@@ -10,7 +10,7 @@ public class PlaybackButtonsScript : MonoBehaviour
 
     public PauseButton pauseButton;
     public PrevButton prevButton;
-    public SkipButton skipButton;
+    public NextButton nextButton;
 
 
     void Awake()
@@ -22,14 +22,14 @@ public class PlaybackButtonsScript : MonoBehaviour
     {
         this.pauseButton = new PauseButton(this.ui);
         this.prevButton = new PrevButton(this.ui);
-        this.skipButton = new SkipButton(this.ui);
+        this.nextButton = new NextButton(this.ui);
     }
 
     void Start()
     {
         this.pauseButton.BindListeners();
         this.prevButton.BindListeners();
-        this.skipButton.BindListeners();
+        this.nextButton.BindListeners();
     }
 }
 
@@ -42,16 +42,13 @@ public class PauseButton
     {
         this.button = ui.Q<Button>("pause");
         this.button.SetEnabled(false);
-        
-        Debug.Log("SETTING");
-        this.button.clicked += () => {
-            Debug.Log("CLICKED");
-            Exec.Audio.TogglePause();
-        };
     }
 
     public void BindListeners()
     {
+        Debug.Log($"Exec.Audio = {Exec.Audio}");
+        this.button.clicked += () => Exec.Audio.TogglePause();
+
         Exec.Audio.onTrackPlayed  += () => this.button.SetEnabled(true);
         Exec.Audio.onTrackCleared += () => this.button.SetEnabled(false);
     }
@@ -77,11 +74,11 @@ public class PrevButton
 }
 
 
-public class SkipButton
+public class NextButton
 {
     public Button button;
 
-    public SkipButton(VisualElement ui)
+    public NextButton(VisualElement ui)
     {
         this.button = ui.Q<Button>("skip");
         this.button.SetEnabled(false);
