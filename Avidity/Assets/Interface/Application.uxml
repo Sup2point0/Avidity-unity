@@ -18,9 +18,12 @@
         </ui:VisualElement>
         <ui:VisualElement name="window" style="flex-grow: 7;" />
         <ui:VisualElement name="navigation" style="flex-grow: 0; flex-basis: auto; flex-direction: row; align-items: center; justify-content: center; background-color: rgba(0, 0, 0, 0.5); padding-top: 10px; padding-bottom: 10px;">
-            <ui:Button text="PLAYLISTS" name="playlists" enabled="true" />
-            <ui:Button text="TRACKS" name="tracks" enabled="true" />
-            <ui:Button text="ARTISTS" name="artists" enabled="true" />
+            <ui:VisualElement name="tabs" style="flex-grow: 1; flex-direction: row; align-items: center; justify-content: center;">
+                <ui:Button text="PLAYLISTS" name="playlists" enabled="true" />
+                <ui:Button text="TRACKS" name="tracks" enabled="true" />
+                <ui:Button text="ARTISTS" name="artists" enabled="true" />
+            </ui:VisualElement>
+            <ui:Button text="QUIT" name="quit" enabled="true" style="align-self: auto; position: absolute; right: 0;" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

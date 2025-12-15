@@ -1,4 +1,9 @@
-#navigation Button {
+#tabs Button {
   min-width: 200px;
+  min-height: 100px;
+}
+
+Button#quit {
+  min-width: 100px;
   min-height: 100px;
 }

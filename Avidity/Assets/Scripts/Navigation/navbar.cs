@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEditor;
 
 using System.Collections.Generic;
 
@@ -13,13 +14,18 @@ public class NavigationBarScript : Bases.InterfaceController
 {
     public Dictionary<SceneExec.Tab, Button> tabButtons = new();
 
+    public Button quitButton;
+
 
     void OnEnable()
     {
         var root = this.ui.Q<VisualElement>("navigation");
+
         this.tabButtons[SceneExec.Tab.Playlists] = root.Q<Button>("playlists");
         this.tabButtons[SceneExec.Tab.Tracks]    = root.Q<Button>("tracks");
         this.tabButtons[SceneExec.Tab.Artists]   = root.Q<Button>("artists");
+
+        this.quitButton = root.Q<Button>("quit");
     }
 
     void Start()
@@ -28,8 +34,9 @@ public class NavigationBarScript : Bases.InterfaceController
         {
             var tab = kvp.Key;
             var button = kvp.Value;
-            Debug.Log($"tab = {tab}");
             button.clicked += () => Exec.Scene.currentTab = tab;
         }
+
+        this.quitButton.clicked += () => Application.Quit();
     }
 }
