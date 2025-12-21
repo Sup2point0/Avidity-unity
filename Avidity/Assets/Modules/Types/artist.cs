@@ -26,7 +26,5 @@ public class Artist
 
 
     public static string DisplayNames(IEnumerable<Artist> artists)
-    {
-        return string.Join(" / ", artists);
-    }
+        => string.Join(" / ", artists);
 }

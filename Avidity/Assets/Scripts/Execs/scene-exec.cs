@@ -164,6 +164,9 @@ public class SceneExecutive : MonoBehaviour
     {
         this.selectedTrack = track;
         onTrackSelected?.Invoke();
+
+        var file = Resources.Load<AudioClip>($"Tracks/{track.shard}");
+        track.duration = file.length;
     }
     
     #endregion
