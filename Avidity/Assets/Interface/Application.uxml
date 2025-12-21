@@ -1,12 +1,13 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <ui:Template name="tracks" src="project://database/Assets/Application/Routes/Tracks/tracks.uxml?fileID=9197481963319205126&amp;guid=7aad10187456d9540ada01620969eb6c&amp;type=3#tracks" />
     <Style src="project://database/Assets/Interface/essence.uss?fileID=7433441132597879392&amp;guid=57add471641c76f49b9f2be788e117d7&amp;type=3" />
+    <Style src="project://database/Assets/Interface/application.uss?fileID=7433441132597879392&amp;guid=e13bf3879e85b8944b8139a706e817ee&amp;type=3#application" />
     <Style src="project://database/Assets/Interface/buttons.uss?fileID=7433441132597879392&amp;guid=3ec11caf9e3cb05429c5b52570f35762&amp;type=3" />
     <Style src="project://database/Assets/Interface/playback.uss?fileID=7433441132597879392&amp;guid=122cbeb5f9eb5504fae39bfae91ce990&amp;type=3" />
     <Style src="project://database/Assets/Interface/navigation.uss?fileID=7433441132597879392&amp;guid=31600e0154b29c3458a8818ed49200b9&amp;type=3" />
     <Style src="project://database/Assets/Interface/selector.uss?fileID=7433441132597879392&amp;guid=2672b8dbd5ac9ac49bc096ebb430dee2&amp;type=3#selector" />
     <ui:VisualElement name="layout" style="flex-grow: 1;">
-        <ui:VisualElement name="playback" style="flex-grow: 0; flex-basis: auto; background-color: rgba(0, 0, 0, 0.5); flex-direction: row; padding-top: 10px; padding-bottom: 10px; min-height: 12%;">
+        <ui:VisualElement name="playback" style="flex-grow: 0; flex-basis: auto; background-color: rgba(0, 0, 0, 0.5); flex-direction: row; padding-top: 10px; padding-bottom: 10px;">
             <ui:VisualElement name="buttons" style="flex-grow: 1; flex-direction: row; align-items: center; justify-content: center;">
                 <ui:Button text="&lt;" name="prev" enabled="true" />
                 <ui:Button text="=" name="pause" enabled="true" />
@@ -46,11 +47,11 @@
                 </ui:ScrollView>
             </ui:VisualElement>
             <ui:VisualElement name="content" style="flex-grow: 10; align-items: center; justify-content: center;">
-                <ui:Instance template="tracks" name="tracks" style="flex-grow: 1;" />
+                <ui:Instance template="tracks" name="tracks" style="flex-grow: 1; width: 100%;" />
             </ui:VisualElement>
             <ui:VisualElement name="queue" style="flex-grow: 1;" />
         </ui:VisualElement>
-        <ui:VisualElement name="navigation" style="flex-grow: 0; flex-basis: auto; flex-direction: row; align-items: center; justify-content: center; background-color: rgba(0, 0, 0, 0.5); padding-top: 10px; padding-bottom: 10px; height: 12%;">
+        <ui:VisualElement name="navigation" style="flex-grow: 0; flex-basis: auto; flex-direction: row; align-items: center; justify-content: center; background-color: rgba(0, 0, 0, 0.5); padding-top: 10px; padding-bottom: 10px;">
             <ui:VisualElement name="tabs" style="flex-grow: 1; flex-direction: row; align-items: center; justify-content: center;">
                 <ui:Button text="PLAYLISTS" name="playlists" enabled="true" />
                 <ui:Button text="TRACKS" name="tracks" enabled="true" />
