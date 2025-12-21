@@ -27,7 +27,7 @@ public class SceneExecutive : MonoBehaviour
     public Action onTabChanged;
 
     /// <summary> Fired when a track is selected. </summary>
-    public Action onTrackSelect;
+    public Action onTrackSelected;
 
     #endregion
 
@@ -163,7 +163,7 @@ public class SceneExecutive : MonoBehaviour
     public void SelectTrack(Track track)
     {
         this.selectedTrack = track;
-        onTrackSelect?.Invoke();
+        onTrackSelected?.Invoke();
     }
     
     #endregion

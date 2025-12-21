@@ -64,7 +64,7 @@ public class AudioExecutive : MonoBehaviour
 
     #region INTERNAL
 
-    private AudioClip LoadClip(Shard shard)
+    public AudioClip LoadClip(Shard shard)
     {
         return Resources.Load<AudioClip>($"Tracks/{shard}") ?? throw new AudioLoadException();
     }

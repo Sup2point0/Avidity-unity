@@ -1,8 +1,9 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/Interface/essence.uss?fileID=7433441132597879392&amp;guid=57add471641c76f49b9f2be788e117d7&amp;type=3#essence" />
-    <Style src="project://database/Assets/Interface/buttons.uss?fileID=7433441132597879392&amp;guid=3ec11caf9e3cb05429c5b52570f35762&amp;type=3#buttons" />
-    <Style src="project://database/Assets/Interface/playback.uss?fileID=7433441132597879392&amp;guid=122cbeb5f9eb5504fae39bfae91ce990&amp;type=3#playback" />
-    <Style src="project://database/Assets/Interface/navigation.uss?fileID=7433441132597879392&amp;guid=31600e0154b29c3458a8818ed49200b9&amp;type=3#navigation" />
+    <Style src="project://database/Assets/Interface/essence.uss?fileID=7433441132597879392&amp;guid=57add471641c76f49b9f2be788e117d7&amp;type=3" />
+    <Style src="project://database/Assets/Interface/buttons.uss?fileID=7433441132597879392&amp;guid=3ec11caf9e3cb05429c5b52570f35762&amp;type=3" />
+    <Style src="project://database/Assets/Interface/playback.uss?fileID=7433441132597879392&amp;guid=122cbeb5f9eb5504fae39bfae91ce990&amp;type=3" />
+    <Style src="project://database/Assets/Interface/navigation.uss?fileID=7433441132597879392&amp;guid=31600e0154b29c3458a8818ed49200b9&amp;type=3" />
+    <Style src="project://database/Assets/Interface/selector.uss?fileID=7433441132597879392&amp;guid=2672b8dbd5ac9ac49bc096ebb430dee2&amp;type=3#selector" />
     <ui:VisualElement name="layout" style="flex-grow: 1;">
         <ui:VisualElement name="playback" style="flex-grow: 0; flex-basis: auto; background-color: rgba(0, 0, 0, 0.5); flex-direction: row; padding-top: 10px; padding-bottom: 10px;">
             <ui:VisualElement name="buttons" style="flex-grow: 1; flex-direction: row; align-items: center; justify-content: center;">
@@ -16,7 +17,38 @@
                 <ui:Label text="&lt;ARTIST-NAME&gt;" name="artist-name" />
             </ui:VisualElement>
         </ui:VisualElement>
-        <ui:VisualElement name="window" style="flex-grow: 7;" />
+        <ui:VisualElement name="window" style="flex-grow: 7; flex-direction: row;">
+            <ui:VisualElement name="selector" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0.4); padding-top: 10px; padding-right: 20px; padding-left: 20px;">
+                <ui:ScrollView>
+                    <ui:VisualElement name="info-main" style="flex-grow: 1;">
+                        <ui:Image name="track-cover" style="width: 300px; background-image: resource(&apos;Images/camellia.terabyte&apos;); height: 300px; -unity-background-scale-mode: scale-and-crop; padding-bottom: 0; margin-bottom: 20px;" />
+                        <ui:Label text="&lt;TRACK-NAME&gt;" name="track-name" />
+                        <ui:VisualElement name="left-right">
+                            <ui:Label text="&lt;ARTIST-NAME&gt;" name="artist-name" />
+                            <ui:Label text="&lt;ALBUM-NAME&gt;" name="album-name" />
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                    <ui:VisualElement name="info-details" style="flex-grow: 1; padding-top: 20px; padding-right: 0; padding-bottom: 0; padding-left: 0;">
+                        <ui:VisualElement name="left-right">
+                            <ui:Label text="Duration" name="duration" class="field" />
+                            <ui:Label text="&lt;TRACK-DURATION&gt;" name="track-duration" class="field-value" />
+                        </ui:VisualElement>
+                        <ui:VisualElement name="left-right">
+                            <ui:Label text="Plays" name="plays" class="field" />
+                            <ui:Label text="&lt;TRACK-PLAYS&gt;" name="track-plays" class="field-value" />
+                        </ui:VisualElement>
+                        <ui:VisualElement name="left-right">
+                            <ui:Label text="Shard" name="shard" class="field" />
+                            <ui:Label text="&lt;TRACK-SOURCE&gt;" name="track-shard" class="field-value" />
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                </ui:ScrollView>
+            </ui:VisualElement>
+            <ui:VisualElement name="content" style="flex-grow: 10; align-items: center; justify-content: center;">
+                <ui:Label text="placeholder" />
+            </ui:VisualElement>
+            <ui:VisualElement name="queue" style="flex-grow: 1;" />
+        </ui:VisualElement>
         <ui:VisualElement name="navigation" style="flex-grow: 0; flex-basis: auto; flex-direction: row; align-items: center; justify-content: center; background-color: rgba(0, 0, 0, 0.5); padding-top: 10px; padding-bottom: 10px;">
             <ui:VisualElement name="tabs" style="flex-grow: 1; flex-direction: row; align-items: center; justify-content: center;">
                 <ui:Button text="PLAYLISTS" name="playlists" enabled="true" />

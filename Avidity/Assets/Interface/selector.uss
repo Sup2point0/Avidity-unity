@@ -1,0 +1,35 @@
+#selector Label {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+#left-right {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#selector #track-name {
+    color: white;
+    font-size: 30px;
+}
+
+#selector #album-name {
+    color: rgb(192, 192, 192);
+    font-size: 25px;
+}
+
+#selector #artist-name {
+    color: rgb(192, 192, 192);
+    font-size: 25px;
+}
+
+.field {
+    color: rgb(192, 192, 192);
+    font-size: 20px;
+}
+
+.field-value {
+    color: white;
+    font-size: 20px;
+}

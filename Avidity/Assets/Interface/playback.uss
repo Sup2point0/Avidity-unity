@@ -3,12 +3,17 @@
   min-height: 100px;
 }
 
-#track-name {
+#playback Label {
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+#playback #track-name {
   color: white;
   font-size: 30px;
 }
 
-#artist-name {
+#playback #artist-name {
   color: rgb(192, 192, 192);
   font-size: 25px;
 }

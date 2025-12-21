@@ -17,16 +17,16 @@ public class SelectorPaneScript : Avidity.Bases.UIElementScript
         GetComponent<Image>().color = colours.Back.Deutive;
     }
 
-    void Start()
-    {
-        Exec.Scene.onTrackSelect += OnTrackSelect;
-    }
+    // void Start()
+    // {
+    //     Exec.Scene.onTrackSelect += OnTrackSelect;
+    // }
 
 
-    void OnTrackSelect()
-    {
-        trackNameText.text = Exec.Scene.selectedTrack.name;
-        artistNameText.text = Artist.DisplayNames(Exec.Scene.selectedTrack.artists);
-        albumNameText.text = Exec.Scene.selectedTrack.album?.name ?? "";
-    }
+    // void OnTrackSelect()
+    // {
+    //     trackNameText.text = Exec.Scene.selectedTrack.name;
+    //     artistNameText.text = Artist.DisplayNames(Exec.Scene.selectedTrack.artists);
+    //     albumNameText.text = Exec.Scene.selectedTrack.album?.name ?? "";
+    // }
 }
