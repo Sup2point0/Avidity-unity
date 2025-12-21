@@ -615,6 +615,7 @@ GameObject:
   - component: {fileID: 273337165}
   - component: {fileID: 273337166}
   - component: {fileID: 273337167}
+  - component: {fileID: 273337168}
   m_Layer: 5
   m_Name: UI
   m_TagString: Untagged
@@ -696,6 +697,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72facc60b402c4f4baf71b2bd70e1a49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NavigationBarScript
+--- !u!114 &273337168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 273337162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16ce69cd275f36048baaa1940fd7cb2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SelectorScript
 --- !u!1 &359876378
 GameObject:
   m_ObjectHideFlags: 0
@@ -1701,7 +1714,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1042137131
 RectTransform:
   m_ObjectHideFlags: 0
