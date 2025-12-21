@@ -64,9 +64,13 @@ public class AudioExecutive : MonoBehaviour
 
     #region INTERNAL
 
-    public AudioClip LoadClip(Shard shard)
+    public AudioClip LoadClip(Track track)
     {
-        return Resources.Load<AudioClip>($"Tracks/{shard}") ?? throw new AudioLoadException();
+        var clip = Resources.Load<AudioClip>($"Tracks/{track.shard}") ?? throw new AudioLoadException();
+
+        track.duration = clip.length;
+
+        return clip;
     }
 
     private AudioSource PlayClip(AudioClip clip, float volume = 1.0f)
@@ -88,7 +92,7 @@ public class AudioExecutive : MonoBehaviour
 
     private void PlayCurrent()
     {
-        var clip = LoadClip(this.activeTrack.shard);
+        var clip = LoadClip(this.activeTrack);
         PlayClip(clip);
     }
 

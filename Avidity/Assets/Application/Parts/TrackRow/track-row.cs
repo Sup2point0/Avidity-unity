@@ -43,6 +43,11 @@ public partial class TrackRow : VisualElement
         this.trackName.text = track.name;
         this.artistName.text = Artist.DisplayNames(track.artists);
         this.trackDuration.text = track.DisplayDuration();
+
+        this.AddManipulator(new Clickable(e =>
+        {
+            Exec.Scene.SelectTrack(track);
+        }));
     }
 }
 

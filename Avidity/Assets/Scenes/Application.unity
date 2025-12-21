@@ -615,6 +615,7 @@ GameObject:
   - component: {fileID: 273337166}
   - component: {fileID: 273337167}
   - component: {fileID: 273337168}
+  - component: {fileID: 273337170}
   - component: {fileID: 273337169}
   m_Layer: 5
   m_Name: UI
@@ -723,6 +724,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TracksWindowController
   trackRow: {fileID: 9197481963319205126, guid: d03803c306d1baa4d82636f744d31038, type: 3}
   displayedTracks: []
+--- !u!114 &273337170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 273337162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4b1f530232933f4e8fcac67c6ad0460, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::QueuePaneController
+  trackRow: {fileID: 9197481963319205126, guid: d03803c306d1baa4d82636f744d31038, type: 3}
 --- !u!1 &359876378
 GameObject:
   m_ObjectHideFlags: 0

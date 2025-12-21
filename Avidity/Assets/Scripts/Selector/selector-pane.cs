@@ -4,7 +4,7 @@ using UnityEngine.UIElements;
 using Avidity;
 
 
-public class SelectorPaneScript : Bases.InterfaceController
+public class SelectorPaneController : Bases.InterfaceController
 {
     public Label trackName;
     public Label artistName;

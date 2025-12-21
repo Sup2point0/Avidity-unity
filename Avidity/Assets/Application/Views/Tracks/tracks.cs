@@ -9,7 +9,7 @@ using Avidity;
 
 public class TracksWindowController : Bases.InterfaceController
 {
-    public ListView tracksList;
+    public ListView listView;
     public VisualTreeAsset trackRow;
 
     public List<Track> displayedTracks = new(); 
@@ -19,10 +19,10 @@ public class TracksWindowController : Bases.InterfaceController
     {
         RegenerateTracks();
 
-        this.tracksList = this.ui.Q<ListView>("tracks-list");
-        this.tracksList.itemsSource = this.displayedTracks;
-        this.tracksList.makeItem = MakeItem;
-        this.tracksList.bindItem = BindItem;
+        this.listView = this.ui.Q<ListView>("tracks-list");
+        this.listView.itemsSource = this.displayedTracks;
+        this.listView.makeItem = MakeItem;
+        this.listView.bindItem = BindItem;
     }
 
 

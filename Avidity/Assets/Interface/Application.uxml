@@ -1,5 +1,6 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:Template name="tracks" src="project://database/Assets/Application/Routes/Tracks/tracks.uxml?fileID=9197481963319205126&amp;guid=7aad10187456d9540ada01620969eb6c&amp;type=3#tracks" />
+    <ui:Template name="tracks" src="project://database/Assets/Application/Views/Tracks/tracks.uxml?fileID=9197481963319205126&amp;guid=7aad10187456d9540ada01620969eb6c&amp;type=3#tracks" />
+    <ui:Template name="queue" src="project://database/Assets/Application/Views/Queue/queue.uxml?fileID=9197481963319205126&amp;guid=6a5b4ca34f7f6fd41a642b66777f2678&amp;type=3#queue" />
     <Style src="project://database/Assets/Interface/essence.uss?fileID=7433441132597879392&amp;guid=57add471641c76f49b9f2be788e117d7&amp;type=3" />
     <Style src="project://database/Assets/Interface/application.uss?fileID=7433441132597879392&amp;guid=e13bf3879e85b8944b8139a706e817ee&amp;type=3#application" />
     <Style src="project://database/Assets/Interface/buttons.uss?fileID=7433441132597879392&amp;guid=3ec11caf9e3cb05429c5b52570f35762&amp;type=3" />
@@ -49,7 +50,7 @@
             <ui:VisualElement name="content" style="flex-grow: 10; align-items: center; justify-content: center;">
                 <ui:Instance template="tracks" name="tracks" style="flex-grow: 1; width: 100%;" />
             </ui:VisualElement>
-            <ui:VisualElement name="queue" style="flex-grow: 1;" />
+            <ui:Instance template="queue" name="queue" style="flex-grow: 1;" />
         </ui:VisualElement>
         <ui:VisualElement name="navigation" style="flex-grow: 0; flex-basis: auto; flex-direction: row; align-items: center; justify-content: center; background-color: rgba(0, 0, 0, 0.5); padding-top: 10px; padding-bottom: 10px;">
             <ui:VisualElement name="tabs" style="flex-grow: 1; flex-direction: row; align-items: center; justify-content: center;">
