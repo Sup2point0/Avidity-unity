@@ -43,7 +43,7 @@ public class SelectorScript : Bases.InterfaceController
         this.artistName.text = Artist.DisplayNames(track.artists);
         this.albumName.text  = track.album?.name ?? "";
 
-        this.trackDuration.text = file? $"{file.length} s" : "unknown";
+        this.trackDuration.text = file ? Utils.Display.Duration(file.length) : "unknown";
         this.trackPlays.text    = track.totalPlays.ToString();
         this.trackShard.text    = track.shard;
     }
