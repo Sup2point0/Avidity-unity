@@ -15,8 +15,8 @@ public class PlaybackButtonsScript : Bases.InterfaceController
     {
         var root = this.ui.Q<VisualElement>("playback");
         this.pauseClicky = new PauseClicky(root);
-        this.prevClicky = new PrevClicky(root);
-        this.nextClicky = new NextClicky(root);
+        this.prevClicky  = new PrevClicky(root);
+        this.nextClicky  = new NextClicky(root);
     }
 
     void Start()

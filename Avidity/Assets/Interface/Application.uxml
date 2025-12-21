@@ -1,4 +1,5 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="tracks" src="project://database/Assets/Application/Routes/Tracks/tracks.uxml?fileID=9197481963319205126&amp;guid=7aad10187456d9540ada01620969eb6c&amp;type=3#tracks" />
     <Style src="project://database/Assets/Interface/essence.uss?fileID=7433441132597879392&amp;guid=57add471641c76f49b9f2be788e117d7&amp;type=3" />
     <Style src="project://database/Assets/Interface/buttons.uss?fileID=7433441132597879392&amp;guid=3ec11caf9e3cb05429c5b52570f35762&amp;type=3" />
     <Style src="project://database/Assets/Interface/playback.uss?fileID=7433441132597879392&amp;guid=122cbeb5f9eb5504fae39bfae91ce990&amp;type=3" />
@@ -45,7 +46,9 @@
                 </ui:ScrollView>
             </ui:VisualElement>
             <ui:VisualElement name="content" style="flex-grow: 10; align-items: center; justify-content: center;">
-                <ui:Label text="placeholder" />
+                <ui:Instance template="tracks" name="tracks">
+                    <ui:Label text="Label" name="TRACKS" style="color: rgb(255, 255, 255); font-size: 100px;" />
+                </ui:Instance>
             </ui:VisualElement>
             <ui:VisualElement name="queue" style="flex-grow: 1;" />
         </ui:VisualElement>
@@ -58,4 +61,5 @@
             <ui:Button text="QUIT" name="quit" enabled="true" style="align-self: auto; position: absolute; right: 0;" />
         </ui:VisualElement>
     </ui:VisualElement>
+    <TrackRow />
 </ui:UXML>

@@ -1,0 +1,14 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/Interface/essence.uss?fileID=7433441132597879392&amp;guid=57add471641c76f49b9f2be788e117d7&amp;type=3" />
+    <TrackRow>
+        <ui:VisualElement style="flex-direction: row;">
+            <ui:Button text="&gt;" name="play" enabled="true" style="width: 100px; height: 100px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+            <ui:Label text="&lt;TRACK-DURATION&gt;" name="duration" />
+            <ui:VisualElement name="info" style="flex-direction: column; justify-content: center;">
+                <ui:Label text="&lt;TRACK-NAME&gt;" name="track-name" />
+                <ui:Label text="&lt;ARTIST-NAME&gt;" name="artist-name" />
+            </ui:VisualElement>
+            <ui:Button text="+" name="queue" enabled="true" style="width: 100px; height: 100px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+        </ui:VisualElement>
+    </TrackRow>
+</ui:UXML>
