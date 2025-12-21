@@ -17,13 +17,12 @@ public class TracksWindowController : Bases.InterfaceController
 
     void OnEnable()
     {
+        RegenerateTracks();
+
         this.tracksList = this.ui.Q<ListView>("tracks-list");
         this.tracksList.itemsSource = this.displayedTracks;
         this.tracksList.makeItem = MakeItem;
         this.tracksList.bindItem = BindItem;
-        this.tracksList.selectionType = SelectionType.Single;
-        
-        RegenerateTracks();
     }
 
 
@@ -39,6 +38,6 @@ public class TracksWindowController : Bases.InterfaceController
 
     void BindItem(VisualElement elem, int idx)
     {
-        (elem as TrackRow).track = this.displayedTracks[idx];
+        (elem as TrackRow).Bind(this.displayedTracks[idx]);
     }
 }

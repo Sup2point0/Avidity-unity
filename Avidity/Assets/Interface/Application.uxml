@@ -6,7 +6,7 @@
     <Style src="project://database/Assets/Interface/navigation.uss?fileID=7433441132597879392&amp;guid=31600e0154b29c3458a8818ed49200b9&amp;type=3" />
     <Style src="project://database/Assets/Interface/selector.uss?fileID=7433441132597879392&amp;guid=2672b8dbd5ac9ac49bc096ebb430dee2&amp;type=3#selector" />
     <ui:VisualElement name="layout" style="flex-grow: 1;">
-        <ui:VisualElement name="playback" style="flex-grow: 0; flex-basis: auto; background-color: rgba(0, 0, 0, 0.5); flex-direction: row; padding-top: 10px; padding-bottom: 10px;">
+        <ui:VisualElement name="playback" style="flex-grow: 0; flex-basis: auto; background-color: rgba(0, 0, 0, 0.5); flex-direction: row; padding-top: 10px; padding-bottom: 10px; min-height: 12%;">
             <ui:VisualElement name="buttons" style="flex-grow: 1; flex-direction: row; align-items: center; justify-content: center;">
                 <ui:Button text="&lt;" name="prev" enabled="true" />
                 <ui:Button text="=" name="pause" enabled="true" />
@@ -46,13 +46,11 @@
                 </ui:ScrollView>
             </ui:VisualElement>
             <ui:VisualElement name="content" style="flex-grow: 10; align-items: center; justify-content: center;">
-                <ui:Instance template="tracks" name="tracks">
-                    <ui:Label text="Label" name="TRACKS" style="color: rgb(255, 255, 255); font-size: 100px;" />
-                </ui:Instance>
+                <ui:Instance template="tracks" name="tracks" style="flex-grow: 1;" />
             </ui:VisualElement>
             <ui:VisualElement name="queue" style="flex-grow: 1;" />
         </ui:VisualElement>
-        <ui:VisualElement name="navigation" style="flex-grow: 0; flex-basis: auto; flex-direction: row; align-items: center; justify-content: center; background-color: rgba(0, 0, 0, 0.5); padding-top: 10px; padding-bottom: 10px;">
+        <ui:VisualElement name="navigation" style="flex-grow: 0; flex-basis: auto; flex-direction: row; align-items: center; justify-content: center; background-color: rgba(0, 0, 0, 0.5); padding-top: 10px; padding-bottom: 10px; height: 12%;">
             <ui:VisualElement name="tabs" style="flex-grow: 1; flex-direction: row; align-items: center; justify-content: center;">
                 <ui:Button text="PLAYLISTS" name="playlists" enabled="true" />
                 <ui:Button text="TRACKS" name="tracks" enabled="true" />
@@ -61,5 +59,4 @@
             <ui:Button text="QUIT" name="quit" enabled="true" style="align-self: auto; position: absolute; right: 0;" />
         </ui:VisualElement>
     </ui:VisualElement>
-    <TrackRow />
 </ui:UXML>

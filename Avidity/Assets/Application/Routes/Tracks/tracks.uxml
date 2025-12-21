@@ -1,6 +1,4 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
     <Style src="project://database/Assets/Interface/essence.uss?fileID=7433441132597879392&amp;guid=57add471641c76f49b9f2be788e117d7&amp;type=3" />
-    <ui:Template name="TrackRow" src="project://database/Assets/Application/Parts/TrackRow/TrackRow.uxml" />
-    <ui:ListView name="tracks-list" />
-    <ui:Instance template="TrackRow" />
+    <ui:ListView name="tracks-list" virtualization-method="FixedHeight" fixed-item-height="100" show-border="true" style="flex-grow: 1; background-color: rgba(0, 62, 156, 0.2);" />
 </ui:UXML>

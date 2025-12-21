@@ -34,7 +34,7 @@ public class Track
 
     public string DisplayDuration()
     {
-        if (this.duration == null) return "--:--";
+        if (this.duration is null) return "--:--";
 
         var mins = this.duration / 60;
         var m = mins.ToString();
