@@ -21,8 +21,9 @@ public class NavigationBarScript : Bases.InterfaceController
     {
         var root = this.ui.Q<VisualElement>("navigation");
 
-        this.tabButtons[SceneExec.Tab.Playlists] = root.Q<Button>("playlists");
+        this.tabButtons[SceneExec.Tab.Home]      = root.Q<Button>("home");
         this.tabButtons[SceneExec.Tab.Tracks]    = root.Q<Button>("tracks");
+        this.tabButtons[SceneExec.Tab.Playlists] = root.Q<Button>("playlists");
         this.tabButtons[SceneExec.Tab.Artists]   = root.Q<Button>("artists");
 
         this.quitButton = root.Q<Button>("quit");

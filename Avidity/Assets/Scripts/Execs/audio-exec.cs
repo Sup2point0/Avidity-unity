@@ -205,6 +205,7 @@ public class AudioExecutive : MonoBehaviour
 
     public void AddToQueue(Track track)
     {
+        Debug.Log("QUEUEING");
         this.queuedTracks.Add(track);
         this.onQueueUpdated?.Invoke();
     }

@@ -13,8 +13,9 @@ public class SceneExecutive : MonoBehaviour
 
     /// <summary> A window tab that can be navigated to in the application. </summary>
     public enum Tab {
-        Playlists,
+        Home,
         Tracks,
+        Playlists,
         Artists,
     }
 
@@ -166,7 +167,10 @@ public class SceneExecutive : MonoBehaviour
         onTrackSelected?.Invoke();
 
         var file = Resources.Load<AudioClip>($"Tracks/{track.shard}");
-        track.duration = file.length;
+        if (file != null) {
+            Debug.Log($"file.length = {file.length}");
+            track.duration = file.length;
+        }
     }
     
     #endregion

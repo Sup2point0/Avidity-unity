@@ -23,6 +23,7 @@ public class QueuePaneController : Bases.InterfaceController
     void Start()
     {
         this.listView.itemsSource = Exec.Audio.queuedTracks;
+        Exec.Audio.onQueueUpdated += () => this.listView.RefreshItems();
     }
 
 
