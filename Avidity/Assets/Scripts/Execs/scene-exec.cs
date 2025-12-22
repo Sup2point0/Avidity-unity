@@ -170,6 +170,7 @@ public class SceneExecutive : MonoBehaviour
         if (file != null) {
             Debug.Log($"file.length = {file.length}");
             track.duration = file.length;
+            Debug.Log($"track.duration = {track.duration}");
         }
     }
     
