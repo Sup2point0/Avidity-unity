@@ -36,10 +36,12 @@ public class Track
     {
         if (this.duration is null) return "--:--";
 
-        var mins = this.duration / 60;
+        var seconds = (int) this.duration;
+
+        var mins = seconds / 60;
         var m = mins.ToString();
 
-        var secs = this.duration % 60;
+        var secs = seconds % 60;
         var s = secs.ToString().PadLeft(2, '0');
 
         return $"{m}:{s}";
