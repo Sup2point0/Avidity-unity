@@ -104,7 +104,7 @@ public class PlayClicky : Bases.Clicky
                 
                 /* Should always be non-null if `ctx` is `QUEUE`, but better safe than sorry... */
                 if (this.qid.HasValue) {
-                    Exec.Audio.RemoveFromQueue(this.qid.Value);
+                    Exec.Audio.UnqueueTrack(this.qid.Value);
                 }
             };
         }
@@ -124,7 +124,7 @@ public class QueueClicky : Bases.Clicky
 
     public override void BindListeners()
     {
-        this.button.clicked += () => Exec.Audio.AddToQueue(this.track);
+        this.button.clicked += () => Exec.Audio.QueueTrack(this.track);
     }
 }
 
@@ -141,7 +141,7 @@ public class RemoveClicky : Bases.Clicky
         
         this.button.clicked += () => {
             if (this.qid.HasValue) {
-                Exec.Audio.RemoveFromQueue(this.qid.Value);
+                Exec.Audio.UnqueueTrack(this.qid.Value);
             } else {
                 Debug.Log("ERROR: No queue ID supplied?");
             }

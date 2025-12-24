@@ -6,11 +6,10 @@ using System.Collections.Generic;
 
 using Avidity;
 
-
 using SceneExec = SceneExecutive;
 
 
-public class NavigationBarScript : Bases.InterfaceController
+public class NavigationBarController : Bases.InterfaceController
 {
     public Dictionary<SceneExec.Tab, Button> tabButtons = new();
 
@@ -20,6 +19,8 @@ public class NavigationBarScript : Bases.InterfaceController
     void OnEnable()
     {
         var root = this.ui.Q<VisualElement>("navigation");
+
+        Debug.Log("FINDING NAVBAR THINGS");
 
         this.tabButtons[SceneExec.Tab.Home]      = root.Q<Button>("home");
         this.tabButtons[SceneExec.Tab.Tracks]    = root.Q<Button>("tracks");
@@ -35,7 +36,7 @@ public class NavigationBarScript : Bases.InterfaceController
         {
             var tab = kvp.Key;
             var button = kvp.Value;
-            button.clicked += () => Exec.Scene.currentTab = tab;
+            button.clicked += () => Exec.Scene.NavigateToTab(tab);
         }
 
         this.quitButton.clicked += () => Application.Quit();

@@ -57,9 +57,9 @@
     <Compile Include="Assets\Scripts\Execs\scene-exec.cs" />
     <Compile Include="Assets\Application\Views\Playback\info.cs" />
     <Compile Include="Assets\Modules\Bases\exception.cs" />
+    <Compile Include="Assets\Application\Views\Selector\selector.cs" />
     <Compile Include="Assets\Application\Views\Navigation\navbar.cs" />
     <Compile Include="Assets\Modules\Core\data.cs" />
-    <Compile Include="Assets\Application\Views\Selector\selector-pane.cs" />
     <Compile Include="Assets\Modules\Core\exec.cs" />
     <Compile Include="Assets\Application\Views\Playback\buttons.cs" />
     <Compile Include="Assets\Modules\Types\playlist.cs" />
@@ -67,9 +67,9 @@
     <Compile Include="Assets\Modules\Types\artist.cs" />
     <Compile Include="Assets\Application\Views\Queue\queue.cs" />
     <Compile Include="Assets\Modules\Internal\declarations.cs" />
+    <Compile Include="Assets\Application\Views\Window\window.cs" />
     <Compile Include="Assets\Modules\Types\track.cs" />
     <Compile Include="Assets\Modules\External\weighted-list.cs" />
-    <Compile Include="Assets\Scripts\Navigation\window.cs" />
     <Compile Include="Assets\Application\Views\Tracks\tracks.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -77,7 +77,7 @@
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
     <None Include="Assets\Application\Parts\TrackRow\track-row.uxml" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile-2-Pass.shader" />
-    <None Include="Assets\Application\Views\Navigation\navigation.uss" />
+    <None Include="Assets\Application\Views\Navigation\navbar.uss" />
     <None Include="Assets\Application\application.uss" />
     <None Include="Assets\Application\Views\Playback\playback.uss" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />

@@ -49,9 +49,11 @@ public class SceneExecutive : MonoBehaviour
 
     [Header("State")]
 
-    public Tab currentTab = Tab.Tracks;
+    [SerializeField] public Tab currentTab { get; private set; } = Tab.Tracks;
 
-    [SerializeField] public Track selectedTrack;
+    /// <summary> The currently selected track to be shown in the Selector. Note this can be `null`, but we're not marking it `Track?` just to avoid `.Value` shenanigans. TODO: Might change in future?
+    /// </summary>
+    [SerializeField] public Track selectedTrack { get; private set; }
 
 
     #region PRIVATE
@@ -68,6 +70,7 @@ public class SceneExecutive : MonoBehaviour
     void Awake()
     {
         Exec.Scene = this;
+        this.onTabChanged += () => { Debug.Log($"tab = {this.currentTab}"); };
 
         this.ToActive();
     }

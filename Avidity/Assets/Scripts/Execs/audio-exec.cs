@@ -207,7 +207,7 @@ public class AudioExecutive : MonoBehaviour
 
     #region QUEUE PLAYBACK
 
-    public void AddToQueue(Track track)
+    public void QueueTrack(Track track)
     {
         this.queuedTracks.Add((++this.qid_counter, track));
         this.onQueueUpdated?.Invoke();
@@ -215,7 +215,7 @@ public class AudioExecutive : MonoBehaviour
 
     /// <summary> Remove a track from the playback queue by its queue ID. </summary>
     /// <param name="qid">The assigned queue ID of the track.</param>
-    public void RemoveFromQueue(uint qid)
+    public void UnqueueTrack(uint qid)
     {
         this.queuedTracks.RemoveAll( entry => entry.Item1 == qid );
         this.onQueueUpdated?.Invoke();
