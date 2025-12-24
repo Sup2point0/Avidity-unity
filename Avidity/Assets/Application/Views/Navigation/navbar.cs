@@ -20,8 +20,7 @@ public class NavigationBarController : Bases.InterfaceController
     {
         var root = this.ui.Q<VisualElement>("navigation");
 
-        Debug.Log("FINDING NAVBAR THINGS");
-
+        this.tabButtons[SceneExec.Tab.Files]     = root.Q<Button>("files");
         this.tabButtons[SceneExec.Tab.Home]      = root.Q<Button>("home");
         this.tabButtons[SceneExec.Tab.Tracks]    = root.Q<Button>("tracks");
         this.tabButtons[SceneExec.Tab.Playlists] = root.Q<Button>("playlists");
