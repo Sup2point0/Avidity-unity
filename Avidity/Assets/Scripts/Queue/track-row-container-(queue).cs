@@ -23,7 +23,7 @@ public class TrackRowQueueContainerScript : MonoBehaviour
     
     void OnQueueUpdated()
     {
-        displayedTracks = Exec.Audio.queuedTracks.ToList();
+        // displayedTracks = Exec.Audio.queuedTracks.ToList();
         RegenerateTrackRows();
     }
 

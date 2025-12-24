@@ -18,6 +18,5 @@ public class PushTrackButtonQueueScript : Avidity.Bases.ButtonScript
     protected override void OnClick()
     {
         Exec.Audio.PlayNow(track);
-        Exec.Audio.DeleteFromQueue(track);
     }
 }

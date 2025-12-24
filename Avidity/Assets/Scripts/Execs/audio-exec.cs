@@ -48,8 +48,12 @@ public class AudioExecutive : MonoBehaviour
     /// <summary> Playback position in seconds. </summary>
     public float timeElapsed;
 
-    /// <summary> The queue of tracks to play next. </summary>
-    public List<Track> queuedTracks = new();
+    /// <summary> The queue of tracks and their temporary uniquifier IDs to play next. </summary>
+    public List<(uint, Track)> queuedTracks = new();
+    /* NOTE: won't show in the editor, cuz Unity doesn't like serialising tuples... */
+
+
+    private uint qid_counter;
 
 
     #region UNITY
@@ -101,7 +105,7 @@ public class AudioExecutive : MonoBehaviour
         ClearCurrent();
 
         if (this.queuedTracks.Count > 0) {
-            this.activeTrack = this.queuedTracks[0];
+            this.activeTrack = this.queuedTracks[0].Item2;
             this.queuedTracks.RemoveAt(0);
             PlayCurrent();
         }
@@ -127,8 +131,7 @@ public class AudioExecutive : MonoBehaviour
         ClearCurrent();
         ClearQueue();
 
-        /* Create a shallow copy so that modifying queue does not corrupt playlist */
-        this.queuedTracks = playlist.tracks.ToList();
+        this.queuedTracks = playlist.tracks.Select((value, index) => ((uint) index, value)).ToList();
         PlayNext();
     }
 
@@ -194,6 +197,7 @@ public class AudioExecutive : MonoBehaviour
     public void ClearQueue()
     {
         this.queuedTracks.Clear();
+        this.qid_counter = 0;
 
         this.onQueueUpdated?.Invoke();
     }
@@ -205,14 +209,15 @@ public class AudioExecutive : MonoBehaviour
 
     public void AddToQueue(Track track)
     {
-        Debug.Log("QUEUEING");
-        this.queuedTracks.Add(track);
+        this.queuedTracks.Add((++this.qid_counter, track));
         this.onQueueUpdated?.Invoke();
     }
 
-    public void DeleteFromQueue(Track track)
+    /// <summary> Remove a track from the playback queue by its queue ID. </summary>
+    /// <param name="qid">The assigned queue ID of the track.</param>
+    public void RemoveFromQueue(uint qid)
     {
-        this.queuedTracks.Remove(track);  // FIXME
+        this.queuedTracks.RemoveAll( entry => entry.Item1 == qid );
         this.onQueueUpdated?.Invoke();
     }
 

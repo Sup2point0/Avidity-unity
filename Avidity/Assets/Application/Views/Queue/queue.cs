@@ -29,11 +29,12 @@ public class QueuePaneController : Bases.InterfaceController
 
     VisualElement MakeItem()
     {
-        return new TrackRow(this.trackRow);
+        return new TrackRow(this.trackRow, ctx: TrackRow.Context.QUEUE);
     }
 
     void BindItem(VisualElement elem, int idx)
     {
-        (elem as TrackRow).Bind(Exec.Audio.queuedTracks[idx]);
+        var (qid, track) = Exec.Audio.queuedTracks[idx];
+        (elem as TrackRow).Bind(track, qid);
     }
 }

@@ -17,6 +17,5 @@ public class DeleteTrackButtonQueueScript : Avidity.Bases.ButtonScript
 
     protected override void OnClick()
     {
-        Exec.Audio.DeleteFromQueue(track);
     }
 }
