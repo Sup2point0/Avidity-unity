@@ -106,7 +106,7 @@ public class AudioExecutive : MonoBehaviour
 
         if (this.queuedTracks.Count > 0) {
             this.activeTrack = this.queuedTracks[0].Item2;
-            this.queuedTracks.RemoveAt(0);
+            UnqueueFirst();
             PlayCurrent();
         }
         else {
@@ -114,11 +114,18 @@ public class AudioExecutive : MonoBehaviour
         }
     }
 
-    public void PlayNow(Track track)
+    public void PlayNow(Track track, uint? qid = null)
     {
         ClearCurrent();
 
         this.activeTrack = track;
+
+        Debug.Log($"qid = {qid}");
+        if (qid.HasValue) {
+            Debug.Log("unqueueing");
+            UnqueueTrack(qid.Value);
+        }
+
         PlayCurrent();
     }
 
@@ -149,7 +156,7 @@ public class AudioExecutive : MonoBehaviour
         this.onPlaybackPaused?.Invoke();
     }
 
-    public void UnPause()
+    public void Unpause()
     {
         if (this.activeTrack is null && this.queuedTracks.Count > 0) {
             PlayNext();
@@ -166,7 +173,7 @@ public class AudioExecutive : MonoBehaviour
     public void TogglePause()
     {
         if (this.isPaused) {
-            UnPause();
+            Unpause();
         } else {
             Pause();
         }
@@ -194,14 +201,6 @@ public class AudioExecutive : MonoBehaviour
         this.onTrackCleared?.Invoke();
     }
 
-    public void ClearQueue()
-    {
-        this.queuedTracks.Clear();
-        this.qid_counter = 0;
-
-        this.onQueueUpdated?.Invoke();
-    }
-
     #endregion
 
 
@@ -218,6 +217,19 @@ public class AudioExecutive : MonoBehaviour
     public void UnqueueTrack(uint qid)
     {
         this.queuedTracks.RemoveAll( entry => entry.Item1 == qid );
+        this.onQueueUpdated?.Invoke();
+    }
+
+    public void UnqueueFirst()
+    {
+        this.queuedTracks.RemoveAt(0);
+        this.onQueueUpdated?.Invoke();
+    }
+
+    public void ClearQueue()
+    {
+        this.queuedTracks.Clear();
+        this.qid_counter = 0;
         this.onQueueUpdated?.Invoke();
     }
 
