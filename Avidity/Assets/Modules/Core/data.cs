@@ -32,6 +32,9 @@ public static class Data
                 },
             },
             new Track() {
+                shard = "colour-mourning", name = "Colour Mourning", artists = new() { new Artist() { shard = "camellia", name = "Camellia", }, },
+            },
+            new Track() {
                 shard = "synthesis", name = "Synthesis.", artists = new() { new Artist() { shard = "tn-shi", name = "tn-shi", }, },
             },
             new Track() {
