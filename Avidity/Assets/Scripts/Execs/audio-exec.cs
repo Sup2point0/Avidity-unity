@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using UnityEngine;
+using UnityEngine.Networking;
 
 using Avidity;
 
@@ -77,6 +78,24 @@ public class AudioExecutive : MonoBehaviour
         return clip;
     }
 
+    async Awaitable<AudioClip> LoadClipAsync(Track track)
+    {
+        var url = $"file://C:/Users/sup/Desktop/assets/sounds/camellia/{track.shard}.mp3";
+        using var request = UnityWebRequestMultimedia.GetAudioClip(url, AudioType.UNKNOWN);
+
+        await request.SendWebRequest();
+
+        if (request.result == UnityWebRequest.Result.ConnectionError) {
+            throw new AudioLoadException();
+        } else {
+            var clip = DownloadHandlerAudioClip.GetContent(request) ?? throw new AudioLoadException();
+
+            track.duration = clip.length;
+
+            return clip;
+        }
+    }
+
     private AudioSource PlayClip(AudioClip clip, float volume = 1.0f)
     {
         this.audioSource.clip = clip;
@@ -96,8 +115,12 @@ public class AudioExecutive : MonoBehaviour
 
     private void PlayCurrent()
     {
-        var clip = LoadClip(this.activeTrack);
-        PlayClip(clip);
+        async void Play() {
+            var clip = await LoadClipAsync(this.activeTrack);
+            PlayClip(clip);
+        }
+
+        Play();
     }
 
     public void PlayNext()
@@ -120,9 +143,7 @@ public class AudioExecutive : MonoBehaviour
 
         this.activeTrack = track;
 
-        Debug.Log($"qid = {qid}");
         if (qid.HasValue) {
-            Debug.Log("unqueueing");
             UnqueueTrack(qid.Value);
         }
 
