@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 using UnityEngine;
 
@@ -28,15 +29,8 @@ namespace Avidity
             => this.name ?? "Anonymous";
 
         public static string DisplayNames(IEnumerable<Artist>? artists)
-        // {
-        //     foreach (var artist in artists ?? new List<Artist>())
-        //     {
-        //         Debug.Log($"artist = {artist}");
-        //     }
-
-        //     return "Anonymous";
-        // }
-            => (artists is null) ? "Anonymous" : string.Join(" / ", artists);
+            => (artists is null) ? "Anonymous"
+                : string.Join(" / ", artists.Select(each => each.DisplayName()));
     }
 
     
