@@ -67,32 +67,38 @@ namespace Avidity
         public List<Shard>? playlists;
         public int          totalPlays = 0;
 
-        public Track ToTrack(Shard shard, Avidity.ApplicationData data)
-            => new Track() {
-                shard = shard,
-                name  = this.name,
 
-                artists =
-                    (this.artists is null) ? null : (
-                        from artist_shard in this.artists 
-                        where data.artists.ContainsKey(artist_shard)
-                        select data.artists[artist_shard]
-                    ).ToList(),
-                
-                duration = this.duration,
+        public Track? ToTrack(Shard shard, Avidity.ApplicationData data)
+        {
+            try {
+                return new Track() {
+                    shard = shard,
+                    name  = this.name,
 
-                album =
-                    (this.album is null) ? null
-                    : data.playlists[this.album],
-                
-                playlists =
-                    (this.playlists is null) ? null : (
-                        from list_shard in this.playlists 
-                        where data.playlists.ContainsKey(list_shard)
-                        select data.playlists[list_shard]
-                    ).ToList(),
-                
-                totalPlays = this.totalPlays,
-            };
+                    artists =
+                        (this.artists is null) ? null : (
+                            from artist_shard in this.artists 
+                            where data.artists.ContainsKey(artist_shard)
+                            select data.artists[artist_shard]
+                        ).ToList(),
+                    
+                    duration = this.duration,
+
+                    album =
+                        (this.album is null) ? null
+                        : data.playlists[this.album],
+                    
+                    playlists =
+                        (this.playlists is null) ? null : (
+                            from list_shard in this.playlists 
+                            where data.playlists.ContainsKey(list_shard)
+                            select data.playlists[list_shard]
+                        ).ToList(),
+                    
+                    totalPlays = this.totalPlays,
+                };
+            }
+            catch { return null; }
+        }
     }
 }

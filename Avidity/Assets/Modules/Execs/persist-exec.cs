@@ -103,6 +103,7 @@ namespace Avidity
                 }
             ).ToDictionary(list => list.shard, list => list);
 
+
         /// <summary> Replace Shards in partially initialised track objects to the objects they represent (pure). </summary>
         /// <param name="tracks">Tracks to link.</param>
         /// <param name="data">Data proving objects to link to.</param>
@@ -112,34 +113,13 @@ namespace Avidity
             Avidity.ApplicationData data
         )
             => (from kvp in tracks
-                let track = kvp.Value
-                select new Track() {
-                    shard = kvp.Key,
-                    name  = track.name,
-
-                    artists =
-                        (track.artists is null) ? null : (
-                            from shard in track.artists 
-                            where data.artists.ContainsKey(shard)
-                            select data.artists[shard]
-                        ).ToList(),
-                    
-                    duration = track.duration,
-
-                    album =
-                        (track.album is null) ? null
-                        : data.playlists[track.album],
-                    
-                    playlists =
-                        (track.playlists is null) ? null : (
-                            from shard in track.playlists 
-                            where data.playlists.ContainsKey(shard)
-                            select data.playlists[shard]
-                        ).ToList(),
-                    
-                    totalPlays = track.totalPlays,
-                }
+                let shard = kvp.Key
+                let track_exchange = kvp.Value
+                let track = track_exchange.ToTrack(shard, data)
+                where track is not null
+                select track
             ).ToDictionary(track => track.shard, track => track);
+
 
         /// <summary> Replace Shards in playlist objects to the objects they represent (in-place). </summary>
         /// <param name="playlists">Playlists to link.</param>
@@ -152,6 +132,8 @@ namespace Avidity
             foreach (var kvp in playlists) {
                 var shard_list = kvp.Key;
                 var list = kvp.Value;
+
+                if (list.tracks is null) continue;
 
                 data.playlists[shard_list].tracks = (
                     from shard_track in list.tracks
