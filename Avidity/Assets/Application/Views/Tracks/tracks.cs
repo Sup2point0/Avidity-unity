@@ -23,6 +23,7 @@ public class TracksWindowController : Bases.InterfaceController
         this.listView.itemsSource = this.displayedTracks;
         this.listView.makeItem = MakeItem;
         this.listView.bindItem = BindItem;
+        this.listView.unbindItem = UnbindItem;
     }
 
 
@@ -39,5 +40,10 @@ public class TracksWindowController : Bases.InterfaceController
     void BindItem(VisualElement elem, int idx)
     {
         (elem as TrackRow).Bind(this.displayedTracks[idx]);
+    }
+
+    void UnbindItem(VisualElement elem, int idx)
+    {
+        (elem as TrackRow).Unbind();
     }
 }

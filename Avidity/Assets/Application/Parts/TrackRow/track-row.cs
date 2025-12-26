@@ -29,6 +29,8 @@ public partial class TrackRow : VisualElement
     public Label artistName;
     public Label trackDuration;
 
+    private IManipulator manipulator;
+
 
     public TrackRow() {}
 
@@ -72,9 +74,15 @@ public partial class TrackRow : VisualElement
         this.artistName.text = Artist.DisplayNames(track.artists);
         this.trackDuration.text = track.DisplayDuration();
 
-        this.AddManipulator(new Clickable(e => {
+        this.manipulator = new Clickable(e => {
             Exec.Scene.SelectTrack(track);
-        }));
+        });
+        this.AddManipulator(this.manipulator);
+    }
+
+    public void Unbind()
+    {
+        if (this.manipulator != null) this.RemoveManipulator(this.manipulator);
     }
 }
 
@@ -141,7 +149,7 @@ public class RemoveClicky : Bases.Clicky
             if (root.qid.HasValue) {
                 Exec.Audio.UnqueueTrack(root.qid.Value);
             } else {
-                Debug.Log("ERROR: No queue ID supplied?");
+                Debug.LogError("No queue ID supplied?");
             }
         };
     }

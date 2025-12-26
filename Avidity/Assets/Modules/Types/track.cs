@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
+using UnityEngine;
+
 using Shard = System.String;
 
 
@@ -98,7 +100,10 @@ namespace Avidity
                     totalPlays = this.totalPlays,
                 };
             }
-            catch { return null; }
+            catch (Exception e) {
+                Debug.LogError($"Error loading track {shard}: {e}");
+                return null;
+            }
         }
     }
 }
