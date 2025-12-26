@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using System.IO;
 
+using Newtonsoft.Json;
+
 using UnityEngine;
 
 
@@ -71,8 +73,7 @@ namespace Avidity
 
         public static void SaveOptions()
         {
-            var data = JsonUtility.ToJson(Persistence.options);
-            SaveFileTo("options.json", data);
+            SaveJson(Persistence.options, "options.json");
         }
 
     #endregion
@@ -83,12 +84,18 @@ namespace Avidity
         private static T LoadJson<T>(string path)
         {
             var text = File.ReadAllText(path);
-            var res = JsonUtility.FromJson<T>(text);
+            var res = JsonConvert.DeserializeObject<T>(text, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
 
             return res;
         }
 
-        private static void SaveFileTo(string path, string content)
+        private static void SaveJson<T>(T obj, string path)
+        {
+            var json = JsonConvert.SerializeObject(obj, Formatting.Indented);
+            SaveFile(json, path);
+        }
+
+        private static void SaveFile(string content, string path)
         {
             var dest = $"{Application.persistentDataPath}/{path}";
 
