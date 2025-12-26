@@ -22,7 +22,7 @@
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="content" style="flex-grow: 7; flex-direction: row;">
-            <ui:VisualElement name="selector" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0.4); padding-top: 10px; padding-right: 20px; padding-left: 20px;">
+            <ui:VisualElement name="selector" style="background-color: rgba(0, 0, 0, 0.4); padding-top: 10px; padding-right: 20px; padding-left: 20px;">
                 <ui:ScrollView>
                     <ui:VisualElement name="info-main" style="flex-grow: 1;">
                         <ui:Image name="track-cover" style="width: 300px; background-image: resource(&apos;Images/camellia.terabyte&apos;); height: 300px; -unity-background-scale-mode: scale-and-crop; padding-bottom: 0; margin-bottom: 20px;" />
@@ -48,11 +48,11 @@
                     </ui:VisualElement>
                 </ui:ScrollView>
             </ui:VisualElement>
-            <ui:VisualElement name="window" style="flex-grow: 10; align-items: center; justify-content: center;">
+            <ui:VisualElement name="window" style="align-items: center; justify-content: center;">
                 <ui:Instance template="tracks" name="tracks" class="window" style="flex-grow: 1; width: 100%;" />
                 <ui:Instance template="options" name="options" class="window" />
             </ui:VisualElement>
-            <ui:Instance template="queue" name="queue" style="flex-grow: 1;" />
+            <ui:Instance template="queue" name="queue" />
         </ui:VisualElement>
         <ui:VisualElement name="navigation" style="flex-grow: 0; flex-basis: auto; flex-direction: row; align-items: center; justify-content: center; background-color: rgba(0, 0, 0, 0.5); padding-top: 10px; padding-bottom: 10px;">
             <ui:VisualElement name="tabs" style="flex-grow: 1; flex-direction: row; align-items: center; justify-content: center;">

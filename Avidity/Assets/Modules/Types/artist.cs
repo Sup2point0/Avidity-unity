@@ -3,6 +3,8 @@
 using System;
 using System.Collections.Generic;
 
+using UnityEngine;
+
 using Shard = System.String;
 
 
@@ -23,6 +25,14 @@ public class Artist
     public string DisplayName()
         => this.name ?? "Anonymous";
 
-    public static string DisplayNames(IEnumerable<Artist> artists)
-        => string.Join(" / ", artists);
+    public static string DisplayNames(IEnumerable<Artist>? artists)
+    {
+        foreach (var artist in artists ?? new List<Artist>())
+        {
+            Debug.Log($"artist = {artist}");
+        }
+
+        return "Anonymous";
+    }
+        // => (artists is null) ? string.Join(" / ", artists) : "Anonymous";
 }

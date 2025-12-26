@@ -2,6 +2,10 @@
 #content    { max-height: 86%; }
 #navigation { min-height: 12%; }
 
+#selector { min-width: 25%; }
+#window   { min-width: 50%; }
+#queue    { min-width: 25%; }
+
 .window {
   display: none;
 }
