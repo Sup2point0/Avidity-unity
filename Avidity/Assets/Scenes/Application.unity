@@ -258,12 +258,14 @@ MonoBehaviour:
   secondsBeforeIdle: 2
   playerInput: {fileID: 196098724}
   mainCanvas: {fileID: 187941623}
-  currentTab: 1
-  selectedTrack:
-    shard: 
-    name: 
+  options:
+    audioSourceFolders: []
+    volume: 1
+    defaultTab: 0
+  data:
+    tracks: []
+    playlists: []
     artists: []
-    totalPlays: 0
   is_focused: 0
   is_idle: 0
   until_idle: 0
@@ -403,6 +405,7 @@ GameObject:
   - component: {fileID: 273337168}
   - component: {fileID: 273337170}
   - component: {fileID: 273337171}
+  - component: {fileID: 273337172}
   - component: {fileID: 273337169}
   m_Layer: 5
   m_Name: UI
@@ -536,6 +539,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98c45453882caec4db61c252a795c39c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WindowController
+--- !u!114 &273337172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 273337162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6963e651106f8a54898fb4928b9af942, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OptionsWindowController
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0

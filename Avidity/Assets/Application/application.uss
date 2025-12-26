@@ -1,3 +1,7 @@
 #playback   { min-height: 12%; }
 #content    { max-height: 86%; }
 #navigation { min-height: 12%; }
+
+.window {
+  display: none;
+}

@@ -1,12 +1,13 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <ui:Template name="tracks" src="project://database/Assets/Application/Views/Tracks/tracks.uxml?fileID=9197481963319205126&amp;guid=7aad10187456d9540ada01620969eb6c&amp;type=3#tracks" />
+    <ui:Template name="options" src="project://database/Assets/Application/Views/Options/options.uxml?fileID=9197481963319205126&amp;guid=1fb4ee194d1c5254785fe3d67830020f&amp;type=3#options" />
     <ui:Template name="queue" src="project://database/Assets/Application/Views/Queue/queue.uxml?fileID=9197481963319205126&amp;guid=6a5b4ca34f7f6fd41a642b66777f2678&amp;type=3#queue" />
-    <Style src="project://database/Assets/Application/essence.uss?fileID=7433441132597879392&amp;guid=57add471641c76f49b9f2be788e117d7&amp;type=3#essence" />
+    <Style src="project://database/Assets/Application/essence.uss?fileID=7433441132597879392&amp;guid=57add471641c76f49b9f2be788e117d7&amp;type=3" />
     <Style src="project://database/Assets/Application/application.uss?fileID=7433441132597879392&amp;guid=e13bf3879e85b8944b8139a706e817ee&amp;type=3#application" />
-    <Style src="project://database/Assets/Application/buttons.uss?fileID=7433441132597879392&amp;guid=3ec11caf9e3cb05429c5b52570f35762&amp;type=3#buttons" />
-    <Style src="project://database/Assets/Application/Views/Playback/playback.uss?fileID=7433441132597879392&amp;guid=122cbeb5f9eb5504fae39bfae91ce990&amp;type=3#playback" />
-    <Style src="project://database/Assets/Application/Views/Navigation/navbar.uss?fileID=7433441132597879392&amp;guid=31600e0154b29c3458a8818ed49200b9&amp;type=3#navbar" />
-    <Style src="project://database/Assets/Application/Views/Selector/selector.uss?fileID=7433441132597879392&amp;guid=2672b8dbd5ac9ac49bc096ebb430dee2&amp;type=3#selector" />
+    <Style src="project://database/Assets/Application/buttons.uss?fileID=7433441132597879392&amp;guid=3ec11caf9e3cb05429c5b52570f35762&amp;type=3" />
+    <Style src="project://database/Assets/Application/Views/Playback/playback.uss?fileID=7433441132597879392&amp;guid=122cbeb5f9eb5504fae39bfae91ce990&amp;type=3" />
+    <Style src="project://database/Assets/Application/Views/Navigation/navbar.uss?fileID=7433441132597879392&amp;guid=31600e0154b29c3458a8818ed49200b9&amp;type=3" />
+    <Style src="project://database/Assets/Application/Views/Selector/selector.uss?fileID=7433441132597879392&amp;guid=2672b8dbd5ac9ac49bc096ebb430dee2&amp;type=3" />
     <ui:VisualElement name="layout" style="flex-grow: 1;">
         <ui:VisualElement name="playback" style="flex-grow: 0; flex-basis: auto; background-color: rgba(0, 0, 0, 0.5); flex-direction: row; padding-top: 10px; padding-bottom: 10px;">
             <ui:VisualElement name="buttons" style="flex-grow: 1; flex-direction: row; align-items: center; justify-content: center;">
@@ -48,12 +49,14 @@
                 </ui:ScrollView>
             </ui:VisualElement>
             <ui:VisualElement name="window" style="flex-grow: 10; align-items: center; justify-content: center;">
-                <ui:Instance template="tracks" name="tracks" style="flex-grow: 1; width: 100%;" />
+                <ui:Instance template="tracks" name="tracks" class="window" style="flex-grow: 1; width: 100%;" />
+                <ui:Instance template="options" name="options" class="window" />
             </ui:VisualElement>
             <ui:Instance template="queue" name="queue" style="flex-grow: 1;" />
         </ui:VisualElement>
         <ui:VisualElement name="navigation" style="flex-grow: 0; flex-basis: auto; flex-direction: row; align-items: center; justify-content: center; background-color: rgba(0, 0, 0, 0.5); padding-top: 10px; padding-bottom: 10px;">
             <ui:VisualElement name="tabs" style="flex-grow: 1; flex-direction: row; align-items: center; justify-content: center;">
+                <ui:Button text="OPTIONS" name="options" enabled="true" />
                 <ui:Button text="FILES" name="files" enabled="true" />
                 <ui:Button text="HOME" name="home" enabled="true" />
                 <ui:Button text="TRACKS" name="tracks" enabled="true" />

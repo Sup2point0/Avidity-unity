@@ -13,7 +13,7 @@ public class SceneExecutive : MonoBehaviour
 
     /// <summary> A window tab that can be navigated to in the application. </summary>
     public enum Tab {
-        Files, Home, Tracks, Playlists, Artists,
+        Options, Files, Home, Tracks, Playlists, Artists,
     }
 
     #endregion
@@ -46,6 +46,9 @@ public class SceneExecutive : MonoBehaviour
 
     [Header("State")]
 
+    [SerializeField] public Avidity.ApplicationOptions options;
+    [SerializeField] public Avidity.ApplicationData data;
+
     [SerializeField] public Tab currentTab { get; private set; } = Tab.Tracks;
 
     /// <summary> The currently selected track to be shown in the Selector. Note this can be `null`, but we're not marking it `Track?` just to avoid `.Value` shenanigans. TODO: Might change in future?
@@ -69,6 +72,11 @@ public class SceneExecutive : MonoBehaviour
         Exec.Scene = this;
 
         this.ToActive();
+    }
+
+    void Start()
+    {
+        this.onTabChanged?.Invoke();
     }
 
     void Update()

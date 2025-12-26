@@ -59,6 +59,7 @@
   },
   "a39-sayonara": {
     "name": "\u3055\u3088\u3046\u306a\u3089",
+    "artist": "a39",
     "lists": [
       "electronic",
       "rhythm",
@@ -69,6 +70,7 @@
   },
   "a39-xin": {
     "name": "\u5fc3\u306e\u8a18\u61b6",
+    "artist": "a39",
     "lists": [
       "electronic",
       "rhythm",
@@ -80,6 +82,7 @@
   },
   "a39-xuejiang": {
     "name": "\u96ea\u964d\u308a\u3001\u30e1\u30ea\u30af\u30ea",
+    "artist": "a39",
     "lists": [
       "electronic",
       "rhythm",
@@ -90,6 +93,7 @@
   },
   "a39-ye": {
     "name": "\u8056\u591c\u8b83\u6b4c",
+    "artist": "a39",
     "lists": [
       "electronic",
       "rhythm",
@@ -100,7 +104,7 @@
   },
   "accidental-office": {
     "name": "The Accidental Office",
-    "artist": "Daniel Thrasher",
+    "artist": "daniel-thrasher",
     "lists": [
       "piano"
     ],

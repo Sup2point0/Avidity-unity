@@ -16,11 +16,11 @@ public class AudioExecutive : MonoBehaviour
     #region EXCEPTIONS
 
     /// <summary> Something went wrong loading an audio file. </summary>
-    public class AudioLoadException : Avidity.Bases.DisplayedException
+    public class AudioLoadException : Bases.DisplayedException
     {}
 
     /// <summary> A playlist is empty so cannot be played. </summary>
-    public class EmptyPlaylistException : Avidity.Bases.DisplayedException
+    public class EmptyPlaylistException : Bases.DisplayedException
     {}
 
     #endregion
