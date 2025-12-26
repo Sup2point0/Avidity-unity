@@ -28,7 +28,7 @@ public class TracksWindowController : Bases.InterfaceController
 
     void RegenerateTracks()
     {
-        this.displayedTracks = Persistence.data.tracks.ToList();
+        this.displayedTracks = Persistence.data.tracks.Values.ToList();
     }
 
     VisualElement MakeItem()

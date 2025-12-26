@@ -6,54 +6,68 @@ using System.Collections.Generic;
 using Shard = System.String;
 
 
-/// <summary> A playlist with all its associated data. </summary>
-[Serializable]
-public class Playlist
+namespace Avidity
 {
-    /// <summary> Base number of 'phantom' plays to add when randomly selecting tracks. </summary>
-    private const int BASE_PLAYS = 69;
+    /// <summary> A playlist with all its associated data. </summary>
+    [Serializable]
+    public class Playlist
+    {
+        /// <summary> Base number of 'phantom' plays to add when randomly selecting tracks. </summary>
+        private const int BASE_PLAYS = 69;
 
 
-    /// <summary> Internal identifier of the playlist. </summary>
-    public Shard? shard;
+        /// <summary> Internal identifier of the playlist. </summary>
+        public Shard? shard;
 
-    /// <summary> Exact displayed name of the playlist. </summary>
-    public string? name;
-    
-    /// <summary> Tracks in the playlist. </summary>
-    public List<Track>? tracks;
+        /// <summary> Exact displayed name of the playlist. </summary>
+        public string? name;
+        
+        /// <summary> Tracks in the playlist. </summary>
+        public List<Track>? tracks;
 
-    /// <summary> Accent colour of the playlist. </summary>
-    public UnityEngine.Color? colour;
+        /// <summary> Accent colour of the playlist. </summary>
+        public UnityEngine.Color? colour;
 
-    /// <summary> Is this playlist an album? </summary>
-    public bool isAlbum = false;
+        /// <summary> Is this playlist an album? </summary>
+        public bool isAlbum = false;
 
-    /// <summary> Total number of times tracks in this playlist have been played. </summary>
-    public int totalPlays = 0;
-
-
-    /// <summary> The first track in the playlist, or <c>null</c> if the playlist is empty. </summary>
-    public Track? firstTrack => (this.tracks?.Count > 0) ? this.tracks[0] : null;
+        /// <summary> Total number of times tracks in this playlist have been played. </summary>
+        public int totalPlays = 0;
 
 
-    public string DisplayName()
-        => this.name ?? "Untitled Playlist";
+        /// <summary> The first track in the playlist, or <c>null</c> if the playlist is empty. </summary>
+        public Track? firstTrack => (this.tracks?.Count > 0) ? this.tracks[0] : null;
 
 
-    // public List<Track> GetShuffledList()
-    // {
-    //     int highest_plays = (
-    //         from each in this.tracks
-    //         select each.totalPlays
-    //     ).Max();
+        public string DisplayName()
+            => this.name ?? "Untitled Playlist";
 
-    //     WeightedList<Track> pool = new(
-    //         from each in this.tracks select
-    //         (BASE_PLAYS + highest_plays - each.totalPlays,
-    //          each)
-    //     );
 
-    //     return pool.GetRandomItems(count: this.tracks.Count, drop: true);
-    // }
+        // public List<Track> GetShuffledList()
+        // {
+        //     int highest_plays = (
+        //         from each in this.tracks
+        //         select each.totalPlays
+        //     ).Max();
+
+        //     WeightedList<Track> pool = new(
+        //         from each in this.tracks select
+        //         (BASE_PLAYS + highest_plays - each.totalPlays,
+        //          each)
+        //     );
+
+        //     return pool.GetRandomItems(count: this.tracks.Count, drop: true);
+        // }
+    }
+
+
+    /// <summary> Intermediate object for converting between a `Playlist` and JSON. </summary>
+    public record PlaylistDataExchange
+    {
+        public string?      name;
+        public List<Shard>? tracks;
+        public string?      colour;
+        public bool         isAlbum = false;
+        public int          totalPlays = 0;
+    }
 }
