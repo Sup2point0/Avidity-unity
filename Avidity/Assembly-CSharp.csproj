@@ -58,7 +58,7 @@
     <Compile Include="Assets\Modules\Types\options.cs" />
     <Compile Include="Assets\Application\Execs\scene-exec.cs" />
     <Compile Include="Assets\Application\Views\Navigation\navbar.cs" />
-    <Compile Include="Assets\Modules\Core\data.cs" />
+    <Compile Include="Assets\Modules\Execs\persist-exec.cs" />
     <Compile Include="Assets\Application\Views\Options\options.cs" />
     <Compile Include="Assets\Modules\Core\exec.cs" />
     <Compile Include="Assets\Application\Views\Playback\buttons.cs" />
@@ -70,7 +70,6 @@
     <Compile Include="Assets\Application\Views\Window\window.cs" />
     <Compile Include="Assets\Application\Execs\audio-exec.cs" />
     <Compile Include="Assets\Modules\Types\track.cs" />
-    <Compile Include="Assets\Modules\Utils\write.cs" />
     <Compile Include="Assets\Modules\External\weighted-list.cs" />
     <Compile Include="Assets\Application\Views\Tracks\tracks.cs" />
   </ItemGroup>

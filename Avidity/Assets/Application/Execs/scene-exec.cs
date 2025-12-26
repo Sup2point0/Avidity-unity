@@ -9,17 +9,17 @@ using Avidity;
 /// <summary> The scene manager. </summary>
 public class SceneExecutive : MonoBehaviour
 {
-    #region ENUMS
+#region ENUMS
 
     /// <summary> A window tab that can be navigated to in the application. </summary>
     public enum Tab {
         Options, Files, Home, Tracks, Playlists, Artists,
     }
 
-    #endregion
+#endregion
 
 
-    #region DELEGATES
+#region DELEGATES
 
     /// <summary> Fired when the window tab is changed. </summary>
     public Action onTabChanged;
@@ -27,7 +27,7 @@ public class SceneExecutive : MonoBehaviour
     /// <summary> Fired when a track is selected. </summary>
     public Action onTrackSelected;
 
-    #endregion
+#endregion
 
 
     [Header("Configuration")]
@@ -46,9 +46,6 @@ public class SceneExecutive : MonoBehaviour
 
     [Header("State")]
 
-    [SerializeField] public Avidity.ApplicationOptions options;
-    [SerializeField] public Avidity.ApplicationData data;
-
     [SerializeField] public Tab currentTab { get; private set; } = Tab.Tracks;
 
     /// <summary> The currently selected track to be shown in the Selector. Note this can be `null`, but we're not marking it `Track?` just to avoid `.Value` shenanigans. TODO: Might change in future?
@@ -56,16 +53,16 @@ public class SceneExecutive : MonoBehaviour
     [SerializeField] public Track selectedTrack { get; private set; }
 
 
-    #region PRIVATE
+#region PRIVATE
 
     public bool is_focused;
     public bool is_idle;
     public float until_idle;
 
-    #endregion
+#endregion
 
 
-    #region UNITY
+#region UNITY
 
     void Awake()
     {
@@ -114,10 +111,10 @@ public class SceneExecutive : MonoBehaviour
         }
     }
 
-    #endregion
+#endregion
 
 
-    #region INTERNAL
+#region INTERNAL
 
     private void ToActive()
     {
@@ -157,10 +154,10 @@ public class SceneExecutive : MonoBehaviour
         this.mainCanvas.enabled = false;
     }
     
-    #endregion
+#endregion
 
 
-    #region INTERFACE
+#region INTERFACE
     
     public void NavigateToTab(Tab tab)
     {
@@ -180,5 +177,5 @@ public class SceneExecutive : MonoBehaviour
         onTrackSelected?.Invoke();
     }
     
-    #endregion
+#endregion
 }

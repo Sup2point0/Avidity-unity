@@ -5,28 +5,26 @@ using UnityEngine;
 
 namespace Avidity
 {
-    /// <summary>
-    /// The global collection of executive singletons.
-    /// </summary>
+    /// <summary> The global collection of Executive singletons. </summary>
     public static class Exec
     {
         /// <summary> Tried assigning to a singleton that already has a value. </summary>
         public class SingletonOverwriteException : Exception
         {
-            public SingletonOverwriteException()
-            {}
-
-            public SingletonOverwriteException(string message) : base(message)
-            {}
+            public SingletonOverwriteException() {}
+            public SingletonOverwriteException(string message) : base(message) {}
         }
 
 
-        /// <summary> The scene executive for managing navigation. </summary>
+        private static SceneExecutive scene_exec;
+        private static AudioExecutive audio_exec;
+
+        /// <summary> The scene executive for managing application state and navigation. </summary>
         public static SceneExecutive Scene {
-            get => scene_exec;
+            get => Exec.scene_exec;
             set {
-                if (scene_exec == null) {
-                    scene_exec = value;
+                if (Exec.scene_exec == null) {
+                    Exec.scene_exec = value;
                 } else {
                     GameObject.Destroy(value);
                     throw new SingletonOverwriteException("Scene executive already exists!");
@@ -36,18 +34,15 @@ namespace Avidity
 
         /// <summary> The audio executive for managing audio playback. </summary>
         public static AudioExecutive Audio {
-            get => audio_exec;
+            get => Exec.audio_exec;
             set {
-                if (audio_exec == null) {
-                    audio_exec = value;
+                if (Exec.audio_exec == null) {
+                    Exec.audio_exec = value;
                 } else {
                     GameObject.Destroy(value);
                     throw new SingletonOverwriteException("Audio executive already exists!");
                 }
             }
         }
-
-        private static SceneExecutive scene_exec;
-        private static AudioExecutive audio_exec;
     }
 }

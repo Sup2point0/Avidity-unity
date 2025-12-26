@@ -14,12 +14,5 @@ namespace Avidity
         public float volume = 1.0f;
 
         public SceneExecutive.Tab defaultTab;
-
-
-        public void Save()
-        {
-            var data = JsonUtility.ToJson(this);
-            Utils.SaveFile("options.json", data);
-        }
     }
 }

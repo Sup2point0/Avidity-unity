@@ -7,13 +7,11 @@ using UnityEngine.Networking;
 
 using Avidity;
 
-using Shard = System.String;
-
 
 /// <summary> The audio manager. </summary>
 public class AudioExecutive : MonoBehaviour
 {
-    #region EXCEPTIONS
+#region EXCEPTIONS
 
     /// <summary> Something went wrong loading an audio file. </summary>
     public class AudioLoadException : Bases.DisplayedException
@@ -23,10 +21,10 @@ public class AudioExecutive : MonoBehaviour
     public class EmptyPlaylistException : Bases.DisplayedException
     {}
 
-    #endregion
+#endregion
 
 
-    #region DELEGATES
+#region DELEGATES
 
     public Action onTrackPlayed;
     public Action onPlaybackUpdated;
@@ -35,7 +33,7 @@ public class AudioExecutive : MonoBehaviour
     public Action onTrackCleared;
     public Action onQueueUpdated;
 
-    #endregion
+#endregion
 
 
     public AudioSource audioSource;
@@ -57,17 +55,17 @@ public class AudioExecutive : MonoBehaviour
     private uint qid_counter;
 
 
-    #region UNITY
+#region UNITY
 
     void Awake()
     {
         Exec.Audio = this;
     }
 
-    #endregion
+#endregion
 
 
-    #region INTERNAL
+#region INTERNAL
 
     public AudioClip LoadClip(Track track)
     {
@@ -108,10 +106,10 @@ public class AudioExecutive : MonoBehaviour
         return this.audioSource;
     }
 
-    #endregion
+#endregion
 
 
-    #region START PLAYBACK
+#region START PLAYBACK
 
     private void PlayCurrent()
     {
@@ -163,10 +161,10 @@ public class AudioExecutive : MonoBehaviour
         PlayNext();
     }
 
-    #endregion
+#endregion
 
     
-    #region MOVE PLAYBACK
+#region MOVE PLAYBACK
 
     public void Pause()
     {
@@ -209,10 +207,10 @@ public class AudioExecutive : MonoBehaviour
     public void Shift(float by)
         => this.audioSource.time += by;
 
-    #endregion
+#endregion
 
 
-    #region END PLAYBACK
+#region END PLAYBACK
 
     public void ClearCurrent()
     {
@@ -222,10 +220,10 @@ public class AudioExecutive : MonoBehaviour
         this.onTrackCleared?.Invoke();
     }
 
-    #endregion
+#endregion
 
 
-    #region QUEUE PLAYBACK
+#region QUEUE PLAYBACK
 
     public void QueueTrack(Track track)
     {
@@ -254,5 +252,5 @@ public class AudioExecutive : MonoBehaviour
         this.onQueueUpdated?.Invoke();
     }
 
-    #endregion
+#endregion
 }

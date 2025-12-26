@@ -27,6 +27,6 @@ public class SaveClicky : Bases.Clicky
 
     public override void BindListeners()
     {
-        this.button.clicked += () => Exec.Scene.options.Save();
+        this.button.clicked += () => Persistence.SaveOptions();
     }
 }
