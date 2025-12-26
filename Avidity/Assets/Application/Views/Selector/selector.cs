@@ -39,12 +39,12 @@ public class SelectorPaneController : Bases.InterfaceController
         var track = Exec.Scene.selectedTrack;
         
 
-        this.trackName.text  = track.name;
+        this.trackName.text  = track.DisplayName();
         this.artistName.text = Artist.DisplayNames(track.artists);
-        this.albumName.text  = track.album?.name ?? "";
+        this.albumName.text  = track.album?.ToString() ?? "None";
 
         this.trackDuration.text = track.DisplayDuration();
         this.trackPlays.text    = track.totalPlays.ToString();
-        this.trackShard.text    = track.shard;
+        this.trackShard.text    = track.shard ?? "None Set";
     }
 }

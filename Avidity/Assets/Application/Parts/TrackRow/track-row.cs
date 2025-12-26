@@ -68,7 +68,7 @@ public partial class TrackRow : VisualElement
         this.qid   = qid;
         this.track = track;
 
-        this.trackName.text = track.name;
+        this.trackName.text = track.DisplayName();
         this.artistName.text = Artist.DisplayNames(track.artists);
         this.trackDuration.text = track.DisplayDuration();
 

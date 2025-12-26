@@ -14,12 +14,14 @@ public class AudioExecutive : MonoBehaviour
 #region EXCEPTIONS
 
     /// <summary> Something went wrong loading an audio file. </summary>
-    public class AudioLoadException : Bases.DisplayedException
-    {}
+    public class AudioLoadException : Bases.DisplayedException {
+        public AudioLoadException(string message) : base("Audio Load Error", message) {}
+    }
 
     /// <summary> A playlist is empty so cannot be played. </summary>
-    public class EmptyPlaylistException : Bases.DisplayedException
-    {}
+    public class EmptyPlaylistException : Bases.DisplayedException {
+        public EmptyPlaylistException() : base("Playlist is empty") {}
+    }
 
 #endregion
 
@@ -67,26 +69,20 @@ public class AudioExecutive : MonoBehaviour
 
 #region INTERNAL
 
-    public AudioClip LoadClip(Track track)
-    {
-        var clip = Resources.Load<AudioClip>($"Tracks/{track.shard}") ?? throw new AudioLoadException();
-
-        track.duration = clip.length;
-
-        return clip;
-    }
-
     async Awaitable<AudioClip> LoadClipAsync(Track track)
     {
+        if (track.shard is null) throw new AudioLoadException("Cannot play a track with no shard set");
+
         var url = $"file://C:/Users/sup/Desktop/assets/sounds/camellia/{track.shard}.mp3";
         using var request = UnityWebRequestMultimedia.GetAudioClip(url, AudioType.UNKNOWN);
 
         await request.SendWebRequest();
 
         if (request.result == UnityWebRequest.Result.ConnectionError) {
-            throw new AudioLoadException();
+            throw new AudioLoadException("Failed to find file path of track");
         } else {
-            var clip = DownloadHandlerAudioClip.GetContent(request) ?? throw new AudioLoadException();
+            var clip = DownloadHandlerAudioClip.GetContent(request)
+                ?? throw new AudioLoadException("Failed to load audio clip for track");
 
             track.duration = clip.length;
 
@@ -150,7 +146,7 @@ public class AudioExecutive : MonoBehaviour
 
     public void PlayNow(Playlist playlist)
     {
-        if (0 >= playlist.tracks.Count) {
+        if (playlist.tracks.Count == 0) {
             throw new EmptyPlaylistException();
         }
 

@@ -11,7 +11,7 @@ namespace Avidity
         /// <summary> Tried assigning to a singleton that already has a value. </summary>
         public class SingletonOverwriteException : Exception
         {
-            public SingletonOverwriteException() {}
+            public SingletonOverwriteException() : base() {}
             public SingletonOverwriteException(string message) : base(message) {}
         }
 
