@@ -3,6 +3,8 @@
 using System;
 using System.Collections.Generic;
 
+using UnityEngine;
+
 using Shard = System.String;
 
 
@@ -69,5 +71,29 @@ namespace Avidity
         public string?      colour;
         public bool         isAlbum = false;
         public int          totalPlays = 0;
+
+
+        public Playlist? ToInitialisedPlaylist(Shard shard)
+        {
+            try {
+                return new Playlist() {
+                    shard  = shard,
+                    name   = this.name,
+                    tracks = new(),
+
+                    colour =
+                        (this.colour is null) ? null
+                        : ColorUtility.TryParseHtmlString(this.colour, out var colour)
+                        ? colour : null,
+                    
+                    isAlbum = this.isAlbum,
+                    totalPlays = this.totalPlays,
+                };
+            }
+            catch (Exception e) {
+                Debug.LogError($"Error loading playlist {shard}: {e}");
+                return null;
+            }
+        }
     }
 }

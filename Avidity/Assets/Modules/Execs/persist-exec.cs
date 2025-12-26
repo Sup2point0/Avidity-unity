@@ -89,20 +89,11 @@ namespace Avidity
 
         private static Dictionary<Shard, Playlist> InitPlaylists(Avidity.ApplicationDataExchange data)
             => (from kvp in data.playlists
-                let list = kvp.Value
-                select new Playlist() {
-                    shard  = kvp.Key,
-                    name   = list.name,
-                    tracks = new(),
-
-                    colour =
-                        (list.colour is null) ? null
-                        : ColorUtility.TryParseHtmlString(list.colour, out var colour)
-                        ? colour : null,
-                    
-                    isAlbum = list.isAlbum,
-                    totalPlays = list.totalPlays,
-                }
+                let shard = kvp.Key
+                let list_data = kvp.Value
+                let list = list_data.ToInitialisedPlaylist(shard)
+                where list is not null
+                select list
             ).ToDictionary(list => list.shard, list => list);
 
 
@@ -116,8 +107,8 @@ namespace Avidity
         )
             => (from kvp in tracks
                 let shard = kvp.Key
-                let track_exchange = kvp.Value
-                let track = track_exchange.ToTrack(shard, data)
+                let track_data = kvp.Value
+                let track = track_data.ToTrack(shard, data)
                 where track is not null
                 select track
             ).ToDictionary(track => track.shard, track => track);
