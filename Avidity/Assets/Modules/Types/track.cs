@@ -79,7 +79,7 @@ namespace Avidity
 
                     artists =
                         (this.artists is null) ? null : (
-                            from artist_shard in this.artists 
+                            from artist_shard in this.artists
                             where data.artists.ContainsKey(artist_shard)
                             select data.artists[artist_shard]
                         ).ToList(),

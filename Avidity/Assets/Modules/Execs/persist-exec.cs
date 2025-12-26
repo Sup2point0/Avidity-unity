@@ -64,9 +64,11 @@ namespace Avidity
 
             /* Then resolve shards references to actual objects */
             var data = new Avidity.ApplicationData();
+            
+            data.artists   = InitArtists(exchange);
             data.playlists = InitPlaylists(exchange);
 
-            data.tracks = LinkTracks(exchange.tracks, data);
+            data.tracks    = LinkTracks(exchange.tracks, data);
             LinkPlaylists(exchange.playlists, data);
 
             return data;
@@ -79,8 +81,8 @@ namespace Avidity
         private static Dictionary<Shard, PlaylistDataExchange> LoadPlaylistsExchange(string path)
             => LoadJson<Dictionary<Shard, PlaylistDataExchange>>(path);
         
-        private static Dictionary<Shard, Artist> LoadArtists(string path)
-            => LoadJson<Dictionary<Shard, Artist>>(path);
+        private static Dictionary<Shard, ArtistDataExchange> LoadArtists(string path)
+            => LoadJson<Dictionary<Shard, ArtistDataExchange>>(path);
 
     #endregion
     #region DATA LINKING
@@ -130,18 +132,28 @@ namespace Avidity
         )
         {
             foreach (var kvp in playlists) {
-                var shard_list = kvp.Key;
+                var list_shard = kvp.Key;
                 var list = kvp.Value;
 
                 if (list.tracks is null) continue;
 
-                data.playlists[shard_list].tracks = (
+                data.playlists[list_shard].tracks = (
                     from shard_track in list.tracks
                     where data.tracks.ContainsKey(shard_track)
                     select data.tracks[shard_track]
                 ).ToList();
             }
         }
+
+        private static Dictionary<Shard, Artist> InitArtists(Avidity.ApplicationDataExchange data)
+            => (from kvp in data.artists
+                let artist = kvp.Value
+                select new Artist() {
+                    shard      = kvp.Key,
+                    name       = artist.name,
+                    totalPlays = artist.totalPlays,
+                }
+            ).ToDictionary(artist => artist.shard, artist => artist);
 
     #endregion
 

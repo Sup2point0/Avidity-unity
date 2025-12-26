@@ -28,14 +28,22 @@ namespace Avidity
             => this.name ?? "Anonymous";
 
         public static string DisplayNames(IEnumerable<Artist>? artists)
-        {
-            foreach (var artist in artists ?? new List<Artist>())
-            {
-                Debug.Log($"artist = {artist}");
-            }
+        // {
+        //     foreach (var artist in artists ?? new List<Artist>())
+        //     {
+        //         Debug.Log($"artist = {artist}");
+        //     }
 
-            return "Anonymous";
-        }
-            // => (artists is null) ? string.Join(" / ", artists) : "Anonymous";
+        //     return "Anonymous";
+        // }
+            => (artists is null) ? "Anonymous" : string.Join(" / ", artists);
+    }
+
+    
+    /// <summary> Intermediate object for converting between a `Artist` and JSON. </summary>
+    public record ArtistDataExchange
+    {
+        public string? name;
+        public int     totalPlays = 0;
     }
 }

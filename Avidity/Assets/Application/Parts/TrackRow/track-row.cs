@@ -71,6 +71,7 @@ public partial class TrackRow : VisualElement
         this.track = track;
 
         this.trackName.text = track.DisplayName();
+        Debug.Log($"track.artists = {track.artists}");
         this.artistName.text = Artist.DisplayNames(track.artists);
         this.trackDuration.text = track.DisplayDuration();
 

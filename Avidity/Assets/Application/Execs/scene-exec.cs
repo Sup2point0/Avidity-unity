@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -9,6 +11,8 @@ using Avidity;
 /// <summary> The scene manager. </summary>
 public class SceneExecutive : MonoBehaviour
 {
+    [SerializeField] public List<Track> data;
+
 #region ENUMS
 
     /// <summary> A window tab that can be navigated to in the application. </summary>
@@ -74,6 +78,7 @@ public class SceneExecutive : MonoBehaviour
     void Start()
     {
         this.onTabChanged?.Invoke();
+        this.data = Persistence.data.tracks.Values.ToList();
     }
 
     void Update()

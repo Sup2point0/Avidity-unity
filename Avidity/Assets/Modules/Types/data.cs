@@ -21,6 +21,6 @@ namespace Avidity
     {
         public Dictionary<Shard, TrackDataExchange>    tracks = new();
         public Dictionary<Shard, PlaylistDataExchange> playlists = new();
-        public Dictionary<Shard, Artist>               artists = new();
+        public Dictionary<Shard, ArtistDataExchange>   artists = new();
     }
 }
