@@ -288,7 +288,7 @@ public class AudioExecutive : MonoBehaviour
     private System.Collections.IEnumerator WatchForClipFinish()
     {
         yield return new WaitWhile(() => !this.audioSource.isPlaying);
-        yield return new WaitWhile(() => this.audioSource.isPlaying);
+        yield return new WaitWhile(() => this.audioSource.isPlaying || this.isPaused);
         this.onPlaybackFinished?.Invoke();
     }
 
