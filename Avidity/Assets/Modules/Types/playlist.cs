@@ -12,7 +12,7 @@ namespace Avidity
 {
     /// <summary> A playlist with all its associated data. </summary>
     [Serializable]
-    public class Playlist
+    public class Playlist : Avidity.ISelectableObject
     {
         /// <summary> Base number of 'phantom' plays to add when randomly selecting tracks. </summary>
         private const int BASE_PLAYS = 69;
@@ -26,6 +26,8 @@ namespace Avidity
         
         /// <summary> Tracks in the playlist. </summary>
         public List<Track>? tracks;
+
+        public PlaylistKind? kind;
 
         /// <summary> Accent colour of the playlist. </summary>
         public UnityEngine.Color? colour;
@@ -63,11 +65,38 @@ namespace Avidity
     }
 
 
+    public record PlaylistKind
+    {
+#pragma warning disable CS8618
+
+        public Shard  shard { get; init; }
+        public string text  { get; init; }
+
+#pragma warning restore CS8618
+
+        public static PlaylistKind Album = new() { shard = "album", text = "Album" };
+        public static PlaylistKind Genre = new() { shard = "genre", text = "Genre" };
+        public static PlaylistKind Mood  = new() { shard = "mood",  text = "Mood"  };
+        public static PlaylistKind Label = new() { shard = "label", text = "Label" };
+
+        private static readonly Dictionary<Shard, PlaylistKind> KINDS = new() {
+            { "album", Album },
+            { "genre", Genre },
+            { "mood" , Mood },
+            { "label", Label },
+        };
+
+        public static PlaylistKind? FromString(Shard shard)
+            => KINDS.TryGetValue(shard, out var kind) ? kind : null;
+    }
+
+
     /// <summary> Intermediate object for converting between a `Playlist` and JSON. </summary>
     public record PlaylistDataExchange
     {
         public string?      name;
         public List<Shard>? tracks;
+        public Shard?       kind;
         public string?      colour;
         public bool         isAlbum = false;
         public int          totalPlays = 0;
@@ -80,6 +109,10 @@ namespace Avidity
                     shard  = shard,
                     name   = this.name,
                     tracks = new(),
+
+                    kind =
+                        (this.kind is null) ? null
+                        : PlaylistKind.FromString(this.kind),
 
                     colour =
                         (this.colour is null) ? null
