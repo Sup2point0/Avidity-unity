@@ -20,7 +20,7 @@ public class PlaybackInfoScript : Bases.InterfaceController
     void Start()
     {
         Exec.Audio.onTrackPlayed += OnTrackPlayed;
-        Exec.Audio.onTrackCleared += OnTrackCleared;
+        Exec.Audio.onPlaybackCleared += OnTrackCleared;
     }
 
 

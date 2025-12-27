@@ -32,8 +32,11 @@ public class AudioExecutive : MonoBehaviour
     public Action onPlaybackUpdated;
     public Action onPlaybackUnpaused;
     public Action onPlaybackPaused;
-    public Action onTrackCleared;
+    public Action onPlaybackFinished;
+    public Action onPlaybackCleared;
     public Action onQueueUpdated;
+
+    private Coroutine watch_for_track_end;
 
 #endregion
 
@@ -61,6 +64,7 @@ public class AudioExecutive : MonoBehaviour
 
     void Awake()
     {
+        this.onPlaybackFinished += this.PlayNext;
         Exec.Audio = this;
     }
 
@@ -69,14 +73,15 @@ public class AudioExecutive : MonoBehaviour
 
 #region START PLAYBACK
 
+    /// <summary> Play the currently selected track. </summary>
     private void PlayCurrent()
     {
-        async void Play() {
-            var clip = await LoadClipAsync(this.activeTrack);
-            PlayClip(clip);
+        if (this.watch_for_track_end != null) {
+            StopCoroutine(this.watch_for_track_end);
         }
 
-        Play();
+        PlayTrack(this.activeTrack);
+        this.watch_for_track_end = StartCoroutine(WatchForClipFinish());
     }
 
     public void PlayNext()
@@ -175,7 +180,7 @@ public class AudioExecutive : MonoBehaviour
         this.audioSource.Stop();
         this.activeTrack = null;
 
-        this.onTrackCleared?.Invoke();
+        this.onPlaybackCleared?.Invoke();
     }
 
 #endregion
@@ -241,6 +246,12 @@ public class AudioExecutive : MonoBehaviour
 
 #region INTERNAL
 
+    private async void PlayTrack(Track track)
+    {
+        var clip = await LoadClipAsync(track);
+        PlayClip(clip);
+    }
+
     private AudioSource PlayClip(AudioClip clip, float volume = 1.0f)
     {
         this.audioSource.clip = clip;
@@ -251,6 +262,13 @@ public class AudioExecutive : MonoBehaviour
         this.onTrackPlayed?.Invoke();
 
         return this.audioSource;
+    }
+
+    private System.Collections.IEnumerator WatchForClipFinish()
+    {
+        yield return new WaitWhile(() => !this.audioSource.isPlaying);
+        yield return new WaitWhile(() => this.audioSource.isPlaying);
+        this.onPlaybackFinished?.Invoke();
     }
 
 #endregion

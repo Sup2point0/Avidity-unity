@@ -39,7 +39,7 @@ public class PauseClicky : Bases.Clicky
     {
         this.button.clicked += () => Exec.Audio.TogglePause();
         Exec.Audio.onTrackPlayed += Enable;
-        Exec.Audio.onTrackCleared += Disable;
+        Exec.Audio.onPlaybackCleared += Disable;
     }
 }
 
@@ -55,7 +55,7 @@ public class PrevClicky : Bases.Clicky
     {
         this.button.clicked += () => Exec.Audio.Restart();
         Exec.Audio.onTrackPlayed += Enable;
-        Exec.Audio.onTrackCleared += Disable;
+        Exec.Audio.onPlaybackCleared += Disable;
     }
 }
 
