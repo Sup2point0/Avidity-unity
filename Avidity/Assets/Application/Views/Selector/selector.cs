@@ -41,16 +41,30 @@ public class SelectorPaneController : Bases.InterfaceController
     void OnTrackSelected()
     {
         var track = Exec.Scene.selectedTrack;
-        
 
         this.trackName.text  = track.DisplayName();
         this.artistName.text = Artist.DisplayNames(track.artists);
-        this.albumName.text  = track.album?.ToString() ?? "None";
+        SetLabelText(this.albumName, track.album?.DisplayName(), "None");
 
         this.trackDuration.text = track.DisplayDuration();
         this.trackPlays.text    = track.totalPlays.ToString();
 
-        this.trackSource.text = track.source ?? "Default";
-        this.trackShard.text  = track.shard ?? "None Set";
+        SetLabelText(this.trackSource, track.source, "Default");
+        SetLabelText(this.trackShard,  track.shard,  "None Set");
+    }
+
+
+    void SetLabelText(Label label, string source, string default_text)
+    {
+        if (source is not null) {
+            label.text = source;
+            label.RemoveFromClassList("value-default");
+            label.AddToClassList("value-set");
+        }
+        else {
+            label.text = default_text;
+            label.RemoveFromClassList("value-set");
+            label.AddToClassList("value-default");
+        }
     }
 }

@@ -67,44 +67,6 @@ public class AudioExecutive : MonoBehaviour
 #endregion
 
 
-#region INTERNAL
-
-    async Awaitable<AudioClip> LoadClipAsync(Track track)
-    {
-        if (track.shard is null) throw new AudioLoadException("Cannot play a track with no shard set");
-
-        var url = $"file://C:/Users/sup/Desktop/assets/sounds/camellia/{track.shard}.mp3";
-        using var request = UnityWebRequestMultimedia.GetAudioClip(url, AudioType.UNKNOWN);
-
-        await request.SendWebRequest();
-
-        if (request.result == UnityWebRequest.Result.ConnectionError) {
-            throw new AudioLoadException("Failed to find file path of track");
-        } else {
-            var clip = DownloadHandlerAudioClip.GetContent(request)
-                ?? throw new AudioLoadException("Failed to load audio clip for track");
-
-            track.duration = clip.length;
-
-            return clip;
-        }
-    }
-
-    private AudioSource PlayClip(AudioClip clip, float volume = 1.0f)
-    {
-        this.audioSource.clip = clip;
-        this.audioSource.volume = volume;
-        this.audioSource.Play();
-        this.isPaused = false;
-
-        this.onTrackPlayed?.Invoke();
-
-        return this.audioSource;
-    }
-
-#endregion
-
-
 #region START PLAYBACK
 
     private void PlayCurrent()
@@ -246,6 +208,49 @@ public class AudioExecutive : MonoBehaviour
         this.queuedTracks.Clear();
         this.qid_counter = 0;
         this.onQueueUpdated?.Invoke();
+    }
+
+#endregion
+
+
+#region LOAD AUDIO
+
+    public async Awaitable<AudioClip> LoadClipAsync(Track track)
+    {
+        if (track.shard is null) throw new AudioLoadException("Cannot play a track with no shard set");
+
+        var url = $"file://C:/Users/sup/Desktop/assets/sounds/{track.artists[0].shard}/{track.shard}.mp3";
+        using var request = UnityWebRequestMultimedia.GetAudioClip(url, AudioType.UNKNOWN);
+
+        await request.SendWebRequest();
+
+        if (request.result == UnityWebRequest.Result.ConnectionError) {
+            throw new AudioLoadException("Failed to find file path of track");
+        } else {
+            var clip = DownloadHandlerAudioClip.GetContent(request)
+                ?? throw new AudioLoadException("Failed to load audio clip for track");
+
+            track.duration = clip.length;
+
+            return clip;
+        }
+    }
+
+#endregion
+
+
+#region INTERNAL
+
+    private AudioSource PlayClip(AudioClip clip, float volume = 1.0f)
+    {
+        this.audioSource.clip = clip;
+        this.audioSource.volume = volume;
+        this.audioSource.Play();
+        this.isPaused = false;
+
+        this.onTrackPlayed?.Invoke();
+
+        return this.audioSource;
     }
 
 #endregion

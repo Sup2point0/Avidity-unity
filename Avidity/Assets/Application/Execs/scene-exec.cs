@@ -178,6 +178,13 @@ public class SceneExecutive : MonoBehaviour
         this.selectedObjectType = Avid.SelectableObjectType.Track;
         
         onTrackSelected?.Invoke();
+
+        async void UpdateInfo() {
+            await Exec.Audio.LoadClipAsync(track);
+            onTrackSelected?.Invoke();
+        }
+
+        UpdateInfo();
     }
     
 #endregion
