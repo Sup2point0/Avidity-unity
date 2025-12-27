@@ -184,7 +184,10 @@ public class SceneExecutive : MonoBehaviour
             onTrackSelected?.Invoke();
         }
 
-        UpdateInfo();
+        /* NOTE: Only load if necessary! */
+        if (track.duration is null) {
+            UpdateInfo();
+        }
     }
     
 #endregion

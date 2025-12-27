@@ -30,12 +30,14 @@ public class AudioExecutive : MonoBehaviour
 
     public Action onTrackPlayed;
     public Action onPlaybackUpdated;
-    public Action onPlaybackUnpaused;
+    public Action onPlaybackStarted;
     public Action onPlaybackPaused;
+    public Action onPlaybackUnpaused;
     public Action onPlaybackFinished;
     public Action onPlaybackCleared;
     public Action onQueueUpdated;
 
+    private Coroutine select_playing_track;
     private Coroutine watch_for_track_end;
 
 #endregion
@@ -65,6 +67,12 @@ public class AudioExecutive : MonoBehaviour
     void Awake()
     {
         this.onPlaybackFinished += this.PlayNext;
+        this.onPlaybackStarted += () => {
+            if (Exec.Scene.selectedTrack is null) {
+                Exec.Scene.SelectTrack(this.activeTrack);
+            }
+        };
+
         Exec.Audio = this;
     }
 
@@ -79,9 +87,13 @@ public class AudioExecutive : MonoBehaviour
         if (this.watch_for_track_end != null) {
             StopCoroutine(this.watch_for_track_end);
         }
+        if (this.select_playing_track != null) {
+            StopCoroutine(this.select_playing_track);
+        }
 
         PlayTrack(this.activeTrack);
-        this.watch_for_track_end = StartCoroutine(WatchForClipFinish());
+        this.watch_for_track_end  = StartCoroutine(WatchForClipFinish());
+        this.select_playing_track = StartCoroutine(WaitForClipStart());
     }
 
     public void PlayNext()
@@ -283,6 +295,11 @@ public class AudioExecutive : MonoBehaviour
         this.onTrackPlayed?.Invoke();
 
         return this.audioSource;
+    }
+
+    System.Collections.IEnumerator WaitForClipStart() {
+        yield return new WaitWhile(() => !this.audioSource.isPlaying);
+        this.onPlaybackStarted?.Invoke();
     }
 
     private System.Collections.IEnumerator WatchForClipFinish()
