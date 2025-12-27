@@ -138,12 +138,11 @@ namespace Avidity
 
         private static Dictionary<Shard, Artist> InitArtists(Avidity.ApplicationDataExchange data)
             => (from kvp in data.artists
-                let artist = kvp.Value
-                select new Artist() {
-                    shard      = kvp.Key,
-                    name       = artist.name,
-                    totalPlays = artist.totalPlays,
-                }
+                let shard = kvp.Key
+                let artist_data = kvp.Value
+                let artist = artist_data.ToArtist(shard)
+                where artist is not null
+                select artist
             ).ToDictionary(artist => artist.shard, artist => artist);
 
     #endregion

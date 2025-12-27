@@ -222,23 +222,44 @@ public class AudioExecutive : MonoBehaviour
 
     public async Awaitable<AudioClip> LoadClipAsync(Track track)
     {
-        if (track.shard is null) throw new AudioLoadException("Cannot play a track with no shard set");
+        if (track.shard is null && track.source is null) {
+            throw new AudioLoadException("Cannot play a track with no shard set");
+        }
 
-        var url = $"file://C:/Users/sup/Desktop/assets/sounds/{track.artists[0].shard}/{track.shard}.mp3";
-        using var request = UnityWebRequestMultimedia.GetAudioClip(url, AudioType.UNKNOWN);
+        var urls = track.ResolveFolders();
+        if (urls is null || urls.Count == 0) {
+            throw new AudioLoadException("Failed to resolve possible track file sources");
+        }
 
-        await request.SendWebRequest();
+        int error_status = 0;
 
-        if (request.result == UnityWebRequest.Result.ConnectionError) {
-            throw new AudioLoadException("Failed to find file path of track");
-        } else {
-            var clip = DownloadHandlerAudioClip.GetContent(request)
-                ?? throw new AudioLoadException("Failed to load audio clip for track");
+        foreach (var url in urls) {
+            using var request = UnityWebRequestMultimedia.GetAudioClip(url, AudioType.UNKNOWN);
+
+            await request.SendWebRequest();
+
+            if (request.result == UnityWebRequest.Result.ConnectionError) {
+                if (error_status < 1) error_status = 1;
+                continue;
+            }
+
+            var clip = DownloadHandlerAudioClip.GetContent(request);
+            if (clip == null) {
+                error_status = 2;
+                continue;
+            }
 
             track.duration = clip.length;
-
             return clip;
         }
+
+        throw new AudioLoadException(
+            error_status switch {
+                1 => "Failed to find file path of track",
+                2 => "Failed to load audio clip for track",
+                _ => "Something went wrong when trying to load audio",
+            }
+        );
     }
 
 #endregion

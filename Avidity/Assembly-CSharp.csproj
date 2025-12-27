@@ -71,6 +71,7 @@
     <Compile Include="Assets\Application\Views\Window\window.cs" />
     <Compile Include="Assets\Application\Execs\audio-exec.cs" />
     <Compile Include="Assets\Modules\Types\track.cs" />
+    <Compile Include="Assets\Modules\Utils\paths.cs" />
     <Compile Include="Assets\Modules\External\weighted-list.cs" />
     <Compile Include="Assets\Application\Views\Tracks\tracks.cs" />
   </ItemGroup>

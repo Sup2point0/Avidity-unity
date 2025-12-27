@@ -6,6 +6,9 @@ using System.Linq;
 
 using UnityEngine;
 
+using Avidity;
+using Avid = Avidity;
+
 using Shard = System.String;
 
 
@@ -13,14 +16,17 @@ namespace Avidity
 {
     /// <summary> A soundtrack with all its associated data. </summary>
     [Serializable]
-    public class Track : Avidity.ISelectableObject
+    public class Track : Avid.ISelectableObject
     {
         /// <summary> Internal identifier of the track. </summary>
         public Shard? shard;
 
         /// <summary> The audio file name (if different to the track shard) of the track. </summary>
         public string? source;
-        
+
+        public string filetype = "mp3";
+    
+
         /// <summary> Exact displayed name of the track. </summary>
         public string? name;
         
@@ -40,6 +46,25 @@ namespace Avidity
         /// <summary> Total number of times the track has been played. </summary>
         public int totalPlays = 0;
         
+
+        /// <summary> Find the name of the file in which we expect the track's audio to be stored. </summary>
+        public string? ResolveSource()
+            => this.source ?? this.shard ?? this.name?.ToLower() ?? null;
+
+        public List<string> ResolveFolders()
+        {
+            var track_file = this.ResolveSource();
+            var ext = this.filetype.ToString();
+
+            return (
+                from source_folder in Persistence.options.audio_source_folders
+                let artist_folder =
+                    (this.artists is null) ? null
+                        : (this.artists.Count > 0) ? this.artists[0].ResolveFolder() : null
+                let path = Utils.JoinPaths(source_folder, artist_folder, track_file)
+                select $"file://{path}.{ext}"
+            ).ToList();
+        }
         
         public string DisplayName()
             => this.name ?? "Untitled Track";
@@ -73,7 +98,7 @@ namespace Avidity
         public int          totalPlays = 0;
 
 
-        public Track? ToTrack(Shard shard, Avidity.ApplicationData data)
+        public Track? ToTrack(Shard shard, Avid.ApplicationData data)
         {
             try {
                 return new Track() {
@@ -105,7 +130,7 @@ namespace Avidity
                 };
             }
             catch (Exception e) {
-                Debug.LogError($"Error loading track {shard}: {e}");
+                Debug.LogError($"Error loading track `{shard}`: {e}");
                 return null;
             }
         }

@@ -9,7 +9,10 @@ namespace Avidity
     [Serializable]
     public class ApplicationOptions
     {
-        public List<string> audio_source_folders = new();
+        public List<string> audio_source_folders = new() {
+            "C:/Users/sup/Desktop/assets/sounds",
+            "C:/Users/sup/Desktop/assets/sounds/#misc",
+        };
 
         public float volume = 1.0f;
 
