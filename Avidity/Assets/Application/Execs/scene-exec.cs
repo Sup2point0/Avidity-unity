@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 using Avidity;
+using Avid = Avidity;
 
 
 /// <summary> The scene manager. </summary>
@@ -54,6 +55,8 @@ public class SceneExecutive : MonoBehaviour
     /// <summary> The currently selected track to be shown in the Selector. Note this can be `null`, but we're not marking it `Track?` just to avoid `.Value` shenanigans. TODO: Might change in future?
     /// </summary>
     public Track selectedTrack { get; private set; }
+
+    public Avid.SelectableObjectType selectedObjectType { get; private set; }
 
 
 #region PRIVATE
@@ -172,11 +175,7 @@ public class SceneExecutive : MonoBehaviour
     public void SelectTrack(Track track)
     {
         this.selectedTrack = track;
-
-        var file = Resources.Load<AudioClip>($"Tracks/{track.shard}");
-        if (file != null) {
-            track.duration = file.length;
-        }
+        this.selectedObjectType = Avid.SelectableObjectType.Track;
         
         onTrackSelected?.Invoke();
     }

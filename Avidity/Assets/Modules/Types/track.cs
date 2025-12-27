@@ -13,7 +13,7 @@ namespace Avidity
 {
     /// <summary> A soundtrack with all its associated data. </summary>
     [Serializable]
-    public class Track
+    public class Track : Avidity.ISelectableObject
     {
         /// <summary> Internal identifier of the track. </summary>
         public Shard? shard;
