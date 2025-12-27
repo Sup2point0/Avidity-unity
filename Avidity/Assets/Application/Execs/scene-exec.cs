@@ -11,7 +11,6 @@ using Avidity;
 /// <summary> The scene manager. </summary>
 public class SceneExecutive : MonoBehaviour
 {
-    [SerializeField] public List<Track> data;
 
 #region ENUMS
 
@@ -54,7 +53,7 @@ public class SceneExecutive : MonoBehaviour
 
     /// <summary> The currently selected track to be shown in the Selector. Note this can be `null`, but we're not marking it `Track?` just to avoid `.Value` shenanigans. TODO: Might change in future?
     /// </summary>
-    [SerializeField] public Track selectedTrack { get; private set; }
+    public Track selectedTrack { get; private set; }
 
 
 #region PRIVATE
@@ -70,6 +69,7 @@ public class SceneExecutive : MonoBehaviour
 
     void Awake()
     {
+        this.currentTab = Persistence.options?.default_tab ?? Tab.Home; 
         Exec.Scene = this;
 
         this.ToActive();
@@ -78,7 +78,6 @@ public class SceneExecutive : MonoBehaviour
     void Start()
     {
         this.onTabChanged?.Invoke();
-        this.data = Persistence.data.tracks.Values.ToList();
     }
 
     void Update()

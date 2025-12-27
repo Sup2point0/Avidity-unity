@@ -62,7 +62,7 @@ namespace Avidity
             exchange.playlists = LoadPlaylistsExchange($"{source_path}/playlists.json");
             exchange.artists   = LoadArtists($"{source_path}/artists.json");
 
-            /* Then resolve shards references to actual objects */
+            /* Then resolve shard references to actual objects */
             var data = new Avidity.ApplicationData();
             
             data.artists   = InitArtists(exchange);
