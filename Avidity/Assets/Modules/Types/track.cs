@@ -15,27 +15,29 @@ namespace Avidity
     [Serializable]
     public class Track
     {
-        /// <summary> Internal identifier of the this. </summary>
+        /// <summary> Internal identifier of the track. </summary>
         public Shard? shard;
+
+        /// <summary> The audio file name (if different to the track shard) of the track. </summary>
+        public string? source;
         
-        /// <summary> Exact displayed name of the this. </summary>
+        /// <summary> Exact displayed name of the track. </summary>
         public string? name;
         
-        /// <summary> Artists assigned to the this. </summary>
+        /// <summary> Artists assigned to the track. </summary>
         public List<Artist>? artists;
 
         /// <summary> Duration of the track in seconds. </summary>
         public float? duration;
 
+        // TODO: Write custom serialiser
         /// <summary> Album the track belongs to. </summary>
-        [NonSerialized]
-        public Playlist? album;
+        [NonSerialized] public Playlist? album;
         
         /// <summary> Playlists the track belongs to. </summary>
-        [NonSerialized]
-        public List<Playlist>? playlists;
+        [NonSerialized] public List<Playlist>? playlists;
         
-        /// <summary> Total number of times this track has been played. </summary>
+        /// <summary> Total number of times the track has been played. </summary>
         public int totalPlays = 0;
         
         
@@ -63,6 +65,7 @@ namespace Avidity
     public record TrackDataExchange
     {
         public string?      name;
+        public string?      source;
         public List<Shard>? artists;
         public float?       duration;
         public Shard?       album;
@@ -74,8 +77,9 @@ namespace Avidity
         {
             try {
                 return new Track() {
-                    shard = shard,
-                    name  = this.name,
+                    shard  = shard,
+                    source = this.source,
+                    name   = this.name,
 
                     artists =
                         (this.artists is null) ? null : (

@@ -12,6 +12,8 @@ public class SelectorPaneController : Bases.InterfaceController
 
     public Label trackDuration;
     public Label trackPlays;
+
+    public Label trackSource;
     public Label trackShard;
 
 
@@ -25,7 +27,9 @@ public class SelectorPaneController : Bases.InterfaceController
 
         this.trackDuration = root.Q<Label>("track-duration");
         this.trackPlays    = root.Q<Label>("track-plays");
-        this.trackShard    = root.Q<Label>("track-shard");
+
+        this.trackSource = root.Q<Label>("track-source");
+        this.trackShard  = root.Q<Label>("track-shard");
     }
 
     void Start()
@@ -45,6 +49,8 @@ public class SelectorPaneController : Bases.InterfaceController
 
         this.trackDuration.text = track.DisplayDuration();
         this.trackPlays.text    = track.totalPlays.ToString();
-        this.trackShard.text    = track.shard ?? "None Set";
+
+        this.trackSource.text = track.source ?? "Default";
+        this.trackShard.text  = track.shard ?? "None Set";
     }
 }

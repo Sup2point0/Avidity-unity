@@ -38,12 +38,17 @@
                             <ui:Label text="&lt;TRACK-DURATION&gt;" name="track-duration" class="field-value" />
                         </ui:VisualElement>
                         <ui:VisualElement name="left-right">
-                            <ui:Label text="Plays" name="plays" class="field" />
+                            <ui:Label text="Total Plays" name="plays" class="field" />
                             <ui:Label text="&lt;TRACK-PLAYS&gt;" name="track-plays" class="field-value" />
                         </ui:VisualElement>
+                        <ui:VisualElement name="gap" style="flex-grow: 1; height: 15px;" />
                         <ui:VisualElement name="left-right">
                             <ui:Label text="Shard" name="shard" class="field" />
-                            <ui:Label text="&lt;TRACK-SOURCE&gt;" name="track-shard" class="field-value" />
+                            <ui:Label text="&lt;TRACK-SHARD&gt;" name="track-shard" class="field-value" />
+                        </ui:VisualElement>
+                        <ui:VisualElement name="left-right">
+                            <ui:Label text="Source File" name="source" class="field" />
+                            <ui:Label text="&lt;TRACK-SOURCE&gt;" name="track-source" class="field-value" />
                         </ui:VisualElement>
                     </ui:VisualElement>
                 </ui:ScrollView>
