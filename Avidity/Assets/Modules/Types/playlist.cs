@@ -58,7 +58,7 @@ namespace Avidity
 
 
         public string DisplayName()
-            => this.name ?? "Untitled Playlist";
+            => this.name ?? $"Untitled Playlist [{this.shard}]";
 
 
         // public List<Track> GetShuffledList()

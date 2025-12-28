@@ -49,6 +49,9 @@ namespace Avidity
         /// <summary> The audio file extension of the track. </summary>
         public TrackAudioFileKind filetype = TrackAudioFileKind.MP3;
 
+        /// <summary> The cover file name (if different to the track shard or album shard) of the track. </summary>
+        public string? cover_file;
+
         /// <summary> Duration of the track in seconds. </summary>
         public float? duration;
     
@@ -78,44 +81,58 @@ namespace Avidity
             Dictionary<string, object> res = new();
 
             Utils.AddMaybe(res, "weak-shard", this.weak_shard);
-            Utils.AddMaybe(res, "name",       this.name);
-            Utils.AddMaybe(res, "audio",      this.audio_file);
-            Utils.AddMaybe(res, "duration",   this.duration);
-            Utils.AddMaybe(res, "artists",    this.artists?.Select(artist => artist.shard).ToList());
-            Utils.AddMaybe(res, "album",      this.album?.shard);
-            Utils.AddMaybe(res, "playlists",  this.playlists?.Select(list => list.shard)).ToList();
-            Utils.AddMaybe(res, "plays",      this.totalPlays);
+            Utils.AddMaybe(res, "name",     this.name);
+            Utils.AddMaybe(res, "audio",    this.audio_file);
+            Utils.AddMaybe(res, "duration", this.duration);
+            Utils.AddMaybe(res, "cover",    this.cover_file);
+            Utils.AddMaybe(res, "artists",  this.artists?.Select(artist => artist.shard).ToList());
+            Utils.AddMaybe(res, "album",    this.album?.shard);
+            // TODO: Is it worth syncing from both sides?
+            Utils.AddMaybe(res, "lists",    this.playlists?.Select(list => list.shard)).ToList();
+            Utils.AddMaybe(res, "plays",    this.totalPlays);
 
             return res;
         }
         
-
-        /// <summary> Find the name of the file in which we expect the track's audio to be stored. </summary>
-        public string? ResolveSource()
-            => this.audio_file ?? this.weak_shard ?? this.name?.ToLower() ?? null;
         
         /// <summary> Find the primary artist the track should be tied to. </summary>
         public Artist? ResolvePrimaryArtist()
             => (this.artists is null) ? null
                 : (this.artists.Count > 0) ? this.artists[0] : null;
 
-        /// <summary> Find the folders in which we could expect the track's audio to be found. </summary>
-        public List<string> ResolveFolders()
+        /// <summary> Find the name of the file in which we expect the track's audio to be stored. </summary>
+        public string? ResolveAudioSource()
+            => this.audio_file ?? this.weak_shard ?? this.name?.ToLower() ?? null;
+
+        /// <summary> Find the filepaths where we could expect the track's audio to be found. </summary>
+        public List<string> ResolveAudioSources()
         {
-            var track_file = this.ResolveSource();
+            var track_file = this.ResolveAudioSource();
             var ext = this.filetype.shard;
 
             return (
                 from source_folder in Persistence.options.audio_source_folders
                 let artist_folder = this.ResolvePrimaryArtist()?.ResolveFolder()
-                let path = Utils.JoinPaths(source_folder, artist_folder, track_file)
+                let path =
+                    (this.audio_file is not null) ? this.audio_file
+                    : Utils.JoinPaths(source_folder, artist_folder, track_file)
                 select $"file://{path}.{ext}"
             ).ToList();
+        }
+
+        public string? ResolveCoverSource()
+            => this.album?.shard ?? this.weak_shard ?? this.name?.ToLower() ?? null;
+
+        public List<string> ResolveCoverSources()
+        {
+            var track_file = this.ResolveCoverSource();
+
+            throw new NotImplementedException();
         }
         
 
         public string DisplayName()
-            => this.name ?? "Untitled Track";
+            => this.name ?? $"Untitled Track [{this.weak_shard}]";
 
         public string DisplayDuration()
         {
@@ -160,6 +177,7 @@ namespace Avidity
         public string?      name;
         public string?      audio;
         public float?       duration;
+        public string?      cover;
         public List<Shard>? artists;
         public Shard?       album;
         public List<Shard>? lists;
@@ -172,6 +190,9 @@ namespace Avidity
                 return new Track() {
                     weak_shard = this.weak_shard,
                     audio_file = this.audio,
+                    duration   = this.duration,
+                    cover_file = this.cover,
+
                     name       = this.name,
 
                     artists =
@@ -180,8 +201,6 @@ namespace Avidity
                             where data.artists.ContainsKey(artist_shard)
                             select data.artists[artist_shard]
                         ).ToList(),
-                    
-                    duration = this.duration,
 
                     album =
                         (this.album is null) ? null

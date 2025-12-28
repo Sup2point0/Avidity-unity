@@ -239,7 +239,7 @@ public class AudioExecutive : MonoBehaviour
             throw new AudioLoadException("Cannot play a track with no shard set");
         }
 
-        var urls = track.ResolveFolders();
+        var urls = track.ResolveAudioSources();
         if (urls is null || urls.Count == 0) {
             throw new AudioLoadException("Failed to resolve possible track file sources");
         }
