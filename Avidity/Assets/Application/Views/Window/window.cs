@@ -17,7 +17,7 @@ public class WindowController : Bases.InterfaceController
     {
         var root = this.ui.Q<VisualElement>("window");
 
-        this.tabWindows[SceneExec.Tab.Options] = root.Q<VisualElement>("options");
+        this.tabWindows[SceneExec.Tab.Config] = root.Q<VisualElement>("config");
         this.tabWindows[SceneExec.Tab.Tracks]  = root.Q<VisualElement>("tracks");
     }
 

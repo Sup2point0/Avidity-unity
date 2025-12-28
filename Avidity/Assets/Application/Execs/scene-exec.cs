@@ -17,7 +17,7 @@ public class SceneExecutive : MonoBehaviour
 
     /// <summary> A window tab that can be navigated to in the application. </summary>
     public enum Tab {
-        Options, Files, Home, Tracks, Playlists, Artists,
+        Config, Files, Home, Tracks, Playlists, Artists,
     }
 
 #endregion

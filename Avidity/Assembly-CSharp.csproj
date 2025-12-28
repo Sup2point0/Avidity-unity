@@ -62,11 +62,11 @@
     <Compile Include="Assets\Application\Execs\scene-exec.cs" />
     <Compile Include="Assets\Application\Views\Navigation\navbar.cs" />
     <Compile Include="Assets\Modules\Execs\persist-exec.cs" />
-    <Compile Include="Assets\Application\Views\Options\options.cs" />
     <Compile Include="Assets\Modules\Core\exec.cs" />
     <Compile Include="Assets\Application\Views\Playback\buttons.cs" />
     <Compile Include="Assets\Modules\Types\playlist.cs" />
     <Compile Include="Assets\Modules\Bases\button.cs" />
+    <Compile Include="Assets\Application\Views\Config\config.cs" />
     <Compile Include="Assets\Modules\Types\artist.cs" />
     <Compile Include="Assets\Application\Views\Queue\queue.cs" />
     <Compile Include="Assets\Modules\Internal\declarations.cs" />
@@ -111,7 +111,7 @@
     <None Include="Assets\Application\buttons.uss" />
     <None Include="Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile.shader" />
-    <None Include="Assets\Application\Views\Options\options.uxml" />
+    <None Include="Assets\Application\Views\Config\config.uxml" />
     <None Include="Assets\Application\application.uxml" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Sprite.shader" />
   </ItemGroup>
