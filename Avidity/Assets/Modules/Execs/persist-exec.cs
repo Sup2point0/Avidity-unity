@@ -4,7 +4,10 @@ using System.Linq;
 
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+
 using UnityEngine;
+
+using Avid = Avidity;
 
 using Shard = System.String;
 
@@ -14,8 +17,8 @@ namespace Avidity
     /// <summary> Executive for managing data persistence (loading and saving). </summary>
     public static class Persistence
     {
-        public static Avidity.ApplicationOptions options;
-        public static Avidity.ApplicationData    data;
+        public static Avid.ApplicationOptions options;
+        public static Avid.ApplicationData    data;
 
         private static readonly JsonSerializerSettings json_serialiser_settings = new() {
             Formatting = Formatting.Indented,
@@ -49,9 +52,9 @@ namespace Avidity
 
     #region OPTIONS LOADING
 
-        public static Avidity.ApplicationOptions LoadOptions(string source_path)
+        public static Avid.ApplicationOptions LoadOptions(string source_path)
         {
-            return LoadJson<Avidity.ApplicationOptions>($"{source_path}/options.json");
+            return LoadJson<Avid.ApplicationOptions>($"{source_path}/options.json");
         }
 
     #endregion
@@ -59,17 +62,17 @@ namespace Avidity
 
     #region DATA LOADING
 
-        public static Avidity.ApplicationData LoadData(string source_path)
+        public static Avid.ApplicationData LoadData(string source_path)
         {
             /* First, load data from JSON into intermediate dictionaries */
-            var exchange = new Avidity.ApplicationDataExchange();
+            var exchange = new Avid.ApplicationDataExchange();
 
             exchange.artists   = LoadArtists($"{source_path}/artists.json");
             exchange.tracks    = LoadTracksExchange($"{source_path}/tracks.json");
             exchange.playlists = LoadPlaylistsExchange($"{source_path}/playlists.json");
 
             /* Then resolve shard references to actual objects */
-            var data = new Avidity.ApplicationData();
+            var data = new Avid.ApplicationData();
             
             data.artists   = InitArtists(exchange);
             data.playlists = InitPlaylists(exchange);
@@ -93,7 +96,7 @@ namespace Avidity
     #endregion
     #region DATA LINKING
 
-        private static Dictionary<Shard, Playlist> InitPlaylists(Avidity.ApplicationDataExchange data)
+        private static Dictionary<Shard, Playlist> InitPlaylists(Avid.ApplicationDataExchange data)
             => (from kvp in data.playlists
                 let shard = kvp.Key
                 let list_data = kvp.Value
@@ -109,7 +112,7 @@ namespace Avidity
         /// <returns>Fully initialised tracks with Shards now linked.</returns>
         private static Dictionary<Shard, Track> LinkTracks(
             Dictionary<Shard, TrackDataExchange> tracks,
-            Avidity.ApplicationData data
+            Avid.ApplicationData data
         )
             => (from kvp in tracks
                 let shard = kvp.Key
@@ -125,7 +128,7 @@ namespace Avidity
         /// <param name="data">Data providing objects to link to.</param>
         private static void LinkPlaylists(
             Dictionary<Shard, PlaylistDataExchange> playlists,
-            Avidity.ApplicationData data
+            Avid.ApplicationData data
         )
         {
             foreach (var kvp in playlists) {
@@ -142,7 +145,7 @@ namespace Avidity
             }
         }
 
-        private static Dictionary<Shard, Artist> InitArtists(Avidity.ApplicationDataExchange data)
+        private static Dictionary<Shard, Artist> InitArtists(Avid.ApplicationDataExchange data)
             => (from kvp in data.artists
                 let shard = kvp.Key
                 let artist_data = kvp.Value

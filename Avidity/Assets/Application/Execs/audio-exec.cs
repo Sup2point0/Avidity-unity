@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 
 using Avidity;
+using Avid = Avidity;
 
 
 /// <summary> The audio manager. </summary>

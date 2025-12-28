@@ -8,7 +8,6 @@ using Newtonsoft.Json;
 
 using UnityEngine;
 
-using Avidity;
 using Avid = Avidity;
 
 using Shard = System.String;
@@ -22,7 +21,7 @@ namespace Avidity
     /// We're modelling tracks as a 'weak entity': we can't reliably assign them a unique shard based no their name alone, since multiple artists could create tracks with the same name. Instead, we'll compute a 'composite shard' by joining their primary artist's shard and their own weak shard. We'll use the composite shard to index them globally, but still keep hold of the weak shard to have a filename to automatically look for when playing audio.
     /// </remarks>
     [Serializable]
-    public class Track : Avid.ISelectableObject
+    public class Track : Bases.ISelectableObject
     {
     
     #region TECHNICAL
@@ -135,7 +134,7 @@ namespace Avidity
     }
 
 
-    public sealed record TrackAudioFileKind : Avid.Bases.SerialisedEnum<TrackAudioFileKind>
+    public sealed record TrackAudioFileKind : Bases.SerialisedEnum<TrackAudioFileKind>
     {
         public static TrackAudioFileKind MP3 = new() { shard = "mp3", text = ".mp3" };
         public static TrackAudioFileKind M4A = new() { shard = "m4a", text = ".m4a" };

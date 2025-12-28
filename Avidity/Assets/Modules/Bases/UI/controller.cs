@@ -1,8 +1,6 @@
 using UnityEngine;
 using UnityEngine.UIElements;
 
-using Avidity;
-
 
 namespace Avidity
 {

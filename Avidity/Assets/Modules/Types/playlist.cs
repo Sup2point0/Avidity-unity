@@ -15,7 +15,7 @@ namespace Avidity
 {
     /// <summary> A playlist with all its associated data. </summary>
     [Serializable]
-    public class Playlist : Avidity.ISelectableObject
+    public class Playlist : Bases.ISelectableObject
     {
         /// <summary> Base number of 'phantom' plays to add when randomly selecting tracks. </summary>
         private const int BASE_PLAYS = 69;
@@ -79,7 +79,7 @@ namespace Avidity
     }
 
 
-    public sealed record PlaylistKind : Avid.Bases.SerialisedEnum<PlaylistKind>
+    public sealed record PlaylistKind : Bases.SerialisedEnum<PlaylistKind>
     {
         public static PlaylistKind ALBUM = new() { shard = "album", text = "Album" };
         public static PlaylistKind GENRE = new() { shard = "genre", text = "Genre" };

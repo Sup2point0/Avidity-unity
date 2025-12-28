@@ -56,7 +56,7 @@ public class SceneExecutive : MonoBehaviour
     /// </summary>
     public Track selectedTrack { get; private set; }
 
-    public Avid.SelectableObjectType selectedObjectType { get; private set; }
+    public Bases.SelectableObjectType selectedObjectType { get; private set; }
 
 
 #region PRIVATE
@@ -175,7 +175,7 @@ public class SceneExecutive : MonoBehaviour
     public void SelectTrack(Track track)
     {
         this.selectedTrack = track;
-        this.selectedObjectType = Avid.SelectableObjectType.Track;
+        this.selectedObjectType = Bases.SelectableObjectType.Track;
         
         onTrackSelected?.Invoke();
 
