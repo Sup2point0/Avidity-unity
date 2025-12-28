@@ -3,7 +3,7 @@ using System.IO;
 using System.Linq;
 
 using Newtonsoft.Json;
-
+using Newtonsoft.Json.Serialization;
 using UnityEngine;
 
 using Shard = System.String;
@@ -17,23 +17,29 @@ namespace Avidity
         public static Avidity.ApplicationOptions options;
         public static Avidity.ApplicationData    data;
 
+        private static readonly JsonSerializerSettings json_serialiser_settings = new() {
+            Formatting = Formatting.Indented,
+            NullValueHandling = NullValueHandling.Ignore,
+            ContractResolver = new DefaultContractResolver() {
+                NamingStrategy = new KebabCaseNamingStrategy()
+            },
+        };
+        private static readonly JsonSerializerSettings json_deserialiser_settings = new() {
+            NullValueHandling = NullValueHandling.Ignore,
+            ContractResolver = new DefaultContractResolver() {
+                NamingStrategy = new KebabCaseNamingStrategy()
+            },
+        };
 
-    #region STATIC
+
+    #region INITIALISERS
 
         /// <summary> Called when the application first starts, to load all the data before the UI displays. </summary>
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
         public static void LoadData()
         {
-            LoadFromPath(Application.persistentDataPath);
-        }
+            var source_path = Application.persistentDataPath;
 
-    #endregion
-
-
-    #region INITIALISERS
-
-        public static void LoadFromPath(string source_path)
-        {
             Persistence.options = LoadOptions(source_path);
             Persistence.data    = LoadData(source_path);
         }
@@ -58,9 +64,9 @@ namespace Avidity
             /* First, load data from JSON into intermediate dictionaries */
             var exchange = new Avidity.ApplicationDataExchange();
 
+            exchange.artists   = LoadArtists($"{source_path}/artists.json");
             exchange.tracks    = LoadTracksExchange($"{source_path}/tracks.json");
             exchange.playlists = LoadPlaylistsExchange($"{source_path}/playlists.json");
-            exchange.artists   = LoadArtists($"{source_path}/artists.json");
 
             /* Then resolve shard references to actual objects */
             var data = new Avidity.ApplicationData();
@@ -68,7 +74,7 @@ namespace Avidity
             data.artists   = InitArtists(exchange);
             data.playlists = InitPlaylists(exchange);
 
-            data.tracks    = LinkTracks(exchange.tracks, data);
+            data.tracks = LinkTracks(exchange.tracks, data);
             LinkPlaylists(exchange.playlists, data);
 
             return data;
@@ -148,7 +154,7 @@ namespace Avidity
     #endregion
 
 
-    #region SAVING
+    #region OPTIONS SAVING
 
         public static void SaveOptions()
         {
@@ -156,19 +162,64 @@ namespace Avidity
         }
 
     #endregion
+
+
+    #region DATA SAVING
+
+        public static void SaveData()
+        {
+            SaveArtists();
+            SaveTracks();
+            SavePlaylists();
+        }
+
+        public static void SaveArtists()
+        {
+            var export = Persistence.data.artists.ToDictionary(
+                kvp => kvp.Key,
+                kvp => kvp.Value.ExportJson()
+            );
+
+            SaveJson(export, "artists-export.json");
+        }
+
+        public static void SaveTracks()
+        {
+            var export = Persistence.data.tracks.ToDictionary(
+                kvp => kvp.Key,
+                kvp => kvp.Value.ExportJson()
+            );
+
+            SaveJson(export, "tracks-export.json");
+        }
+
+        public static void SavePlaylists()
+        {
+            var export = Persistence.data.playlists.ToDictionary(
+                kvp => kvp.Key,
+                kvp => kvp.Value.ExportJson()
+            );
+
+            SaveJson(export, "playlists-export.json");
+        }
+
+
+    #endregion
+
+
     #region INTERNAL
 
         private static T LoadJson<T>(string path)
         {
             var text = File.ReadAllText(path);
-            var res = JsonConvert.DeserializeObject<T>(text, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+            var res = JsonConvert.DeserializeObject<T>(text, Persistence.json_deserialiser_settings);
 
             return res;
         }
 
         private static void SaveJson<T>(T obj, string path)
         {
-            var json = JsonConvert.SerializeObject(obj, Formatting.Indented);
+            var json = JsonConvert.SerializeObject(obj, Persistence.json_serialiser_settings);
             SaveFile(json, path);
         }
 

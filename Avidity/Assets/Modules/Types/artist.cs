@@ -29,9 +29,18 @@ namespace Avidity
         public int totalPlays = 0;
 
 
+        public Artist ExportJson()
+            => new() {
+                name       = this.name,
+                folder     = this.folder,
+                totalPlays = this.totalPlays,
+            };
+
+
         /// <summary> Find the folder where we expect the artist's tracks to be stored. </summary>
         public string? ResolveFolder()
             => this.folder ?? this.shard ?? this.name?.ToLower() ?? null;
+
 
         public string DisplayName()
             => this.name ?? "Anonymous";

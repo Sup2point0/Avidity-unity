@@ -49,8 +49,8 @@ public class SelectorPaneController : Bases.InterfaceController
         this.trackDuration.text = track.DisplayDuration();
         this.trackPlays.text    = track.totalPlays.ToString();
 
-        SetLabelText(this.trackSource, track.source, "Default");
-        SetLabelText(this.trackShard,  track.shard,  "None Set");
+        SetLabelText(this.trackSource, track.audio_file, "Default");
+        SetLabelText(this.trackShard,  track.shard,      "None Set");
     }
 
 

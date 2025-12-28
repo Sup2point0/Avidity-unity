@@ -234,7 +234,7 @@ public class AudioExecutive : MonoBehaviour
 
     public async Awaitable<AudioClip> LoadClipAsync(Track track)
     {
-        if (track.shard is null && track.source is null) {
+        if (track.shard is null && track.audio_file is null) {
             throw new AudioLoadException("Cannot play a track with no shard set");
         }
 
