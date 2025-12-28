@@ -1,4 +1,22 @@
 * {
-  -unity-font: resource('Fonts/Abel');
-  -unity-font-definition: resource('Fonts/Abel');
+    -unity-font: resource('Fonts/Abel');
+    -unity-font-definition: resource('Fonts/Abel');
+}
+
+.tracks-list {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.ui-button {
+    width: 80px;
+    max-width: 80px;
+    height: 80px;
+    max-height: 80px;
+    background-color: transparent;
+    -unity-background-scale-mode: scale-to-fit;
+    border-width: 0;
+}
+
+.ui-button:hover {
+    background-color: rgba(0, 0, 0, 0.5);
 }

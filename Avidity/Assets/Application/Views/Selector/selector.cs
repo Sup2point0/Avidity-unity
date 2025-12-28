@@ -13,8 +13,9 @@ public class SelectorPaneController : Bases.InterfaceController
     public Label trackDuration;
     public Label trackPlays;
 
-    public Label trackSource;
     public Label trackShard;
+    public Label trackAudio;
+    public Label trackCover;
 
 
     void OnEnable()
@@ -28,8 +29,9 @@ public class SelectorPaneController : Bases.InterfaceController
         this.trackDuration = root.Q<Label>("track-duration");
         this.trackPlays    = root.Q<Label>("track-plays");
 
-        this.trackSource = root.Q<Label>("track-source");
-        this.trackShard  = root.Q<Label>("track-shard");
+        this.trackShard = root.Q<Label>("track-shard");
+        this.trackAudio = root.Q<Label>("track-audio");
+        this.trackCover = root.Q<Label>("track-cover");
     }
 
     void Start()
@@ -49,8 +51,9 @@ public class SelectorPaneController : Bases.InterfaceController
         this.trackDuration.text = track.DisplayDuration();
         this.trackPlays.text    = track.totalPlays.ToString();
 
-        SetLabelText(this.trackSource, track.audio_file, "Default");
-        SetLabelText(this.trackShard,  track.shard,      "None Set");
+        SetLabelText(this.trackShard, track.weak_shard, "None Set");
+        SetLabelText(this.trackAudio, track.audio_file, "Default");
+        SetLabelText(this.trackCover, track.cover_file, "Default");
     }
 
 

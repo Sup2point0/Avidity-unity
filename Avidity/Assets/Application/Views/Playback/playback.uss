@@ -1,11 +1,10 @@
-#playback Button {
-  min-width: 100px;
-  min-height: 100px;
-}
-
 #playback Label {
   padding-top: 0px;
   padding-bottom: 0px;
+}
+
+#playback Button#pause {
+  margin: 0 20px;
 }
 
 #playback #track-name {

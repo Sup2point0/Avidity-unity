@@ -14,22 +14,20 @@
     font-size: 30px;
 }
 
+#selector #artist-name,
 #selector #album-name {
-    color: rgb(192, 192, 192);
-    font-size: 25px;
-}
-
-#selector #artist-name {
-    color: rgb(192, 192, 192);
+    color: rgb(144, 144, 144);
     font-size: 25px;
 }
 
 .field {
-    color: rgb(192, 192, 192);
+    color: rgb(128, 128, 128);
     font-size: 20px;
 }
 
 .field-value {
-    color: white;
+    color: #40e0ff;
     font-size: 20px;
 }
+.value-default { color: rgb(144, 144, 144); }
+.value-set     { color: white; }

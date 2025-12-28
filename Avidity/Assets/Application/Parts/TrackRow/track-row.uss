@@ -1,6 +1,16 @@
-Button {
-    width: 80px;
-    height: 80px;
+TrackRow {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-bottom-color: rgb(192, 192, 192);
+    border-bottom-width: 0.5px;
+}
+TrackRow:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+Label {
+    padding-top: 0px;
+    padding-bottom: 0px;
 }
 
 #track-name {
