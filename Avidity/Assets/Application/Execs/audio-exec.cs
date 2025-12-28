@@ -134,6 +134,7 @@ public class AudioExecutive : MonoBehaviour
         ClearQueue();
 
         this.queuedTracks = playlist.tracks.Select((value, index) => ((uint) index, value)).ToList();
+
         PlayNext();
     }
 

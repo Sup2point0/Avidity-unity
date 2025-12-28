@@ -20,20 +20,28 @@ namespace Avidity
         /// <summary> Internal identifier of the artist. </summary>
         public Shard? shard;
 
-        /// <summary> Exact displayed name of artist. </summary>
+        /// <summary> Exact displayed name of the artist. </summary>
         public string? name;
 
+        /// <summary> Folder where the artist's tracks are stored. </summary>
         public string? folder;
 
-        /// <summary> Total number of times tracks by this artist have been played. </summary>
+        /// <summary> Total number of tracks by the artist. </summary>
+        /// <remarks>
+        /// This is dynamically re-calculated on application startup, not loaded from persistent data.
+        /// </remarks>
+        public int totalTracks = 0;
+
+        /// <summary> Total number of times tracks by the artist have been played. </summary>
         public int totalPlays = 0;
 
 
         public Artist ExportJson()
             => new() {
-                name       = this.name,
-                folder     = this.folder,
-                totalPlays = this.totalPlays,
+                name        = this.name,
+                folder      = this.folder,
+                totalTracks = this.totalTracks,
+                totalPlays  = this.totalPlays,
             };
 
 

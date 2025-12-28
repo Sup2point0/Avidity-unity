@@ -17,10 +17,6 @@ namespace Avidity
     [Serializable]
     public class Playlist : Bases.ISelectableObject
     {
-        /// <summary> Base number of 'phantom' plays to add when randomly selecting tracks. </summary>
-        private const int BASE_PLAYS = 69;
-
-
         /// <summary> Internal identifier of the playlist. </summary>
         public Shard? shard;
 
@@ -28,7 +24,7 @@ namespace Avidity
         public string? name;
         
         /// <summary> Tracks in the playlist. </summary>
-        public List<Track>? tracks;
+        public List<Track> tracks = new();
 
         public PlaylistKind? kind;
 

@@ -173,7 +173,8 @@ namespace Avidity
     public record TrackDataExchange
     {
         [JsonProperty("weak-shard")]
-        public string?      weak_shard;
+        public string? weak_shard;
+
         public string?      name;
         public string?      audio;
         public float?       duration;
@@ -192,26 +193,10 @@ namespace Avidity
                     audio_file = this.audio,
                     duration   = this.duration,
                     cover_file = this.cover,
-
                     name       = this.name,
-
-                    artists =
-                        (this.artists is null) ? null : (
-                            from artist_shard in this.artists
-                            where data.artists.ContainsKey(artist_shard)
-                            select data.artists[artist_shard]
-                        ).ToList(),
-
-                    album =
-                        (this.album is null) ? null
-                        : data.playlists[this.album],
-                    
-                    playlists =
-                        (this.lists is null) ? null : (
-                            from list_shard in this.lists 
-                            where data.playlists.ContainsKey(list_shard)
-                            select data.playlists[list_shard]
-                        ).ToList(),
+                    artists    = this.artists?.Select(s => data.GetOrCreateArtistForTrack(s)).ToList(),
+                    album      = this.album is null ? null : data.GetOrCreatePlaylist(this.album),
+                    playlists  = this.lists?.Select(l => data.GetOrCreatePlaylist(l)).ToList(),
                     
                     totalPlays = this.plays,
                 };
