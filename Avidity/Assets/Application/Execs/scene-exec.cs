@@ -1,3 +1,5 @@
+#nullable enable
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,11 +27,9 @@ public class SceneExecutive : MonoBehaviour
 
 #region DELEGATES
 
-    /// <summary> Fired when the window tab is changed. </summary>
-    public Action onTabChanged;
-
-    /// <summary> Fired when a track is selected. </summary>
-    public Action onTrackSelected;
+    public Action? onTabChanged;
+    public Action? onTrackSelected;
+    public Action? onSelectionChanged;
 
 #endregion
 
@@ -44,8 +44,7 @@ public class SceneExecutive : MonoBehaviour
 
     [Header("Connections")]
 
-    public PlayerInput playerInput;
-    public Canvas mainCanvas;
+    public PlayerInput? playerInput;
 
 
     [Header("State")]
@@ -54,9 +53,15 @@ public class SceneExecutive : MonoBehaviour
 
     /// <summary> The currently selected track to be shown in the Selector. Note this can be `null`, but we're not marking it `Track?` just to avoid `.Value` shenanigans. TODO: Might change in future?
     /// </summary>
-    public Track selectedTrack { get; private set; }
+    public Track? selectedTrack { get; private set; }
 
-    public Bases.SelectableObjectType selectedObjectType { get; private set; }
+// TODO: migrating
+    /// <summary> The type of the currently selected entity. </summary>
+    public Bases.SelectableEntityType selectedEntityType { get; private set; }
+        = Bases.SelectableEntityType.NoSelection;
+
+    /// <summary> The currently selected entity. Use `.selectedEntityType` to determine its type and downcast as appropriate. </summary>
+    public object? selectedEntity { get; private set; }
 
 
 #region PRIVATE
@@ -148,7 +153,6 @@ public class SceneExecutive : MonoBehaviour
         // QualitySettings.vSyncCount = 1;
         Application.targetFrameRate = this.frameRateWhenActive;
         // this.playerInput.enabled = true;
-        this.mainCanvas.enabled = true;
     }
 
     private void ToUnfocused()
@@ -157,8 +161,7 @@ public class SceneExecutive : MonoBehaviour
 
         // QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = this.frameRateWhenUnfocused;
-        this.playerInput.enabled = false;
-        this.mainCanvas.enabled = false;
+        this.playerInput!.enabled = false;
     }
     
 #endregion
@@ -175,9 +178,14 @@ public class SceneExecutive : MonoBehaviour
     public void SelectTrack(Track track)
     {
         this.selectedTrack = track;
-        this.selectedObjectType = Bases.SelectableObjectType.Track;
         
         onTrackSelected?.Invoke();
+
+    // TODO: part of migration
+        this.selectedEntityType = Bases.SelectableEntityType.Track;
+        this.selectedEntity = track;
+
+        onSelectionChanged?.Invoke();
 
         async void UpdateInfo() {
             await Exec.Audio.LoadClipAsync(track);

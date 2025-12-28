@@ -2,7 +2,8 @@ namespace Avidity
 {
     public static partial class Bases
     {
-        public enum SelectableObjectType {
+        public enum SelectableEntityType {
+            NoSelection,
             File,
             Track,
             Playlist,
@@ -10,6 +11,6 @@ namespace Avidity
         }
 
         /// <summary> An object which can be selected in the Selector. </summary>
-        public interface ISelectableObject {}
+        public interface ISelectableEntity {}
     }
 }

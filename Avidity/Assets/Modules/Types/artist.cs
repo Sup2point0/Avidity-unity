@@ -15,7 +15,7 @@ namespace Avidity
 {
     /// <summary> An artist with all its associated data. </summary>
     [Serializable]
-    public class Artist : Bases.ISelectableObject
+    public class Artist : Bases.ISelectableEntity
     {
         /// <summary> Internal identifier of the artist. </summary>
         public Shard? shard;

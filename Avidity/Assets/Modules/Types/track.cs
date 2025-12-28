@@ -21,7 +21,7 @@ namespace Avidity
     /// We're modelling tracks as a 'weak entity': we can't reliably assign them a unique shard based no their name alone, since multiple artists could create tracks with the same name. Instead, we'll compute a 'composite shard' by joining their primary artist's shard and their own weak shard. We'll use the composite shard to index them globally, but still keep hold of the weak shard to have a filename to automatically look for when playing audio.
     /// </remarks>
     [Serializable]
-    public class Track : Bases.ISelectableObject
+    public class Track : Bases.ISelectableEntity
     {
     
     #region TECHNICAL

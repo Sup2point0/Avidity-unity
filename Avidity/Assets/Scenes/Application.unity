@@ -257,7 +257,6 @@ MonoBehaviour:
   frameRateWhenUnfocused: 2
   secondsBeforeIdle: 2
   playerInput: {fileID: 196098724}
-  mainCanvas: {fileID: 187941623}
   is_focused: 0
   is_idle: 0
   until_idle: 0
@@ -938,6 +937,7 @@ MonoBehaviour:
   activeTrack:
     weak_shard: 
     audio_file: 
+    cover_file: 
     name: 
     artists: []
     totalPlays: 0
@@ -1008,7 +1008,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 8616776872641824041, guid: f1a4bcf38ea3cd748a55161443f8987e, type: 3}
-  m_Color: {r: 0.4056604, g: 0.4056604, b: 0.4056604, a: 1}
+  m_Color: {r: 0.3, g: 0.3, b: 0.3, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
