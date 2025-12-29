@@ -65,20 +65,21 @@ public class SceneExecutive : MonoBehaviour
     /// <summary> The currently selected entity. Use `.selectedEntityType` to determine its type and downcast as appropriate. </summary>
     public object? selectedEntity { get; private set; }
 
-
-    [Header("Debug")]
     
 #if UNITY_EDITOR
+    [Header("Debug")]
+
     [SerializeField] private int             numberOfItemsInPreviews;
     [SerializeField] private int             totalTrackCount;
     [SerializeField] private List<Track>?    applicationTracks;
     [SerializeField] private List<Playlist>? applicationPlaylists;
     [SerializeField] private List<Artist>?   applicationArtists;
 
+#endif
+
     [SerializeField] private bool is_focused;
     [SerializeField] private bool is_idle;
     [SerializeField] private float until_idle;
-#endif
 
 
 #endregion

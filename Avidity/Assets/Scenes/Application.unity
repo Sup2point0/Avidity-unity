@@ -257,6 +257,11 @@ MonoBehaviour:
   frameRateWhenUnfocused: 2
   secondsBeforeIdle: 2
   playerInput: {fileID: 196098724}
+  numberOfItemsInPreviews: 100
+  totalTrackCount: 0
+  applicationTracks: []
+  applicationPlaylists: []
+  applicationArtists: []
   is_focused: 0
   is_idle: 0
   until_idle: 0
