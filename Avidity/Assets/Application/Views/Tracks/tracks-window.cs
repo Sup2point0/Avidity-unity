@@ -21,9 +21,9 @@ public class TracksWindowController : Bases.InterfaceController
 
         this.listView = this.ui.Q<ListView>("tracks-list");
         this.listView.itemsSource = this.displayedTracks;
-        this.listView.makeItem = MakeItem;
-        this.listView.bindItem = BindItem;
-        this.listView.unbindItem = UnbindItem;
+        this.listView.makeItem    = MakeItem;
+        this.listView.bindItem    = BindItem;
+        this.listView.unbindItem  = UnbindItem;
     }
 
 
@@ -32,7 +32,7 @@ public class TracksWindowController : Bases.InterfaceController
         this.displayedTracks = Persistence.data.tracks.Values.ToList();
     }
 
-    VisualElement MakeItem()
+    TrackRow MakeItem()
     {
         return new TrackRow(this.trackRow);
     }

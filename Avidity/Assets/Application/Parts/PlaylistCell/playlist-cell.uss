@@ -1,0 +1,16 @@
+PlaylistCell {
+    padding: 10px;
+}
+PlaylistCell:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+#list-name {
+    color: white;
+    font-size: 30px;
+}
+
+#track-count {
+    color: rgb(192, 192, 192);
+    font-size: 30px;
+}

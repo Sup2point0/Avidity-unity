@@ -6,12 +6,12 @@ namespace Avidity
 {
     public static partial class Bases
     {
-        public abstract class Clicky
+        public abstract class ClickyScript
         {
             public Button button;
 
             
-            public Clicky(VisualElement root, string name)
+            public ClickyScript(VisualElement root, string name)
             {
                 this.button = root.Q<Button>(name);
             }

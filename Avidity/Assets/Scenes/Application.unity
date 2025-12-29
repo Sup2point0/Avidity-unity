@@ -398,6 +398,7 @@ GameObject:
   - component: {fileID: 273337171}
   - component: {fileID: 273337172}
   - component: {fileID: 273337169}
+  - component: {fileID: 273337173}
   m_Layer: 5
   m_Name: UI
   m_TagString: Untagged
@@ -542,6 +543,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6963e651106f8a54898fb4928b9af942, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::OptionsWindowController
+--- !u!114 &273337173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 273337162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca59216005111e641bbdf4b89a95c33a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlaylistsWindowController
+  playlistCell: {fileID: 9197481963319205126, guid: 60c97ac7c7eabfb4dbd3361b50537159, type: 3}
+  displayedPlaylists: []
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -937,6 +952,7 @@ MonoBehaviour:
   activeTrack:
     weak_shard: 
     audio_file: 
+    audio_folder: 
     cover_file: 
     name: 
     artists: []
@@ -1040,5 +1056,5 @@ SceneRoots:
   - {fileID: 519420032}
   - {fileID: 886424312}
   - {fileID: 187941624}
-  - {fileID: 273337164}
   - {fileID: 1943376745}
+  - {fileID: 273337164}

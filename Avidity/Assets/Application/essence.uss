@@ -7,6 +7,11 @@
     background-color: rgba(0, 0, 0, 0.2);
 }
 
+.page-title {
+    color: white;
+    font-size: 40px;
+}
+
 .ui-button {
     width: 80px;
     max-width: 80px;
@@ -16,7 +21,6 @@
     -unity-background-scale-mode: scale-to-fit;
     border-width: 0;
 }
-
 .ui-button:hover {
     background-color: rgba(0, 0, 0, 0.5);
 }

@@ -252,7 +252,7 @@ public class AudioExecutive : MonoBehaviour
 
             await request.SendWebRequest();
 
-            if (request.result == UnityWebRequest.Result.ConnectionError) {
+            if (request.result != UnityWebRequest.Result.Success) {
                 if (error_status < 1) error_status = 1;
                 continue;
             }
@@ -269,10 +269,13 @@ public class AudioExecutive : MonoBehaviour
 
         throw new AudioLoadException(
             error_status switch {
-                1 => "Failed to find file path of track",
+                0 => "Failed to find file path of track",
+                1 => "Failed to access audio file of track",
                 2 => "Failed to load audio clip for track",
                 _ => "Something went wrong when trying to load audio",
             }
+            + "; looked in: "
+            + string.Join(", ", urls.Select(u => $"`{u}`"))
         );
     }
 

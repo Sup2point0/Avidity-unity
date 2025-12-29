@@ -28,7 +28,7 @@ public class PlaybackButtonsScript : Bases.InterfaceController
 }
 
 
-public class PauseClicky : Bases.Clicky
+public class PauseClicky : Bases.ClickyScript
 {
     public PauseClicky(VisualElement ui) : base(ui, "pause")
     {
@@ -44,7 +44,7 @@ public class PauseClicky : Bases.Clicky
 }
 
 
-public class PrevClicky : Bases.Clicky
+public class PrevClicky : Bases.ClickyScript
 {
     public PrevClicky(VisualElement ui) : base(ui, "prev")
     {
@@ -60,7 +60,7 @@ public class PrevClicky : Bases.Clicky
 }
 
 
-public class NextClicky : Bases.Clicky
+public class NextClicky : Bases.ClickyScript
 {
     public NextClicky(VisualElement ui) : base(ui, "next")
     {

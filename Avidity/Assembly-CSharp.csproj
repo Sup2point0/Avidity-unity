@@ -52,8 +52,10 @@
     <Compile Include="Assets\Modules\Types\data.cs" />
     <Compile Include="Assets\Modules\Bases\serialised-enum.cs" />
     <Compile Include="Assets\Modules\Bases\UI\controller.cs" />
+    <Compile Include="Assets\Application\Parts\PlaylistCell\playlist-cell.cs" />
     <Compile Include="Assets\Modules\Bases\UI\clicky.cs" />
     <Compile Include="Assets\Modules\Utils\collections.cs" />
+    <Compile Include="Assets\Modules\Bases\UI\bindable-item.cs" />
     <Compile Include="Assets\Application\Views\Playback\info.cs" />
     <Compile Include="Assets\Modules\Bases\json-data-exchange.cs" />
     <Compile Include="Assets\Modules\Bases\displayed-exception.cs" />
@@ -62,7 +64,10 @@
     <Compile Include="Assets\Modules\Types\options.cs" />
     <Compile Include="Assets\Application\Execs\scene-exec.cs" />
     <Compile Include="Assets\Application\Views\Navigation\navbar.cs" />
+    <Compile Include="Assets\Application\Views\Playlists\playlists-window.cs" />
     <Compile Include="Assets\Modules\Execs\persist-exec.cs" />
+    <Compile Include="Assets\Application\Views\Tracks\tracks-window.cs" />
+    <Compile Include="Assets\Application\Parts\GridRow\grid-row.cs" />
     <Compile Include="Assets\Modules\Core\exec.cs" />
     <Compile Include="Assets\Application\Views\Playback\buttons.cs" />
     <Compile Include="Assets\Modules\Types\playlist.cs" />
@@ -76,11 +81,12 @@
     <Compile Include="Assets\Modules\Types\track.cs" />
     <Compile Include="Assets\Modules\Utils\paths.cs" />
     <Compile Include="Assets\Modules\External\weighted-list.cs" />
-    <Compile Include="Assets\Application\Views\Tracks\tracks.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
+    <None Include="Assets\Application\Parts\PlaylistCell\playlist-cell.uxml" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
+    <None Include="Assets\Application\Parts\PlaylistCell\playlist-cell.uss" />
     <None Include="Assets\Application\Parts\TrackRow\track-row.uxml" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile-2-Pass.shader" />
     <None Include="Assets\Application\Views\Navigation\navbar.uss" />
@@ -91,6 +97,7 @@
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\Application\Views\Selector\selector.uss" />
+    <None Include="Assets\Application\Views\Playlists\playlists.uxml" />
     <None Include="Assets\TextMesh Pro\Shaders\SDFFunctions.hlsl" />
     <None Include="Assets\Application\essence.uss" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface.shader" />

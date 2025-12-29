@@ -70,8 +70,8 @@ public partial class TrackRow : VisualElement
         this.qid   = qid;
         this.track = track;
 
-        this.trackName.text = track.DisplayName();
-        this.artistName.text = Artist.DisplayNames(track.artists);
+        this.trackName.text     = track.DisplayName();
+        this.artistName.text    = Artist.DisplayNames(track.artists);
         this.trackDuration.text = track.DisplayDuration();
 
         this.manipulator = new Clickable(e => {
@@ -84,73 +84,73 @@ public partial class TrackRow : VisualElement
     {
         if (this.manipulator != null) this.RemoveManipulator(this.manipulator);
     }
-}
 
 
-public class PlayClicky : Bases.Clicky
-{
-    public TrackRow root;
+#region BUTTONS
 
-
-    public PlayClicky(TrackRow root) : base(root, "play")
+    public class PlayClicky : Bases.ClickyScript
     {
-        this.root = root;
+        public TrackRow root;
+
+
+        public PlayClicky(TrackRow root) : base(root, "play")
+        {
+            this.root = root;
+        }
+
+        public override void BindListeners()
+        {
+            if ((root.ctx & TrackRow.Context.QUEUE) != 0) {
+                this.button.clicked += () => {
+                    Exec.Audio.PlayNow(root.track, root.qid);
+                };
+            }
+            else {
+                this.button.clicked += () => Exec.Audio.PlayNow(root.track);
+            }
+        }
     }
 
-    public override void BindListeners()
+
+    public class QueueClicky : Bases.ClickyScript
     {
-        if ((root.ctx & TrackRow.Context.QUEUE) != 0) {
+        public TrackRow root;
+
+
+        public QueueClicky(TrackRow root) : base(root, "queue")
+        {
+            this.root = root;
+        }
+
+        public override void BindListeners()
+        {
+            this.button.clicked += () => Exec.Audio.QueueTrack(root.track);
+        }
+    }
+
+
+    public class RemoveClicky : Bases.ClickyScript
+    {
+        public TrackRow root;
+
+
+        public RemoveClicky(TrackRow root) : base(root, "remove")
+        {
+            this.root = root;
+        }
+
+        public override void BindListeners()
+        {
             this.button.clicked += () => {
-                Exec.Audio.PlayNow(root.track, root.qid);
-                
-                /* Should always be non-null if `ctx` is `QUEUE`, but better safe than sorry... */
-                // if (this.qid.HasValue) {
-                //     Exec.Audio.UnqueueTrack(this.qid.Value);
-                // }
+                if (root.qid.HasValue) {
+                    Exec.Audio.UnqueueTrack(root.qid.Value);
+                } else {
+                    Debug.LogError("No queue ID supplied?");
+                }
             };
         }
-        else {
-            this.button.clicked += () => Exec.Audio.PlayNow(root.track);
-        }
-    }
-}
-
-
-public class QueueClicky : Bases.Clicky
-{
-    public TrackRow root;
-
-
-    public QueueClicky(TrackRow root) : base(root, "queue")
-    {
-        this.root = root;
     }
 
-    public override void BindListeners()
-    {
-        this.button.clicked += () => Exec.Audio.QueueTrack(root.track);
-    }
-}
+#endregion
 
-
-public class RemoveClicky : Bases.Clicky
-{
-    public TrackRow root;
-
-
-    public RemoveClicky(TrackRow root) : base(root, "remove")
-    {
-        this.root = root;
-    }
-
-    public override void BindListeners()
-    {
-        this.button.clicked += () => {
-            if (root.qid.HasValue) {
-                Exec.Audio.UnqueueTrack(root.qid.Value);
-            } else {
-                Debug.LogError("No queue ID supplied?");
-            }
-        };
-    }
 }

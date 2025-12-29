@@ -1,0 +1,14 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/Application/essence.uss?fileID=7433441132597879392&amp;guid=57add471641c76f49b9f2be788e117d7&amp;type=3#essence" />
+    <Style src="project://database/Assets/Application/Parts/PlaylistCell/playlist-cell.uss?fileID=7433441132597879392&amp;guid=b038e1c717ecbe84cb23eba091f8bb5b&amp;type=3#playlist-cell" />
+    <PlaylistCell>
+        <ui:VisualElement name="cover-container" style="position: relative;">
+            <ui:VisualElement name="cover" style="width: 300px; height: 300px; background-image: resource(&apos;Images/camellia.terabyte&apos;); -unity-background-scale-mode: scale-and-crop;" />
+            <ui:Button text="&gt;" name="play" style="position: absolute; left: 5px; bottom: 5px;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="info" style="flex-grow: 1; flex-direction: row; justify-content: space-between;">
+            <ui:Label text="&lt;LIST-NAME&gt;" name="list-name" style="flex-grow: 2;" />
+            <ui:Label text="&lt;TRACK-COUNT&gt;" name="track-count" style="flex-grow: 1;" />
+        </ui:VisualElement>
+    </PlaylistCell>
+</ui:UXML>

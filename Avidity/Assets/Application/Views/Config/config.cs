@@ -24,7 +24,7 @@ public class ConfigWindowController : Bases.InterfaceController
 }
 
 
-public class SaveOptionsClicky : Bases.Clicky
+public class SaveOptionsClicky : Bases.ClickyScript
 {
     public SaveOptionsClicky(VisualElement ui) : base(ui, "save-options") {}
 
@@ -35,7 +35,7 @@ public class SaveOptionsClicky : Bases.Clicky
 }
 
 
-public class SaveDataClicky : Bases.Clicky
+public class SaveDataClicky : Bases.ClickyScript
 {
     public SaveDataClicky(VisualElement ui) : base(ui, "save-data") {}
 

@@ -1,6 +1,6 @@
 TrackRow {
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding: 10px 0px;
+    border-top-width: 0px;
     border-bottom-color: rgb(192, 192, 192);
     border-bottom-width: 0.5px;
 }
