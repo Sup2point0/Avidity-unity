@@ -1,10 +1,23 @@
 namespace tests;
 
+using Avidity;
+
 
 [TestClass]
 public class Test_Track
 {
     public Track track = new();
+
+    [TestMethod]
+    public void TestEquality()
+    {
+        var t1 = new Track() { weak_shard = "test" };
+        var t2 = new Track() { weak_shard = "test" };
+        Assert.AreEqual(t1, t2);
+
+        var t3 = new Track() { weak_shard = "testing" };
+        Assert.AreNotEqual(t1, t3);
+    }
 
     [TestMethod]
     public void DisplayDuration()

@@ -1,5 +1,9 @@
 namespace tests;
 
+using System.Linq;
+
+using Avidity;
+
 
 [TestClass]
 public class Test_Utils_Paths
@@ -22,9 +26,15 @@ public class Test_Utils_Collections
     [TestMethod]
     public void AddMaybe()
     {
-        Dictionary<string, int> dict = [];
+        Dictionary<string, string> dict = [];
 
-        Assert.AreEqual( Utils.AddMaybe(dict, "test", null), dict );
-        Assert.AreEqual( Utils.AddMaybe(dict, "test", 0), new() { ["test"] = 0 } );
+        Assert.IsTrue(
+            Utils.AddMaybe(dict, "test", null)
+            .SequenceEqual(dict)
+        );
+        Assert.IsTrue(
+            Utils.AddMaybe(dict, "test", "t")
+            .SequenceEqual(new Dictionary<string, string>() { ["test"] = "t" })
+        );
     }
 }
