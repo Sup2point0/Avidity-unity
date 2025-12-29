@@ -17,12 +17,14 @@ public partial class GridRow<Cell, Entity> : VisualElement
 
     public GridRow() {}
 
-    public GridRow(VisualTreeAsset cell_uxml)
+    public GridRow(int cells_per_row, VisualTreeAsset cell_uxml)
     {
+        this.cellsPerRow = cells_per_row;
+
         this.style.flexDirection  = FlexDirection.Row;
         this.style.justifyContent = Justify.SpaceAround;
 
-        for (int i = 0; i< this.cellsPerRow; i++) {
+        for (int i = 0; i < this.cellsPerRow; i++) {
             var cell = new Cell();
             cell.InitFromUxml(cell_uxml);
             this.Add(cell);

@@ -38,7 +38,7 @@ public class PlaylistsWindowController : Bases.InterfaceController
     }
 
     Row MakeItem()
-        => new(this.cellUxml);
+        => new(3, this.cellUxml);
 
     void BindItem(VisualElement elem, int idx)
     {
