@@ -11,7 +11,8 @@ public partial class PlaylistCell : VisualElement, Bases.IBindableItem<Playlist>
 {
     public Playlist playlist;
 
-    public PlayClicky playClicky;
+    public PlayClicky  playClicky;
+    public QueueClicky queueClicky;
     
     public Label listName;
     public Label listTrackCount;
@@ -25,6 +26,9 @@ public partial class PlaylistCell : VisualElement, Bases.IBindableItem<Playlist>
 
         this.playClicky = new PlayClicky(this);
         this.playClicky.BindListeners();
+
+        this.queueClicky = new QueueClicky(this);
+        this.queueClicky.BindListeners();
 
         this.listName       = this.Q<Label>("list-name");
         this.listTrackCount = this.Q<Label>("track-count");
@@ -43,7 +47,7 @@ public partial class PlaylistCell : VisualElement, Bases.IBindableItem<Playlist>
     public void Unbind() {}
 
 
-#region 
+#region BUTTONS
 
     public class PlayClicky : Bases.ClickyScript
     {
@@ -59,6 +63,25 @@ public partial class PlaylistCell : VisualElement, Bases.IBindableItem<Playlist>
         {
             this.button.clicked += () => {
                 Exec.Audio.PlayNow(root.playlist);
+            };
+        }
+    }
+
+
+    public class QueueClicky : Bases.ClickyScript
+    {
+        public PlaylistCell root;
+
+
+        public QueueClicky(PlaylistCell root) : base(root, "queue")
+        {
+            this.root = root;
+        }
+
+        public override void BindListeners()
+        {
+            this.button.clicked += () => {
+                Exec.Audio.QueueTracks(root.playlist.tracks);
             };
         }
     }

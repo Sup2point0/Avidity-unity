@@ -133,8 +133,7 @@ public class AudioExecutive : MonoBehaviour
         ClearCurrent();
         ClearQueue();
 
-        this.queuedTracks = playlist.tracks.Select((value, index) => ((uint) index, value)).ToList();
-
+        QueueTracks(playlist.tracks);
         PlayNext();
     }
 
@@ -205,6 +204,23 @@ public class AudioExecutive : MonoBehaviour
     public void QueueTrack(Track track)
     {
         this.queuedTracks.Add((++this.qid_counter, track));
+        this.onQueueUpdated?.Invoke();
+    }
+
+    public void QueueTracks(IEnumerable<Track> tracks)
+    {
+        if (this.queuedTracks.Count == 0) {
+            // one day TODO: could be more efficient, maybe? Essentially want an Rc<Refcell<>>, I suppose.
+            this.queuedTracks.Clear();
+            this.queuedTracks.AddRange(
+                tracks.Select((track, index) => ((uint) index, track)).ToList()
+            );
+        }
+        else {
+            this.queuedTracks.AddRange(
+                tracks.Select((track, index) => (++this.qid_counter, track)).ToList()
+            );
+        }
         this.onQueueUpdated?.Invoke();
     }
 
