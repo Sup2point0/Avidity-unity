@@ -30,8 +30,8 @@ namespace Avidity
 
         public string? cover_file;
         
-        /// <summary> Tracks in the playlist. </summary>
-        public List<Track> tracks = new();
+        /// <summary> Tracks in the playlist (unordered). </summary>
+        public HashSet<Track> tracks = new();
 
         /// <summary> Accent colour of the playlist. </summary>
         public UnityEngine.Color? colour;
@@ -40,10 +40,7 @@ namespace Avidity
         public int totalPlays = 0;
 
 
-        public int trackCount => this.tracks?.Count ?? 0;
-
-        /// <summary> The first track in the playlist, or <c>null</c> if the playlist is empty. </summary>
-        public Track? firstTrack => (this.tracks?.Count > 0) ? this.tracks[0] : null;
+        [SerializeField] public int trackCount => this.tracks?.Count ?? 0;
 
 
         public Dictionary<string, object> ExportJson()
@@ -114,7 +111,7 @@ namespace Avidity
     {
         public string?      name;
         public Shard?       kind;
-        public List<Shard>? tracks;
+        public List<Shard>? tracks = new();
         public string?      cover;
         public string?      col;
         public int          totalPlays = 0;

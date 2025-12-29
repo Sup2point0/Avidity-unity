@@ -198,7 +198,7 @@ namespace Avidity
         public string?      name;
         public List<Shard>? artists;
         public Shard?       album;
-        public List<Shard>? lists;
+        public List<Shard>? lists = new();
         public int          plays = 0;
 
 

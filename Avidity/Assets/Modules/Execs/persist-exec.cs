@@ -78,8 +78,8 @@ namespace Avidity
             data.artists   = InitArtists(exchange);
             data.playlists = InitPlaylists(exchange);
 
-            data.tracks = LinkTracks(exchange.tracks, data);
-            LinkPlaylists(exchange.playlists, data);
+            InitAndLinkTracks(exchange.tracks, data);
+            // LinkPlaylists(exchange.playlists, data);
 
             return data;
         }
@@ -97,63 +97,57 @@ namespace Avidity
     #endregion
     #region DATA LINKING
 
+        private static Dictionary<Shard, Artist> InitArtists(Avid.ApplicationDataExchange data)
+            => (from kvp in data.artists
+                let shard = kvp.Key
+                let artist_data = kvp.Value
+
+                let artist = artist_data.ToArtist(shard)
+                where artist is not null
+                select artist
+            ).ToDictionary(artist => artist.shard, artist => artist);
+
         private static Dictionary<Shard, Playlist> InitPlaylists(Avid.ApplicationDataExchange data)
             => (from kvp in data.playlists
                 let shard = kvp.Key
                 let list_data = kvp.Value
+
                 let list = list_data.ToInitialisedPlaylist(shard)
                 where list is not null
                 select list
             ).ToDictionary(list => list.shard, list => list);
 
-
-        /// <summary> Replace Shards in partially initialised track objects to the objects they represent (pure). </summary>
-        /// <param name="tracks">Tracks to link.</param>
+        /// <summary> (in-place) Replace Shards in partially initialised track objects to the objects they represent, and add the tracks to the playlists they're in. </summary>
+        /// <param name="tracks_data">Partially initialised tracks to link.</param>
         /// <param name="data">Data proving objects to link to.</param>
         /// <returns>Fully initialised tracks with Shards now linked.</returns>
-        private static Dictionary<Shard, Track> LinkTracks(
-            Dictionary<Shard, TrackDataExchange> tracks,
-            Avid.ApplicationData data
-        )
-            => (from kvp in tracks
-                let shard = kvp.Key
-                let track_data = kvp.Value
-                let track = track_data.ToTrack(shard, data)
-                where track is not null
-                select track
-            ).ToDictionary(track => track.shard, track => track);
-
-
-        /// <summary> Replace Shards in playlist objects to the objects they represent (in-place). </summary>
-        /// <param name="playlists">Playlists to link.</param>
-        /// <param name="data">Data providing objects to link to.</param>
-        private static void LinkPlaylists(
-            Dictionary<Shard, PlaylistDataExchange> playlists,
+        private static void InitAndLinkTracks(
+            Dictionary<Shard, TrackDataExchange> tracks_data,
             Avid.ApplicationData data
         )
         {
-            foreach (var kvp in playlists) {
-                var list_shard = kvp.Key;
-                var list = kvp.Value;
+            data.tracks = tracks_data
+                .Select(kvp => {
+                    var shard = kvp.Key;
+                    var track_data = kvp.Value;
 
-                if (list.tracks is null) continue;
+                    var track = track_data.ToTrack(shard, data);
+                    if (track is null) {
+                        Debug.Log("NULL TRACK");return null; }
 
-                data.playlists[list_shard].tracks = (
-                    from shard_track in list.tracks
-                    where data.tracks.ContainsKey(shard_track)
-                    select data.tracks[shard_track]
-                ).ToList();
-            }
+                    if (track_data.album is not null) {
+                        data.GetOrCreatePlaylist(track_data.album).tracks.Add(track);
+                    }
+                    foreach (string list_shard in track_data?.lists ?? new()) {
+                        data.GetOrCreatePlaylist(list_shard).tracks.Add(track);
+                    }
+                    
+                    return track;
+                })
+                .Where(t => t is not null)
+                .ToDictionary(track => track.shard, track => track)
+            ;
         }
-
-        private static Dictionary<Shard, Artist> InitArtists(Avid.ApplicationDataExchange data)
-            => (from kvp in data.artists
-                let shard = kvp.Key
-                let artist_data = kvp.Value
-                let artist = artist_data.ToArtist(shard)
-                where artist is not null
-                select artist
-            ).ToDictionary(artist => artist.shard, artist => artist);
 
     #endregion
 

@@ -234,7 +234,7 @@ GameObject:
   - component: {fileID: 196098722}
   - component: {fileID: 196098724}
   m_Layer: 0
-  m_Name: Scene
+  m_Name: Scene Executive
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -273,7 +273,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 886424312}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &196098724
 MonoBehaviour:
@@ -772,39 +772,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 187941624}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &886424311
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 886424312}
-  m_Layer: 0
-  m_Name: ------- Executives -------
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &886424312
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 886424311}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 196098723}
-  - {fileID: 1667131215}
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1667131213
 GameObject:
   m_ObjectHideFlags: 0
@@ -817,7 +784,7 @@ GameObject:
   - component: {fileID: 1667131216}
   - component: {fileID: 1667131214}
   m_Layer: 0
-  m_Name: Audio
+  m_Name: Audio Executive
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -933,7 +900,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 886424312}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1667131216
 MonoBehaviour:
@@ -1053,7 +1020,8 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 519420032}
-  - {fileID: 886424312}
+  - {fileID: 196098723}
+  - {fileID: 1667131215}
   - {fileID: 187941624}
   - {fileID: 1943376745}
   - {fileID: 273337164}

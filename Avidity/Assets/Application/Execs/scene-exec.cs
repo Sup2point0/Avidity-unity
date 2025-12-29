@@ -34,6 +34,8 @@ public class SceneExecutive : MonoBehaviour
 #endregion
 
 
+#region FIELDS
+
     [Header("Configuration")]
 
     public int frameRateWhenActive = 0;
@@ -64,11 +66,20 @@ public class SceneExecutive : MonoBehaviour
     public object? selectedEntity { get; private set; }
 
 
-#region PRIVATE
+    [Header("Debug")]
+    
+#if UNITY_EDITOR
+    [SerializeField] private int             numberOfItemsInPreviews;
+    [SerializeField] private int             totalTrackCount;
+    [SerializeField] private List<Track>?    applicationTracks;
+    [SerializeField] private List<Playlist>? applicationPlaylists;
+    [SerializeField] private List<Artist>?   applicationArtists;
 
-    public bool is_focused;
-    public bool is_idle;
-    public float until_idle;
+    [SerializeField] private bool is_focused;
+    [SerializeField] private bool is_idle;
+    [SerializeField] private float until_idle;
+#endif
+
 
 #endregion
 
@@ -86,6 +97,13 @@ public class SceneExecutive : MonoBehaviour
     void Start()
     {
         this.onTabChanged?.Invoke();
+
+#if UNITY_EDITOR
+        this.totalTrackCount      = Persistence.data.tracks.Count;
+        this.applicationTracks    = Persistence.data.tracks.Values.Take(this.numberOfItemsInPreviews).ToList();
+        this.applicationArtists   = Persistence.data.artists.Values.Take(this.numberOfItemsInPreviews).ToList();
+        this.applicationPlaylists = Persistence.data.playlists.Values.Take(this.numberOfItemsInPreviews).ToList();
+#endif
     }
 
     void Update()
