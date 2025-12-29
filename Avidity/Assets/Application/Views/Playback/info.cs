@@ -26,13 +26,13 @@ public class PlaybackInfoScript : Bases.InterfaceController
 
     void OnTrackPlayed()
     {
-        this.trackName.text = Exec.Audio.activeTrack.name;
+        this.trackName.text  = Exec.Audio.activeTrack.DisplayName();
         this.artistName.text = Artist.DisplayNames(Exec.Audio.activeTrack.artists);
     }
 
     void OnTrackCleared()
     {
-        this.trackName.text = "No Track Selected";
+        this.trackName.text  = "No Track Selected";
         this.artistName.text = "";
     }
 }

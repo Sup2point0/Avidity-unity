@@ -22,11 +22,13 @@ namespace Avidity
 
         /// <summary> Exact displayed name of the playlist. </summary>
         public string? name;
+
+        public PlaylistKind? kind;
+
+        public string? cover_file;
         
         /// <summary> Tracks in the playlist. </summary>
         public List<Track> tracks = new();
-
-        public PlaylistKind? kind;
 
         /// <summary> Accent colour of the playlist. </summary>
         public UnityEngine.Color? colour;
@@ -34,6 +36,8 @@ namespace Avidity
         /// <summary> Total number of times tracks in this playlist have been played. </summary>
         public int totalPlays = 0;
 
+
+        public int trackCount => this.tracks?.Count ?? 0;
 
         /// <summary> The first track in the playlist, or <c>null</c> if the playlist is empty. </summary>
         public Track? firstTrack => (this.tracks?.Count > 0) ? this.tracks[0] : null;
@@ -45,8 +49,9 @@ namespace Avidity
 
             Utils.AddMaybe(res, "name",   this.name);
             Utils.AddMaybe(res, "kind",   this.kind?.shard);
-            Utils.AddMaybe(res, "col",    this.colour?.ToString());
             Utils.AddMaybe(res, "tracks", this.tracks.Select(track => track.shard).ToList());
+            Utils.AddMaybe(res, "cover",  this.cover_file?.ToString());
+            Utils.AddMaybe(res, "col",    this.colour?.ToString());
             Utils.AddMaybe(res, "plays",  this.totalPlays);
 
             return res;
@@ -54,7 +59,7 @@ namespace Avidity
 
 
         public string DisplayName()
-            => this.name ?? $"Untitled Playlist [{this.shard}]";
+            => this.name ?? $"Untitled [{this.shard}]";
 
 
         // public List<Track> GetShuffledList()
@@ -98,9 +103,10 @@ namespace Avidity
     public record PlaylistDataExchange
     {
         public string?      name;
-        public List<Shard>? tracks;
         public Shard?       kind;
-        public string?      colour;
+        public List<Shard>? tracks;
+        public string?      cover;
+        public string?      col;
         public int          totalPlays = 0;
 
 
@@ -110,15 +116,17 @@ namespace Avidity
                 return new Playlist() {
                     shard  = shard,
                     name   = this.name,
-                    tracks = new(),
 
                     kind =
                         (this.kind is null) ? null
                         : PlaylistKind.FromString(this.kind),
+                    
+                    cover_file = this.cover,
+                    tracks     = new(),
 
                     colour =
-                        (this.colour is null) ? null
-                        : ColorUtility.TryParseHtmlString(this.colour, out var colour)
+                        (this.col is null) ? null
+                        : ColorUtility.TryParseHtmlString(this.col, out var colour)
                         ? colour : null,
                     
                     totalPlays = this.totalPlays,

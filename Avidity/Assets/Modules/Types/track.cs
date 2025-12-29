@@ -136,7 +136,7 @@ namespace Avidity
         
 
         public string DisplayName()
-            => this.name ?? $"Untitled Track [{this.weak_shard}]";
+            => this.name ?? $"Untitled [{this.weak_shard}]";
 
         public string DisplayDuration()
         {

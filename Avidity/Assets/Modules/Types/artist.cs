@@ -51,7 +51,7 @@ namespace Avidity
 
 
         public string DisplayName()
-            => this.name ?? $"Unnamed Artist [{this.shard}]";
+            => this.name ?? $"Unnamed [{this.shard}]";
 
         public static string DisplayNames(IEnumerable<Artist>? artists)
             => (artists is null) ? "Anonymous"
