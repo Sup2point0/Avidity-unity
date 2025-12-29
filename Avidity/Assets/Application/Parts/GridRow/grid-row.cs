@@ -17,10 +17,15 @@ public partial class GridRow<Cell, Entity> : VisualElement
 
     public GridRow() {}
 
-    public GridRow(int cells_per_row, VisualTreeAsset cell_uxml)
+    public GridRow(
+        string class_name,
+        int cells_per_row,
+        VisualTreeAsset cell_uxml
+    )
     {
         this.cellsPerRow = cells_per_row;
 
+        this.AddToClassList(class_name);
         this.style.flexDirection  = FlexDirection.Row;
         this.style.justifyContent = Justify.SpaceAround;
 

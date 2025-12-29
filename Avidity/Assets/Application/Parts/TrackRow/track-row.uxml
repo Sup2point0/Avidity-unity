@@ -1,7 +1,7 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
     <Style src="project://database/Assets/Application/essence.uss?fileID=7433441132597879392&amp;guid=57add471641c76f49b9f2be788e117d7&amp;type=3" />
     <Style src="project://database/Assets/Application/Parts/TrackRow/track-row.uss?fileID=7433441132597879392&amp;guid=addcc3e11d26dd74daca82d491a569d6&amp;type=3#track-row" />
-    <TrackRow style="flex-direction: row; min-width: 100%; align-items: center; justify-content: space-between;">
+    <TrackRow style="flex-direction: row; min-width: 100%; align-items: center; justify-content: space-between; border-bottom-width: 0.5px;">
         <ui:Button name="play" enabled="true" class="ui-button" style="background-image: resource(&apos;Interface/button.play&apos;); background-size: 30% 30%;" />
         <ui:Label text="&lt;DURATION&gt;" name="track-duration" style="padding-right: 10px;" />
         <ui:VisualElement name="info" style="flex-grow: 1; flex-direction: column; justify-content: center;">

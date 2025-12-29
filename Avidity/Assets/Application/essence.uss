@@ -3,8 +3,9 @@
     -unity-font-definition: resource('Fonts/Abel');
 }
 
-.tracks-list {
-    background-color: rgba(0, 0, 0, 0.2);
+.window {
+    flex-grow: 1;
+    width: 100%;
 }
 
 .page-title {

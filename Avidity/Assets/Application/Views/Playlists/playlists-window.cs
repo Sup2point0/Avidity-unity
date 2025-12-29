@@ -22,6 +22,7 @@ public class PlaylistsWindowController : Bases.InterfaceController
         RegeneratePlaylists();
 
         this.gridView = this.ui.Q<ListView>("playlists-grid");
+        
         this.gridView.itemsSource = this.displayedPlaylists;
         this.gridView.makeItem    = MakeItem;
         this.gridView.bindItem    = BindItem;
@@ -38,7 +39,7 @@ public class PlaylistsWindowController : Bases.InterfaceController
     }
 
     Row MakeItem()
-        => new(3, this.cellUxml);
+        => new("playlist-row", 3, this.cellUxml);
 
     void BindItem(VisualElement elem, int idx)
     {

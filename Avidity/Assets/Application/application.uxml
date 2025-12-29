@@ -1,8 +1,8 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:Template name="tracks" src="project://database/Assets/Application/Views/Tracks/tracks.uxml?fileID=9197481963319205126&amp;guid=7aad10187456d9540ada01620969eb6c&amp;type=3#tracks" />
+    <ui:Template name="tracks" src="project://database/Assets/Application/Views/Tracks/tracks-window.uxml?fileID=9197481963319205126&amp;guid=7aad10187456d9540ada01620969eb6c&amp;type=3#tracks-window" />
     <ui:Template name="config" src="project://database/Assets/Application/Views/Config/config.uxml?fileID=9197481963319205126&amp;guid=1fb4ee194d1c5254785fe3d67830020f&amp;type=3#config" />
     <ui:Template name="queue" src="project://database/Assets/Application/Views/Queue/queue.uxml?fileID=9197481963319205126&amp;guid=6a5b4ca34f7f6fd41a642b66777f2678&amp;type=3#queue" />
-    <ui:Template name="playlists" src="project://database/Assets/Application/Views/Playlists/playlists.uxml?fileID=9197481963319205126&amp;guid=864299926f649cb49a68871719a2c42e&amp;type=3#playlists" />
+    <ui:Template name="playlists" src="project://database/Assets/Application/Views/Playlists/playlists-window.uxml?fileID=9197481963319205126&amp;guid=864299926f649cb49a68871719a2c42e&amp;type=3#playlists-window" />
     <Style src="project://database/Assets/Application/essence.uss?fileID=7433441132597879392&amp;guid=57add471641c76f49b9f2be788e117d7&amp;type=3#essence" />
     <Style src="project://database/Assets/Application/application.uss?fileID=7433441132597879392&amp;guid=e13bf3879e85b8944b8139a706e817ee&amp;type=3#application" />
     <Style src="project://database/Assets/Application/buttons.uss?fileID=7433441132597879392&amp;guid=3ec11caf9e3cb05429c5b52570f35762&amp;type=3#buttons" />
@@ -59,8 +59,8 @@
                 </ui:ScrollView>
             </ui:VisualElement>
             <ui:VisualElement name="window" style="align-items: center; justify-content: center;">
-                <ui:Instance template="tracks" name="tracks" class="window" style="flex-grow: 1; width: 100%;" />
-                <ui:Instance template="playlists" name="playlists" />
+                <ui:Instance template="tracks" name="tracks" class="window" />
+                <ui:Instance template="playlists" name="playlists" class="window" />
                 <ui:Instance template="config" name="config" class="window" />
             </ui:VisualElement>
             <ui:Instance template="queue" name="queue" />

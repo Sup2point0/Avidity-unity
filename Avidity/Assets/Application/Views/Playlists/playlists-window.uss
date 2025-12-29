@@ -1,0 +1,6 @@
+.playlist-row {
+    background-color: transparent;
+}
+.playlist-row:hover {
+    background-color: transparent;
+}
