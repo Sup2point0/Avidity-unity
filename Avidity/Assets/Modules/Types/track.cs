@@ -31,10 +31,13 @@ namespace Avidity
             (this.weak_shard is null && this.primary_artist_shard is null) ? null
             : $"{this.primary_artist_shard}-{this.weak_shard}";
 
-        /// <summary> Internal identifier of the track. </summary>
+        /// <summary> Shard (weak key) of the track. </summary>
+        /// <remarks>
+        /// Guaranteed to be non-null, has to be nullable due to lack of <c>required</c> in C# 9.0.
+        /// </remarks>
         public Shard? weak_shard;
 
-        /// <summary> Internal identifier of the track's primary artist. </summary>
+        /// <summary> Shard of the primary artist the track is attributed to. </summary>
         private Shard? primary_artist_shard {
             get {
                 this._artist_shard ??= this.ResolvePrimaryArtist()?.shard;
@@ -152,6 +155,13 @@ namespace Avidity
 
             return $"{m}:{s}";
         }
+
+
+        public override bool Equals(object obj)
+            => (obj is Track) && this.shard!.Equals((obj as Track)!.shard);
+
+        public override int GetHashCode()
+            => this.shard!.GetHashCode();
     }
 
 

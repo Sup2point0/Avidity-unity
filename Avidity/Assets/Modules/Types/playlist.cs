@@ -17,7 +17,10 @@ namespace Avidity
     [Serializable]
     public class Playlist : Bases.ISelectableEntity
     {
-        /// <summary> Internal identifier of the playlist. </summary>
+        /// <summary> Shard (primary key) of the playlist. </summary>
+        /// <remarks>
+        /// Guaranteed to be non-null, has to be nullable due to lack of <c>required</c> in C# 9.0.
+        /// </remarks>
         public Shard? shard;
 
         /// <summary> Exact displayed name of the playlist. </summary>
@@ -77,6 +80,13 @@ namespace Avidity
 
         //     return pool.GetRandomItems(count: this.tracks.Count, drop: true);
         // }
+
+
+        public override bool Equals(object obj)
+            => (obj is Playlist) && this.shard!.Equals((obj as Playlist)!.shard);
+
+        public override int GetHashCode()
+            => this.shard!.GetHashCode();
     }
 
 

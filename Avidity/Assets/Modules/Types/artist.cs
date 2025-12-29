@@ -17,7 +17,10 @@ namespace Avidity
     [Serializable]
     public class Artist : Bases.ISelectableEntity
     {
-        /// <summary> Internal identifier of the artist. </summary>
+        /// <summary> Shard (primary key) of the artist. </summary>
+        /// <remarks>
+        /// Guaranteed to be non-null, has to be nullable due to lack of <c>required</c> in C# 9.0.
+        /// </remarks>
         public Shard? shard;
 
         /// <summary> Exact displayed name of the artist. </summary>
@@ -56,6 +59,13 @@ namespace Avidity
         public static string DisplayNames(IEnumerable<Artist>? artists)
             => (artists is null) ? "Anonymous"
                 : string.Join(" / ", artists.Select(each => each.DisplayName()));
+
+
+        public override bool Equals(object obj)
+            => (obj is Artist) && this.shard!.Equals((obj as Artist)!.shard);
+
+        public override int GetHashCode()
+            => this.shard!.GetHashCode();
     }
 
     
