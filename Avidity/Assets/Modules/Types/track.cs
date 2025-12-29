@@ -46,14 +46,17 @@ namespace Avidity
         /// <summary> The audio file name (if different to the track shard) of the track. </summary>
         public string? audio_file;
 
+        /// <summary> The folder in which the audio file (with the same name as the track shard) is stored. </summary>
+        public string? audio_folder;
+
         /// <summary> The audio file extension of the track. </summary>
-        public TrackAudioFileKind filetype = TrackAudioFileKind.MP3;
+        public AudioFileExtension filetype = AudioFileExtension.MP3;
+
+        /// <summary> Duration of the track (in seconds). </summary>
+        public float? duration;
 
         /// <summary> The cover file name (if different to the track shard or album shard) of the track. </summary>
         public string? cover_file;
-
-        /// <summary> Duration of the track in seconds. </summary>
-        public float? duration;
     
     #endregion
     #region NON-TECHNICAL
@@ -81,15 +84,18 @@ namespace Avidity
             Dictionary<string, object> res = new();
 
             Utils.AddMaybe(res, "weak-shard", this.weak_shard);
-            Utils.AddMaybe(res, "name",     this.name);
-            Utils.AddMaybe(res, "audio",    this.audio_file);
-            Utils.AddMaybe(res, "duration", this.duration);
-            Utils.AddMaybe(res, "cover",    this.cover_file);
-            Utils.AddMaybe(res, "artists",  this.artists?.Select(artist => artist.shard).ToList());
-            Utils.AddMaybe(res, "album",    this.album?.shard);
+            Utils.AddMaybe(res, "audio",      this.audio_file);
+            Utils.AddMaybe(res, "folder",     this.audio_folder);
+            Utils.AddMaybe(res, "extension",  this.filetype);
+            Utils.AddMaybe(res, "duration",   this.duration);
+            Utils.AddMaybe(res, "cover",      this.cover_file);
+
+            Utils.AddMaybe(res, "name",       this.name);
+            Utils.AddMaybe(res, "artists",    this.artists?.Select(artist => artist.shard).ToList());
+            Utils.AddMaybe(res, "album",      this.album?.shard);
             // TODO: Is it worth syncing from both sides?
-            Utils.AddMaybe(res, "lists",    this.playlists?.Select(list => list.shard)).ToList();
-            Utils.AddMaybe(res, "plays",    this.totalPlays);
+            Utils.AddMaybe(res, "lists",      this.playlists?.Select(list => list.shard)).ToList();
+            Utils.AddMaybe(res, "plays",      this.totalPlays);
 
             return res;
         }
@@ -112,10 +118,8 @@ namespace Avidity
 
             return (
                 from source_folder in Persistence.options.audio_source_folders
-                let artist_folder = this.ResolvePrimaryArtist()?.ResolveFolder()
-                let path =
-                    (this.audio_file is not null) ? this.audio_file
-                    : Utils.JoinPaths(source_folder, artist_folder, track_file)
+                let artist_folder = this.audio_folder ?? this.ResolvePrimaryArtist()?.ResolveFolder()
+                let path = Utils.JoinPaths(source_folder, artist_folder, track_file)
                 select $"file://{path}.{ext}"
             ).ToList();
         }
@@ -151,20 +155,20 @@ namespace Avidity
     }
 
 
-    public sealed record TrackAudioFileKind : Bases.SerialisedEnum<TrackAudioFileKind>
+    public sealed record AudioFileExtension : Bases.SerialisedEnum<AudioFileExtension>
     {
-        public static TrackAudioFileKind MP3 = new() { shard = "mp3", text = ".mp3" };
-        public static TrackAudioFileKind M4A = new() { shard = "m4a", text = ".m4a" };
-        public static TrackAudioFileKind WAV = new() { shard = "wav", text = ".wav"  };
+        public static AudioFileExtension MP3 = new() { shard = "mp3", text = ".mp3" };
+        public static AudioFileExtension M4A = new() { shard = "m4a", text = ".m4a" };
+        public static AudioFileExtension WAV = new() { shard = "wav", text = ".wav"  };
 
-        private static readonly Dictionary<Shard, TrackAudioFileKind> KINDS = new() {
+        private static readonly Dictionary<Shard, AudioFileExtension> EXTENSIONS = new() {
             ["mp3"] = MP3,
             ["m4a"] = M4A,
             ["wav"] = WAV,
         };
 
-        public static TrackAudioFileKind? FromString(Shard shard)
-            => FromVariants(KINDS, shard);
+        public static AudioFileExtension? FromString(Shard? shard)
+            => FromVariants(EXTENSIONS, shard);
     }
 
 
@@ -175,10 +179,13 @@ namespace Avidity
         [JsonProperty("weak-shard")]
         public string? weak_shard;
 
+        public string? audio;
+        public string? folder;
+        public string? extension;
+        public float?  duration;
+        public string? cover;
+
         public string?      name;
-        public string?      audio;
-        public float?       duration;
-        public string?      cover;
         public List<Shard>? artists;
         public Shard?       album;
         public List<Shard>? lists;
@@ -189,15 +196,17 @@ namespace Avidity
         {
             try {
                 return new Track() {
-                    weak_shard = this.weak_shard,
-                    audio_file = this.audio,
-                    duration   = this.duration,
-                    cover_file = this.cover,
+                    weak_shard   = this.weak_shard,
+                    audio_file   = this.audio,
+                    audio_folder = this.folder,
+                    filetype     = AudioFileExtension.FromString(this.extension) ?? AudioFileExtension.MP3,
+                    duration     = this.duration,
+                    cover_file   = this.cover,
+
                     name       = this.name,
                     artists    = this.artists?.Select(s => data.GetOrCreateArtistForTrack(s)).ToList(),
                     album      = this.album is null ? null : data.GetOrCreatePlaylist(this.album),
                     playlists  = this.lists?.Select(l => data.GetOrCreatePlaylist(l)).ToList(),
-                    
                     totalPlays = this.plays,
                 };
             }

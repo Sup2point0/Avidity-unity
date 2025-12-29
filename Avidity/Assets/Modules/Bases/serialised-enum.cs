@@ -32,8 +32,10 @@ namespace Avidity
             /// <param name="variants">The possible expected string representations variants and the enum variants they represent.</param>
             /// <param name="shard">The string representation to parse.</param>
             /// <returns>An enum variant if one matched, otherwise `null`.</returns>
-            public static ChildClass? FromVariants(Dictionary<Shard, ChildClass> variants, Shard shard)
-                => variants.TryGetValue(shard, out var value) ? value : null;
+            public static ChildClass? FromVariants(Dictionary<Shard, ChildClass> variants, Shard? shard)
+                => shard is null ? null
+                    : variants.TryGetValue(shard, out var value)
+                    ? value : null;
             
             public override string ToString()
                 => this.text;

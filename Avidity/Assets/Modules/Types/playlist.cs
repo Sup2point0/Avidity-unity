@@ -79,13 +79,13 @@ namespace Avidity
     {
         public static PlaylistKind ALBUM = new() { shard = "album", text = "Album" };
         public static PlaylistKind GENRE = new() { shard = "genre", text = "Genre" };
-        public static PlaylistKind MOOD  = new() { shard = "mood",  text = "Mood"  };
+        public static PlaylistKind VIBE  = new() { shard = "vibe",  text = "Vibe"  };
         public static PlaylistKind LABEL = new() { shard = "label", text = "Label" };
 
         private static readonly Dictionary<Shard, PlaylistKind> KINDS = new() {
             ["album"] = ALBUM,
             ["genre"] = GENRE,
-            ["mood" ] = MOOD,
+            ["vibe" ] = VIBE,
             ["label"] = LABEL,
         };
 
