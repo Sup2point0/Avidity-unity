@@ -398,7 +398,9 @@ GameObject:
   - component: {fileID: 273337165}
   - component: {fileID: 273337166}
   - component: {fileID: 273337167}
+  - component: {fileID: 273337175}
   - component: {fileID: 273337168}
+  - component: {fileID: 273337174}
   - component: {fileID: 273337170}
   - component: {fileID: 273337171}
   - component: {fileID: 273337172}
@@ -561,6 +563,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlaylistsWindowController
   cellUxml: {fileID: 9197481963319205126, guid: 60c97ac7c7eabfb4dbd3361b50537159, type: 3}
+--- !u!114 &273337174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 273337162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22e21eeec3f9ff84bb7fd9f07eb2994a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlaylistSelectorController
+--- !u!114 &273337175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 273337162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccdb72d5636199c439380dba445b442a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EmptySelectorController
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0

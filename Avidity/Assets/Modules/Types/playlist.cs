@@ -29,7 +29,7 @@ namespace Avidity
         /// <summary> Exact displayed name of the playlist. </summary>
         public string? name;
 
-        public PlaylistKind? kind;
+        public PlaylistKind kind = PlaylistKind.LIST;
 
         public string? cover_file;
         
@@ -112,7 +112,7 @@ namespace Avidity
         public string DisplayName()
             => this.name ?? $"Untitled <{this.shard}>";
 
-        public string DisplayArtists()
+        public string DisplayArtistNames()
         {
             var artists = this.ResolvePrimaryArtists();
             if (artists is null) return "Unknown Artists";
@@ -163,20 +163,22 @@ namespace Avidity
 
     public sealed record PlaylistKind : Bases.SerialisedEnum<PlaylistKind>
     {
+        public static PlaylistKind LIST  = new() { shard = "list", text = "Playlist" };
         public static PlaylistKind ALBUM = new() { shard = "album", text = "Album" };
         public static PlaylistKind GENRE = new() { shard = "genre", text = "Genre" };
         public static PlaylistKind VIBE  = new() { shard = "vibe",  text = "Vibe"  };
         public static PlaylistKind LABEL = new() { shard = "label", text = "Label" };
 
         private static readonly Dictionary<Shard, PlaylistKind> KINDS = new() {
+            ["list" ] = LIST,
             ["album"] = ALBUM,
             ["genre"] = GENRE,
             ["vibe" ] = VIBE,
             ["label"] = LABEL,
         };
 
-        public static PlaylistKind? FromString(Shard shard)
-            => FromVariants(KINDS, shard);
+        public static PlaylistKind FromString(Shard? shard)
+            => FromVariants(KINDS, shard) ?? PlaylistKind.LIST;
     }
 
 
@@ -185,8 +187,8 @@ namespace Avidity
     {
         public string?      name;
         public Shard?       kind;
-        public List<Shard>? tracks = new();
         public string?      cover;
+        public List<Shard>? tracks = new();
         public string?      col;
         public int          totalPlays = 0;
 
@@ -195,13 +197,9 @@ namespace Avidity
         {
             try {
                 return new Playlist() {
-                    shard  = shard,
-                    name   = this.name,
-
-                    kind =
-                        (this.kind is null) ? null
-                        : PlaylistKind.FromString(this.kind),
-                    
+                    shard      = shard,
+                    name       = this.name,
+                    kind       = PlaylistKind.FromString(this.kind),
                     cover_file = this.cover,
                     tracks     = new(),
 

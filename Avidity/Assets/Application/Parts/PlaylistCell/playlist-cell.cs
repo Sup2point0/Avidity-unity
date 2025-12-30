@@ -46,6 +46,7 @@ public partial class PlaylistCell : VisualElement, Bases.IBindableItem<Playlist>
         this.click_manipulator = new Clickable(e => {
             Exec.Scene.SelectEntity(Bases.EntityType.Playlist, playlist);
         });
+        this.AddManipulator(this.click_manipulator);
     }
 
     public void Unbind()

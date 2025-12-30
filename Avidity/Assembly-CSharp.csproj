@@ -60,12 +60,14 @@
     <Compile Include="Assets\Application\Views\Playback\info.cs" />
     <Compile Include="Assets\Modules\Bases\json-data-exchange.cs" />
     <Compile Include="Assets\Modules\Bases\displayed-exception.cs" />
+    <Compile Include="Assets\Application\Views\Selector\selector.cs" />
     <Compile Include="Assets\Modules\Utils\display.cs" />
     <Compile Include="Assets\Modules\Bases\selectable-entity.cs" />
     <Compile Include="Assets\Modules\Types\options.cs" />
     <Compile Include="Assets\Application\Execs\scene-exec.cs" />
     <Compile Include="Assets\Application\Views\Navigation\navbar.cs" />
     <Compile Include="Assets\Application\Views\Playlists\playlists-window.cs" />
+    <Compile Include="Assets\Application\Views\Selector\selector.playlist.cs" />
     <Compile Include="Assets\Modules\Execs\persist-exec.cs" />
     <Compile Include="Assets\Application\Views\Tracks\tracks-window.cs" />
     <Compile Include="Assets\Application\Parts\GridRow\grid-row.cs" />
@@ -74,13 +76,14 @@
     <Compile Include="Assets\Modules\Types\playlist.cs" />
     <Compile Include="Assets\Modules\Bases\button.cs" />
     <Compile Include="Assets\Application\Views\Config\config.cs" />
-    <Compile Include="Assets\Application\Views\Selector\track-selector.cs" />
     <Compile Include="Assets\Modules\Types\artist.cs" />
     <Compile Include="Assets\Application\Views\Queue\queue.cs" />
     <Compile Include="Assets\Modules\Internal\declarations.cs" />
+    <Compile Include="Assets\Application\Views\Selector\selector.none.cs" />
     <Compile Include="Assets\Application\Views\Window\window.cs" />
     <Compile Include="Assets\Application\Execs\audio-exec.cs" />
     <Compile Include="Assets\Modules\Types\track.cs" />
+    <Compile Include="Assets\Application\Views\Selector\selector.track.cs" />
     <Compile Include="Assets\Modules\Utils\paths.cs" />
     <Compile Include="Assets\Modules\External\weighted-list.cs" />
   </ItemGroup>

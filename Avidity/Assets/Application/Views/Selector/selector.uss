@@ -11,12 +11,14 @@ Label {
 }
 
 
-#track-name {
+#track-name,
+#list-name {
     color: white;
     font-size: 30px;
 }
 
-#artist-name, #album-name {
+#artist-name, #album-name,
+#artist-names, #list-kind {
     color: rgb(144, 144, 144);
     font-size: 25px;
 }
