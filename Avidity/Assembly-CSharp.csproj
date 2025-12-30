@@ -59,7 +59,6 @@
     <Compile Include="Assets\Application\Views\Playback\info.cs" />
     <Compile Include="Assets\Modules\Bases\json-data-exchange.cs" />
     <Compile Include="Assets\Modules\Bases\displayed-exception.cs" />
-    <Compile Include="Assets\Application\Views\Selector\selector.cs" />
     <Compile Include="Assets\Modules\Bases\selectable-entity.cs" />
     <Compile Include="Assets\Modules\Types\options.cs" />
     <Compile Include="Assets\Application\Execs\scene-exec.cs" />
@@ -73,6 +72,7 @@
     <Compile Include="Assets\Modules\Types\playlist.cs" />
     <Compile Include="Assets\Modules\Bases\button.cs" />
     <Compile Include="Assets\Application\Views\Config\config.cs" />
+    <Compile Include="Assets\Application\Views\Selector\track-selector.cs" />
     <Compile Include="Assets\Modules\Types\artist.cs" />
     <Compile Include="Assets\Application\Views\Queue\queue.cs" />
     <Compile Include="Assets\Modules\Internal\declarations.cs" />
@@ -93,6 +93,7 @@
     <None Include="Assets\Application\application.uss" />
     <None Include="Assets\Application\Views\Playback\playback.uss" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
+    <None Include="Assets\Application\Views\Selector\selector.uxml" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
     <None Include="Assets\Application\Views\Playlists\playlists-window.uss" />

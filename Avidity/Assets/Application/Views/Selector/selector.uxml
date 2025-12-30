@@ -1,0 +1,37 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Application/essence.uss?fileID=7433441132597879392&amp;guid=57add471641c76f49b9f2be788e117d7&amp;type=3#essence" />
+    <Style src="project://database/Assets/Application/Views/Selector/selector.uss?fileID=7433441132597879392&amp;guid=2672b8dbd5ac9ac49bc096ebb430dee2&amp;type=3#selector" />
+    <ui:ScrollView style="flex-grow: 1; padding-top: 10px; padding-right: 20px; padding-left: 20px;">
+        <ui:VisualElement name="info-main" style="flex-grow: 1;">
+            <ui:Image name="track-cover" style="width: 300px; background-image: resource(&apos;Images/camellia.terabyte&apos;); height: 300px; -unity-background-scale-mode: scale-and-crop; padding-bottom: 0; margin-bottom: 20px;" />
+            <ui:Label text="&lt;TRACK-NAME&gt;" name="track-name" />
+            <ui:VisualElement name="left-right">
+                <ui:Label text="&lt;ARTIST-NAME&gt;" name="artist-name" />
+                <ui:Label text="&lt;ALBUM-NAME&gt;" name="album-name" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="info-details" style="flex-grow: 1; padding-top: 20px; padding-right: 0; padding-bottom: 0; padding-left: 0;">
+            <ui:VisualElement name="left-right">
+                <ui:Label text="Duration" name="duration" class="field" />
+                <ui:Label text="&lt;TRACK-DURATION&gt;" name="track-duration" class="field-value" />
+            </ui:VisualElement>
+            <ui:VisualElement name="left-right">
+                <ui:Label text="Plays" name="plays" class="field" />
+                <ui:Label text="&lt;TRACK-PLAYS&gt;" name="track-plays" class="field-value" />
+            </ui:VisualElement>
+            <ui:VisualElement name="gap" style="flex-grow: 1; height: 15px;" />
+            <ui:VisualElement name="left-right">
+                <ui:Label text="Shard" name="shard" class="field" />
+                <ui:Label text="&lt;TRACK-SHARD&gt;" name="track-shard" class="field-value" />
+            </ui:VisualElement>
+            <ui:VisualElement name="left-right">
+                <ui:Label text="Audio" name="audio" class="field" />
+                <ui:Label text="&lt;AUDIO-SOURCE&gt;" name="track-audio" class="field-value" />
+            </ui:VisualElement>
+            <ui:VisualElement name="left-right">
+                <ui:Label text="Cover" name="cover" class="field" />
+                <ui:Label text="&lt;COVER-SOURCE&gt;" name="track-cover" class="field-value" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:ScrollView>
+</ui:UXML>

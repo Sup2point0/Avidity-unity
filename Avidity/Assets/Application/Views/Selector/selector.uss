@@ -1,7 +1,8 @@
-#selector Label {
+Label {
     padding-top: 0;
     padding-bottom: 0;
 }
+
 
 #left-right {
     display: flex;
@@ -9,16 +10,17 @@
     justify-content: space-between;
 }
 
-#selector #track-name {
+
+#track-name {
     color: white;
     font-size: 30px;
 }
 
-#selector #artist-name,
-#selector #album-name {
+#artist-name, #album-name {
     color: rgb(144, 144, 144);
     font-size: 25px;
 }
+
 
 .field {
     color: rgb(128, 128, 128);

@@ -3,11 +3,6 @@
     -unity-font-definition: resource('Fonts/Abel');
 }
 
-.window {
-    flex-grow: 1;
-    width: 100%;
-}
-
 .page-title {
     color: white;
     font-size: 40px;
