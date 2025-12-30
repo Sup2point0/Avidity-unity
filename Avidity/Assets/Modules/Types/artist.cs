@@ -58,7 +58,7 @@ namespace Avidity
 
         public static string DisplayNames(IEnumerable<Artist>? artists)
             => (artists is null) ? "Anonymous"
-                : string.Join(" / ", artists.Select(each => each.DisplayName()));
+                : string.Join(", ", artists.Select(each => each.DisplayName()));
 
 
         public override bool Equals(object obj)

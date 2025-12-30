@@ -57,7 +57,7 @@ public class PlaylistSelectorController : SelectorController
     void RegenerateDetails(Playlist list)
     {
         this.listName.text    = list.DisplayName();
-        this.artistNames.text = list.DisplayArtistNames();
+        this.artistNames.text = list.DisplayArtistNames(shorter: true);
         this.listKind.text    = list.kind.text;
 
         this.listDuration.text = list.DisplayDuration();

@@ -112,15 +112,17 @@ namespace Avidity
         public string DisplayName()
             => this.name ?? $"Untitled <{this.shard}>";
 
-        public string DisplayArtistNames()
+        public string DisplayArtistNames(bool shorter = false)
         {
+            var max = shorter ? 2 : 3;
+
             var artists = this.ResolvePrimaryArtists();
             if (artists is null) return "Unknown Artists";
 
-            if (artists.Count > 3) {
-                return $"{string.Join(", ", artists.Take(3))}, and {artists.Count - 3} more";
+            if (artists.Count > max) {
+                return $"{Artist.DisplayNames(artists.Take(max))}, and {artists.Count - max} more";
             } else {
-                return string.Join(", ", artists);
+                return Artist.DisplayNames(artists);
             }
         }
 
