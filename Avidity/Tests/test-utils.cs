@@ -24,6 +24,15 @@ public class Test_Utils_Paths
 public class Test_Utils_Collections
 {
     [TestMethod]
+    public void Chunks()
+    {
+        List<int> list = [1, 2, 3, 4, 5];
+
+        List<int[]> expect = [[1, 2, 3], [4, 5]];
+        Assert.IsTrue( list.Chunked(3).SequenceEqual(expect) );
+    }
+
+    [TestMethod]
     public void AddMaybe()
     {
         Dictionary<string, string> dict = [];

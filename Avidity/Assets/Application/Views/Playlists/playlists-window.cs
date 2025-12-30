@@ -11,6 +11,8 @@ using Row = GridRow<PlaylistCell, Avidity.Playlist>;
 
 public class PlaylistsWindowController : Bases.InterfaceController
 {
+    public const int CELLS_PER_ROW = 3;
+
     public ListView gridView;
     public VisualTreeAsset cellUxml;
 
@@ -32,14 +34,11 @@ public class PlaylistsWindowController : Bases.InterfaceController
 
     void RegeneratePlaylists()
     {
-        this.displayedPlaylists = (
-            from list in Persistence.data.playlists.Values
-            select new Playlist[] { list, list, list }
-        ).ToList();
+        this.displayedPlaylists = Persistence.data.playlists.Values.Chunked(CELLS_PER_ROW).ToList();
     }
 
     Row MakeItem()
-        => new("playlist-row", 3, this.cellUxml);
+        => new("playlist-row", CELLS_PER_ROW, this.cellUxml);
 
     void BindItem(VisualElement elem, int idx)
     {
