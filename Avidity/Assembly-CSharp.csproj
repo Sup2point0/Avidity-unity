@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="Assets\Application\Parts\TrackRow\track-row.cs" />
     <Compile Include="Assets\Modules\Types\data.cs" />
+    <Compile Include="Assets\Modules\External\multiset.cs" />
     <Compile Include="Assets\Modules\Bases\serialised-enum.cs" />
     <Compile Include="Assets\Modules\Bases\UI\controller.cs" />
     <Compile Include="Assets\Application\Parts\PlaylistCell\playlist-cell.cs" />
@@ -59,6 +60,7 @@
     <Compile Include="Assets\Application\Views\Playback\info.cs" />
     <Compile Include="Assets\Modules\Bases\json-data-exchange.cs" />
     <Compile Include="Assets\Modules\Bases\displayed-exception.cs" />
+    <Compile Include="Assets\Modules\Utils\display.cs" />
     <Compile Include="Assets\Modules\Bases\selectable-entity.cs" />
     <Compile Include="Assets\Modules\Types\options.cs" />
     <Compile Include="Assets\Application\Execs\scene-exec.cs" />
