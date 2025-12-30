@@ -62,7 +62,7 @@ namespace Avidity
         public string? cover_file;
     
     #endregion
-    #region NON-TECHNICAL
+    #region DATA
 
         /// <summary> Exact displayed name of the track. </summary>
         public string? name;
@@ -81,6 +81,8 @@ namespace Avidity
     
     #endregion
 
+
+    #region EXPORTING
 
         public Dictionary<string, object> ExportJson()
         {
@@ -102,7 +104,11 @@ namespace Avidity
 
             return res;
         }
-        
+
+    #endregion
+
+
+    #region INTERNAL
         
         /// <summary> Find the primary artist the track should be tied to. </summary>
         public Artist? ResolvePrimaryArtist()
@@ -136,32 +142,31 @@ namespace Avidity
 
             throw new NotImplementedException();
         }
+
+    #endregion
         
 
+    #region DISPLAYING
+
         public string DisplayName()
-            => this.name ?? $"Untitled [{this.weak_shard}]";
+            => this.name ?? $"Untitled <{this.weak_shard}>";
 
         public string DisplayDuration()
-        {
-            if (this.duration is null) return "--:--";
+            => Utils.Display.Duration(this.duration);
 
-            var seconds = (int) this.duration;
+    #endregion
 
-            var mins = seconds / 60;
-            var m = mins.ToString();
 
-            var secs = seconds % 60;
-            var s = secs.ToString().PadLeft(2, '0');
-
-            return $"{m}:{s}";
-        }
-
+    #region
 
         public override bool Equals(object obj)
             => (obj is Track) && this.shard!.Equals((obj as Track)!.shard);
 
         public override int GetHashCode()
             => this.shard!.GetHashCode();
+    
+    #endregion
+
     }
 
 

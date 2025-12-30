@@ -17,6 +17,9 @@ namespace Avidity
     [Serializable]
     public class Playlist : Bases.ISelectableEntity
     {
+
+    #region DATA
+
         /// <summary> Shard (primary key) of the playlist. </summary>
         /// <remarks>
         /// Guaranteed to be non-null, has to be nullable due to lack of <c>required</c> in C# 9.0.
@@ -39,9 +42,17 @@ namespace Avidity
         /// <summary> Total number of times tracks in this playlist have been played. </summary>
         public int totalPlays = 0;
 
+    #endregion
 
-        [SerializeField] public int trackCount => this.tracks?.Count ?? 0;
 
+    #region COMPUTED
+
+        public int trackCount => this.tracks?.Count ?? 0;
+
+    #endregion
+
+
+    #region EXPORTING
 
         public Dictionary<string, object> ExportJson()
         {
@@ -57,9 +68,65 @@ namespace Avidity
             return res;
         }
 
+    #endregion
+
+
+    #region INTERNAL
+
+        public List<Artist>? ResolvePrimaryArtists()
+        {
+            var artists = new MultiSet<Artist>();
+
+            foreach (var track in this.tracks) {
+                foreach (var artist in track.artists ?? new()) {
+                    artists.Add(artist);
+                }
+
+                if (artists.Count > 5) break;
+            }
+
+            var res = artists.SortedDescending();
+            return res;
+        }
+
+        public float? FindMinimumDuration(out bool may_exceed)
+        {
+            var did_encounter_null = false;
+
+            var res = this.tracks.Sum(track => {
+                if (track.duration is null) {
+                    did_encounter_null = true;
+                }
+                return track.duration;
+            });
+
+            may_exceed = did_encounter_null;
+            return res;
+        }
+
+    #endregion
+
+
+    #region DISPLAYING
 
         public string DisplayName()
-            => this.name ?? $"Untitled [{this.shard}]";
+            => this.name ?? $"Untitled <{this.shard}>";
+
+        public string DisplayArtists()
+        {
+            var artists = this.ResolvePrimaryArtists();
+            if (artists is null) return "Unknown Artists";
+
+            if (artists.Count > 3) {
+                return $"{string.Join(", ", artists.Take(3))}, and {artists.Count - 3} more";
+            } else {
+                return string.Join(", ", artists);
+            }
+        }
+
+        // TODO: Maybe need to make async>
+        public string DisplayDuration()
+            => Utils.Display.Timespan(this.FindMinimumDuration(out var may_exceed), may_exceed);
 
 
         // public List<Track> GetShuffledList()
@@ -78,12 +145,19 @@ namespace Avidity
         //     return pool.GetRandomItems(count: this.tracks.Count, drop: true);
         // }
 
+    #endregion
+
+
+    #region
 
         public override bool Equals(object obj)
             => (obj is Playlist) && this.shard!.Equals((obj as Playlist)!.shard);
 
         public override int GetHashCode()
             => this.shard!.GetHashCode();
+
+    #endregion
+
     }
 
 
