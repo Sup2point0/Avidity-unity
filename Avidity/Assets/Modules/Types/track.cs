@@ -186,7 +186,7 @@ namespace Avidity
     // [JsonObject(NamingStrategyType = typeof(KebabCaseNamingStrategy))]
     public record TrackDataExchange
     {
-        [JsonProperty("weak-shard")]
+        [JsonProperty("ws")]
         public string? weak_shard;
 
         public string? audio;
@@ -195,11 +195,11 @@ namespace Avidity
         public float?  duration;
         public string? cover;
 
-        public string?      name;
-        public List<Shard>? artists;
-        public Shard?       album;
-        public List<Shard>? lists = new();
-        public int          plays = 0;
+        [JsonProperty("n")]  public string?      name;
+        [JsonProperty("ar")] public List<Shard>? artists;
+        [JsonProperty("al")] public Shard?       album;
+        [JsonProperty("l")]  public List<Shard>  lists = new();
+        public int plays = 0;
 
 
         public Track? ToTrack(Shard shard, Avid.ApplicationData data)
