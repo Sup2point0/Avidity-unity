@@ -28,8 +28,9 @@ public class Test_Utils_Collections
     {
         List<int> list = [1, 2, 3, 4, 5];
 
-        List<int[]> expect = [[1, 2, 3], [4, 5]];
-        Assert.IsTrue( list.Chunked(3).SequenceEqual(expect) );
+        var chunks = list.Chunked(3).ToList();
+        Assert.IsTrue(chunks[0].SequenceEqual([1, 2, 3]));
+        Assert.IsTrue(chunks[1].SequenceEqual([4, 5]));
     }
 
     [TestMethod]
