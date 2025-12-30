@@ -69,8 +69,8 @@ public class AudioExecutive : MonoBehaviour
     {
         this.onPlaybackFinished += this.PlayNext;
         this.onPlaybackStarted += () => {
-            if (Exec.Scene.selectedTrack is null) {
-                Exec.Scene.SelectTrack(this.activeTrack);
+            if (Exec.Scene.selectedEntity is null) {
+                Exec.Scene.SelectEntity(Bases.EntityType.Track, this.activeTrack);
             }
         };
 

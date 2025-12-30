@@ -29,7 +29,7 @@ public partial class TrackRow : VisualElement
     public Label artistName;
     public Label trackDuration;
 
-    private IManipulator manipulator;
+    private IManipulator click_manipulator;
 
 
     public TrackRow() {}
@@ -74,15 +74,15 @@ public partial class TrackRow : VisualElement
         this.artistName.text    = Artist.DisplayNames(track.artists);
         this.trackDuration.text = track.DisplayDuration();
 
-        this.manipulator = new Clickable(e => {
-            Exec.Scene.SelectTrack(track);
+        this.click_manipulator = new Clickable(e => {
+            Exec.Scene.SelectEntity(Bases.EntityType.Track, track);
         });
-        this.AddManipulator(this.manipulator);
+        this.AddManipulator(this.click_manipulator);
     }
 
     public void Unbind()
     {
-        if (this.manipulator != null) this.RemoveManipulator(this.manipulator);
+        if (this.click_manipulator != null) this.RemoveManipulator(this.click_manipulator);
     }
 
 

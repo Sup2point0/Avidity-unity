@@ -9,6 +9,7 @@ using UnityEngine.InputSystem;
 
 using Avidity;
 using Avid = Avidity;
+using Unity.VisualScripting;
 
 
 /// <summary> The scene manager. </summary>
@@ -28,7 +29,6 @@ public class SceneExecutive : MonoBehaviour
 #region DELEGATES
 
     public Action? onTabChanged;
-    public Action? onTrackSelected;
     public Action? onSelectionChanged;
 
 #endregion
@@ -51,18 +51,16 @@ public class SceneExecutive : MonoBehaviour
 
     [Header("State")]
 
-    [SerializeField] public Tab currentTab { get; private set; } = Tab.Tracks;
+    public Tab currentTab { get; private set; } = Tab.Tracks;
 
-    /// <summary> The currently selected track to be shown in the Selector. Note this can be `null`, but we're not marking it `Track?` just to avoid `.Value` shenanigans. TODO: Might change in future?
-    /// </summary>
-    public Track? selectedTrack { get; private set; }
-
-// TODO: migrating
     /// <summary> The type of the currently selected entity. </summary>
-    public Bases.SelectableEntityType selectedEntityType { get; private set; }
-        = Bases.SelectableEntityType.NoSelection;
+    public Bases.EntityType selectedEntityType { get; private set; }
+        = Bases.EntityType.NoSelection;
 
-    /// <summary> The currently selected entity. Use `.selectedEntityType` to determine its type and downcast as appropriate. </summary>
+    /// <summary> The currently selected entity to be shown in the Selector. </summary>
+    /// <remarks>
+    /// Use `.selectedEntityType` to determine its type and downcast as appropriate.
+    /// </remarks>
     public object? selectedEntity { get; private set; }
 
     
@@ -194,26 +192,27 @@ public class SceneExecutive : MonoBehaviour
         onTabChanged?.Invoke();
     }
 
-    public void SelectTrack(Track track)
+    public void SelectEntity<Entity>(
+        Bases.EntityType type,
+        Entity entity
+    )
+        where Entity : Bases.ISelectableEntity
     {
-        this.selectedTrack = track;
-        
-        onTrackSelected?.Invoke();
-
-    // TODO: part of migration
-        this.selectedEntityType = Bases.SelectableEntityType.Track;
-        this.selectedEntity = track;
+        this.selectedEntityType = type;
+        this.selectedEntity = entity;
 
         onSelectionChanged?.Invoke();
 
-        async void UpdateInfo() {
-            await Exec.Audio.LoadClipAsync(track);
-            onTrackSelected?.Invoke();
-        }
+        if (entity is Track) {
+            /* NOTE: Only load if necessary! */
+            if ((entity as Track)!.duration is null) {
+                async void UpdateInfo() {
+                    await Exec.Audio.LoadClipAsync(entity as Track);
+                    onSelectionChanged?.Invoke();
+                }
 
-        /* NOTE: Only load if necessary! */
-        if (track.duration is null) {
-            UpdateInfo();
+                UpdateInfo();
+            }
         }
     }
     

@@ -2,7 +2,7 @@ namespace Avidity
 {
     public static partial class Bases
     {
-        public enum SelectableEntityType {
+        public enum EntityType {
             NoSelection,
             File,
             Track,

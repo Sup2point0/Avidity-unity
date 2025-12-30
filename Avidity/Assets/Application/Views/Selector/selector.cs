@@ -36,13 +36,13 @@ public class SelectorPaneController : Bases.InterfaceController
 
     void Start()
     {
-        Exec.Scene.onTrackSelected += OnTrackSelected;
+        Exec.Scene.onSelectionChanged += OnSelectionChanged;
     }
 
 
-    void OnTrackSelected()
+    void OnSelectionChanged()
     {
-        var track = Exec.Scene.selectedTrack;
+        var track = Exec.Scene.selectedEntity as Track;
 
         this.trackName.text  = track.DisplayName();
         this.artistName.text = Artist.DisplayNames(track.artists);

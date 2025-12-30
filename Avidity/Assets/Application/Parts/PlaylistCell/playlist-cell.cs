@@ -17,6 +17,8 @@ public partial class PlaylistCell : VisualElement, Bases.IBindableItem<Playlist>
     public Label listName;
     public Label listTrackCount;
 
+    private IManipulator click_manipulator;
+
 
     public PlaylistCell() {}
 
@@ -41,10 +43,15 @@ public partial class PlaylistCell : VisualElement, Bases.IBindableItem<Playlist>
         this.listName.text = playlist.DisplayName();
         this.listTrackCount.text = playlist.trackCount.ToString();
 
-        // TODO: Open playlist
+        this.click_manipulator = new Clickable(e => {
+            Exec.Scene.SelectEntity(Bases.EntityType.Playlist, playlist);
+        });
     }
 
-    public void Unbind() {}
+    public void Unbind()
+    {
+        if (this.click_manipulator != null) this.RemoveManipulator(this.click_manipulator);
+    }
 
 
 #region BUTTONS
